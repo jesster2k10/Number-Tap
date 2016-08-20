@@ -1,0 +1,6 @@
+framework module Pods_Number_Tap_OSX {
+  umbrella header "Pods-Number Tap OSX-umbrella.h"
+
+  export *
+  module * { export * }
+}
