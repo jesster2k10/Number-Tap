@@ -19,15 +19,15 @@ class SKScrollView: UIScrollView {
     
     // MARK: - Static Properties
     
-    private static var disabledTouches = false
-    private static var scrollView: UIScrollView?
+    fileprivate static var disabledTouches = false
+    fileprivate static var scrollView: UIScrollView?
     
     // MARK: - Properties
     
     var currentScene: SKScene?
-    private let moveableNode: SKNode
-    private let scrollDirection: ScrollDirection
-    private var nodesTouched = [AnyObject]() /// Nodes touched. This will forward touches to node subclasses.
+    fileprivate let moveableNode: SKNode
+    fileprivate let scrollDirection: ScrollDirection
+    fileprivate var nodesTouched = [AnyObject]() /// Nodes touched. This will forward touches to node subclasses.
     
     // MARK: - Init
     
@@ -42,9 +42,9 @@ class SKScrollView: UIScrollView {
         
         self.frame = frame
         delegate = self
-        indicatorStyle = .White
-        scrollEnabled = true
-        userInteractionEnabled = true
+        indicatorStyle = .white
+        isScrollEnabled = true
+        isUserInteractionEnabled = true
         //canCancelContentTouches = false
         //minimumZoomScale = 1
         //maximumZoomScale = 3
@@ -53,7 +53,7 @@ class SKScrollView: UIScrollView {
         showsVerticalScrollIndicator = false
         
         if scrollDirection == .horizontal {
-            transform = CGAffineTransformMakeScale(-1,1) // set 2nd number to -1 if you want scroll indicator at top
+            transform = CGAffineTransform(scaleX: -1,y: 1) // set 2nd number to -1 if you want scroll indicator at top
         }
     }
     
@@ -67,77 +67,77 @@ class SKScrollView: UIScrollView {
 extension SKScrollView {
     
     /// Began
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
         guard let currentScene = currentScene else { return }
         
         for touch in touches {
-            let location = touch.locationInNode(currentScene)
+            let location = touch.location(in: currentScene)
             
             guard !SKScrollView.disabledTouches else { return }
             
-            currentScene.touchesBegan(touches, withEvent: event)
-            nodesTouched = currentScene.nodesAtPoint(location)
+            currentScene.touchesBegan(touches, with: event)
+            nodesTouched = currentScene.nodes(at: location)
             for node in nodesTouched {
-                node.touchesBegan(touches, withEvent: event)
+                node.touchesBegan(touches, with: event)
             }
         }
     }
     
     /// Moved
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesMoved(touches, withEvent: event)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         
         guard let currentScene = currentScene else { return }
         
         for touch in touches {
-            let location = touch.locationInNode(currentScene)
+            let location = touch.location(in: currentScene)
             
             guard !SKScrollView.disabledTouches else { return }
             
-            currentScene.touchesMoved(touches, withEvent: event)
-            nodesTouched = currentScene.nodesAtPoint(location)
+            currentScene.touchesMoved(touches, with: event)
+            nodesTouched = currentScene.nodes(at: location)
             for node in nodesTouched {
-                node.touchesMoved(touches, withEvent: event)
+                node.touchesMoved(touches, with: event)
             }
         }
     }
     
     /// Ended
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         
         guard let currentScene = currentScene else { return }
         
         for touch in touches {
-            let location = touch.locationInNode(currentScene)
+            let location = touch.location(in: currentScene)
             
             guard !SKScrollView.disabledTouches else { return }
             
-            currentScene.touchesEnded(touches, withEvent: event)
-            nodesTouched = currentScene.nodesAtPoint(location)
+            currentScene.touchesEnded(touches, with: event)
+            nodesTouched = currentScene.nodes(at: location)
             for node in nodesTouched {
-                node.touchesEnded(touches, withEvent: event)
+                node.touchesEnded(touches, with: event)
             }
         }
     }
     
     /// Cancelled
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        super.touchesCancelled(touches, withEvent: event)
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
         
         guard let currentScene = currentScene else { return }
         
-        for touch in touches! {
-            let location = touch.locationInNode(currentScene)
+        for touch in touches {
+            let location = touch.location(in: currentScene)
             
             guard !SKScrollView.disabledTouches else { return }
             
-            currentScene.touchesCancelled(touches, withEvent: event)
-            nodesTouched = currentScene.nodesAtPoint(location)
+            currentScene.touchesCancelled(touches, with: event)
+            nodesTouched = currentScene.nodes(at: location)
             for node in nodesTouched {
-                node.touchesCancelled(touches, withEvent: event)
+                node.touchesCancelled(touches, with: event)
             }
         }
     }
@@ -148,12 +148,12 @@ extension SKScrollView {
 extension SKScrollView {
     
     class func disable() {
-        SKScrollView.scrollView?.userInteractionEnabled = false
+        SKScrollView.scrollView?.isUserInteractionEnabled = false
         SKScrollView.disabledTouches = true
     }
     
     class func enable() {
-        SKScrollView.scrollView?.userInteractionEnabled = true
+        SKScrollView.scrollView?.isUserInteractionEnabled = true
         SKScrollView.disabledTouches = false
     }
 }
@@ -162,7 +162,7 @@ extension SKScrollView {
 
 extension SKScrollView: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollDirection == .horizontal {
             moveableNode.position.x = scrollView.contentOffset.x
         } else {

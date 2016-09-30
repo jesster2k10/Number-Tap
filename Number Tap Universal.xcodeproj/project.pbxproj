@@ -7,10 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52A005801D9725A7000BC100 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */; };
+		52A005811D9725A7000BC100 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A0057E1D9725A6000BC100 /* OpenEars.framework */; };
+		52A005821D9725A7000BC100 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A0057F1D9725A6000BC100 /* Slt.framework */; };
+		52A005881D973EF9000BC100 /* VoiceRecognitionHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 52A005861D973EF9000BC100 /* VoiceRecognitionHelper.h */; };
+		52A005891D973EF9000BC100 /* VoiceRecognitionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A005871D973EF9000BC100 /* VoiceRecognitionHelper.m */; };
+		5F0D7D681D7AEB55007BDA84 /* Appirater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0D7D671D7AEB55007BDA84 /* Appirater.framework */; };
+		5F0D7D7C1D7B42A7007BDA84 /* Number Tap iOS-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7C5CA01D670EAF00EA24EC /* Number Tap iOS-Bridging-Header.h */; };
+		5F0D7D871D7B4311007BDA84 /* ios-ntp.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0D7D7E1D7B4311007BDA84 /* ios-ntp.h */; };
+		5F0D7D881D7B4311007BDA84 /* NetAssociation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0D7D7F1D7B4311007BDA84 /* NetAssociation.h */; };
+		5F0D7D891D7B4311007BDA84 /* NetAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D7D801D7B4311007BDA84 /* NetAssociation.m */; };
+		5F0D7D8A1D7B4311007BDA84 /* NetworkClock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0D7D811D7B4311007BDA84 /* NetworkClock.h */; };
+		5F0D7D8B1D7B4311007BDA84 /* NetworkClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D7D821D7B4311007BDA84 /* NetworkClock.m */; };
+		5F0D7D8C1D7B4311007BDA84 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 5F0D7D831D7B4311007BDA84 /* Notes */; };
+		5F0D7D8D1D7B4311007BDA84 /* NSDate+NetworkClock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0D7D841D7B4311007BDA84 /* NSDate+NetworkClock.h */; };
+		5F0D7D8E1D7B4311007BDA84 /* NSDate+NetworkClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D7D851D7B4311007BDA84 /* NSDate+NetworkClock.m */; };
+		5F0D7D8F1D7B4311007BDA84 /* ntp-log.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0D7D861D7B4311007BDA84 /* ntp-log.h */; };
+		5F0D7D901D7B4392007BDA84 /* ios-ntp.h in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D7D7E1D7B4311007BDA84 /* ios-ntp.h */; };
+		5F1D9BB71D8587C000B905DE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F1D9BB61D8587C000B905DE /* GameKit.framework */; };
+		5F1D9BB91D8587CA00B905DE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F1D9BB81D8587CA00B905DE /* StoreKit.framework */; };
 		5F44B8C61D6680470022FB81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F44B8C01D6680470022FB81 /* AppDelegate.swift */; };
 		5F44B8C71D6680470022FB81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F44B8C11D6680470022FB81 /* Assets.xcassets */; };
 		5F44B8C81D6680470022FB81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F44B8C21D6680470022FB81 /* Main.storyboard */; };
 		5F44B8C91D6680470022FB81 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F44B8C41D6680470022FB81 /* GameViewController.swift */; };
+		5F48B6C21D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */; };
+		5F48B6C31D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */; };
+		5F48B6C41D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */; };
+		5F48B6DB1D725D4300FE4310 /* AppStoreReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */; };
+		5F48B6DD1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */; };
 		5F6EC9C51D685B3B00AF3489 /* SKAction+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */; };
 		5F6EC9C71D685B4C00AF3489 /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */; };
 		5F6EC9C91D685B5E00AF3489 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */; };
@@ -150,9 +174,13 @@
 		5F7C5D561D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */; };
 		5F7C5D571D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */; };
 		5F7C5D581D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */; };
-		5F7C5D5E1D6725BA00EA24EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C5D5D1D6725BA00EA24EC /* GoogleService-Info.plist */; };
-		5F7C5D5F1D6725BA00EA24EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C5D5D1D6725BA00EA24EC /* GoogleService-Info.plist */; };
-		5F7C5D601D6725BA00EA24EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C5D5D1D6725BA00EA24EC /* GoogleService-Info.plist */; };
+		5FCBAE7D1D85950500EC5DF0 /* flatbox-text-icon copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAE7C1D85950500EC5DF0 /* flatbox-text-icon copy.png */; };
+		5FCBAE7F1D859C1600EC5DF0 /* DailyRewardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */; };
+		5FCBAED91D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */; };
+		5FCBAEDA1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */; };
+		5FCBAEDB1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */; };
+		5FDDC4FF1D95CA4B00456DA8 /* GameModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */; };
+		5FDDC5011D95D02400456DA8 /* LocalNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */; };
 		9400FDAA1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */; };
 		9400FDAB1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */; };
 		9400FDAC1C1E1E47007FC1E7 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9F1C1E1E47007FC1E7 /* CGPoint+Extensions.swift */; };
@@ -210,11 +238,32 @@
 		005DD5D9C75CADC7FF65F826 /* Pods-Number Tap tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Number Tap tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Number Tap tvOS/Pods-Number Tap tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		0530AF982121349456056E90 /* Pods-Number Tap OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Number Tap OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Number Tap OSX/Pods-Number Tap OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		17253E4DC810DC5B2265E38A /* Pods-Number Tap iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Number Tap iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Number Tap iOS/Pods-Number Tap iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AcousticModelEnglish.bundle; path = Libraries/AcousticModelEnglish.bundle; sourceTree = "<group>"; };
+		52A0057E1D9725A6000BC100 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEars.framework; path = Libraries/OpenEars.framework; sourceTree = "<group>"; };
+		52A0057F1D9725A6000BC100 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Slt.framework; path = Libraries/Slt.framework; sourceTree = "<group>"; };
+		52A005861D973EF9000BC100 /* VoiceRecognitionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceRecognitionHelper.h; sourceTree = "<group>"; };
+		52A005871D973EF9000BC100 /* VoiceRecognitionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceRecognitionHelper.m; sourceTree = "<group>"; };
+		5F0D7D671D7AEB55007BDA84 /* Appirater.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appirater.framework; path = "../../Library/Developer/Xcode/DerivedData/Number_Tap_Universal-eymrhjgdqbbftxdulcywvhhuvbse/Build/Products/Debug-iphonesimulator/Appirater/Appirater.framework"; sourceTree = "<group>"; };
+		5F0D7D7E1D7B4311007BDA84 /* ios-ntp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ios-ntp.h"; sourceTree = "<group>"; };
+		5F0D7D7F1D7B4311007BDA84 /* NetAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetAssociation.h; sourceTree = "<group>"; };
+		5F0D7D801D7B4311007BDA84 /* NetAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetAssociation.m; sourceTree = "<group>"; };
+		5F0D7D811D7B4311007BDA84 /* NetworkClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkClock.h; sourceTree = "<group>"; };
+		5F0D7D821D7B4311007BDA84 /* NetworkClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkClock.m; sourceTree = "<group>"; };
+		5F0D7D831D7B4311007BDA84 /* Notes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
+		5F0D7D841D7B4311007BDA84 /* NSDate+NetworkClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NetworkClock.h"; sourceTree = "<group>"; };
+		5F0D7D851D7B4311007BDA84 /* NSDate+NetworkClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NetworkClock.m"; sourceTree = "<group>"; };
+		5F0D7D861D7B4311007BDA84 /* ntp-log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ntp-log.h"; sourceTree = "<group>"; };
+		5F1D9BB51D8587B000B905DE /* Number Tap iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Number Tap iOS.entitlements"; sourceTree = "<group>"; };
+		5F1D9BB61D8587C000B905DE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		5F1D9BB81D8587CA00B905DE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5F44B8C01D6680470022FB81 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F44B8C11D6680470022FB81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F44B8C31D6680470022FB81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F44B8C41D6680470022FB81 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5F44B8C51D6680470022FB81 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
+		5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptValidator.swift; sourceTree = "<group>"; };
+		5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptObtainer.swift; sourceTree = "<group>"; };
 		5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+Spring.swift"; sourceTree = "<group>"; };
 		5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
 		5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -278,7 +327,11 @@
 		5F7C5D4D1D671CFE00EA24EC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Libraries/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		5F7C5D4E1D671CFE00EA24EC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Libraries/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Libraries/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		5F7C5D5D1D6725BA00EA24EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5FCBAE7C1D85950500EC5DF0 /* flatbox-text-icon copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flatbox-text-icon copy.png"; sourceTree = "<group>"; };
+		5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyRewardHelper.swift; sourceTree = "<group>"; };
+		5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeHelper.swift; sourceTree = "<group>"; };
+		5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationHelper.swift; sourceTree = "<group>"; };
 		8D0F76A0556902927134F4F1 /* Pods_Number_Tap_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Number_Tap_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		9400FD9F1C1E1E47007FC1E7 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -312,8 +365,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0D7D681D7AEB55007BDA84 /* Appirater.framework in Frameworks */,
+				5F1D9BB91D8587CA00B905DE /* StoreKit.framework in Frameworks */,
 				5F7C5D561D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */,
+				52A005821D9725A7000BC100 /* Slt.framework in Frameworks */,
+				52A005811D9725A7000BC100 /* OpenEars.framework in Frameworks */,
 				A790347423B20F0D18171259 /* Pods_Number_Tap_iOS.framework in Frameworks */,
+				5F1D9BB71D8587C000B905DE /* GameKit.framework in Frameworks */,
 				5F7C5D501D671CFE00EA24EC /* FBSDKCoreKit.framework in Frameworks */,
 				5F7C5D531D671CFE00EA24EC /* FBSDKLoginKit.framework in Frameworks */,
 			);
@@ -344,6 +402,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52A005851D973EC7000BC100 /* Voice Recognition */ = {
+			isa = PBXGroup;
+			children = (
+				52A005861D973EF9000BC100 /* VoiceRecognitionHelper.h */,
+				52A005871D973EF9000BC100 /* VoiceRecognitionHelper.m */,
+			);
+			name = "Voice Recognition";
+			sourceTree = "<group>";
+		};
+		5F0D7D7D1D7B4311007BDA84 /* ios-ntp-lib */ = {
+			isa = PBXGroup;
+			children = (
+				5F0D7D7E1D7B4311007BDA84 /* ios-ntp.h */,
+				5F0D7D7F1D7B4311007BDA84 /* NetAssociation.h */,
+				5F0D7D801D7B4311007BDA84 /* NetAssociation.m */,
+				5F0D7D811D7B4311007BDA84 /* NetworkClock.h */,
+				5F0D7D821D7B4311007BDA84 /* NetworkClock.m */,
+				5F0D7D831D7B4311007BDA84 /* Notes */,
+				5F0D7D841D7B4311007BDA84 /* NSDate+NetworkClock.h */,
+				5F0D7D851D7B4311007BDA84 /* NSDate+NetworkClock.m */,
+				5F0D7D861D7B4311007BDA84 /* ntp-log.h */,
+			);
+			name = "ios-ntp-lib";
+			path = "Libraries/ios-ntp-lib";
+			sourceTree = "<group>";
+		};
 		5F44B8BF1D6680470022FB81 /* Number Tap tvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,7 +456,7 @@
 		5F7C5C821D66830200EA24EC /* Number Tap iOS */ = {
 			isa = PBXGroup;
 			children = (
-				5F7C5D5D1D6725BA00EA24EC /* GoogleService-Info.plist */,
+				5F1D9BB51D8587B000B905DE /* Number Tap iOS.entitlements */,
 				5F7C5C831D66830200EA24EC /* AppDelegate.swift */,
 				5F7C5C841D66830200EA24EC /* Assets.xcassets */,
 				5F7C5C851D66830200EA24EC /* LaunchScreen.storyboard */,
@@ -397,6 +481,7 @@
 		5F7C5C9A1D66870F00EA24EC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				52A005851D973EC7000BC100 /* Voice Recognition */,
 				5F7C5C9F1D670E7800EA24EC /* GameCenter */,
 				5F7C5C9B1D66878200EA24EC /* IAPHelper.swift */,
 				5F7C5CCA1D6712B800EA24EC /* FTLogging.swift */,
@@ -404,6 +489,11 @@
 				5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */,
 				5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */,
 				5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */,
+				5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */,
+				5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */,
+				5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */,
+				5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */,
+				5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -497,6 +587,7 @@
 		9400FD9C1C1E1E2F007FC1E7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5F0D7D7D1D7B4311007BDA84 /* ios-ntp-lib */,
 				5F7C5D4D1D671CFE00EA24EC /* FBSDKCoreKit.framework */,
 				5F7C5D4E1D671CFE00EA24EC /* FBSDKLoginKit.framework */,
 				5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */,
@@ -553,6 +644,8 @@
 		9402F45F1C120EC400B2C2D7 /* Number Tap */ = {
 			isa = PBXGroup;
 			children = (
+				5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */,
+				5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */,
 				5F7C5CB51D67124D00EA24EC /* Classes */,
 				5F7C5C911D66862B00EA24EC /* Utilities */,
 				943373221C1DC1D100D222D6 /* Assets */,
@@ -597,6 +690,7 @@
 		943373251C1DC2AD00D222D6 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				5FCBAE7C1D85950500EC5DF0 /* flatbox-text-icon copy.png */,
 				5F7C5CEC1D6713DC00EA24EC /* Build-Up.atlas */,
 				5F7C5CED1D6713DC00EA24EC /* Endless.atlas */,
 				5F7C5CEE1D6713DC00EA24EC /* Memory.atlas */,
@@ -619,6 +713,12 @@
 		CFE588D2C606B40C2C276AFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */,
+				52A0057E1D9725A6000BC100 /* OpenEars.framework */,
+				52A0057F1D9725A6000BC100 /* Slt.framework */,
+				5F1D9BB81D8587CA00B905DE /* StoreKit.framework */,
+				5F1D9BB61D8587C000B905DE /* GameKit.framework */,
+				5F0D7D671D7AEB55007BDA84 /* Appirater.framework */,
 				9E2F8897D10C5D9D4C68B8BD /* Pods_Number_Tap_OSX.framework */,
 				BDAC24ADE289AFA4A6AC0D37 /* Pods_Number_Tap_iOS.framework */,
 				8D0F76A0556902927134F4F1 /* Pods_Number_Tap_tvOS.framework */,
@@ -634,6 +734,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F7C5D431D671A5400EA24EC /* MultiplayerNetworking.h in Headers */,
+				5F0D7D871D7B4311007BDA84 /* ios-ntp.h in Headers */,
+				5F0D7D7C1D7B42A7007BDA84 /* Number Tap iOS-Bridging-Header.h in Headers */,
+				5F0D7D8A1D7B4311007BDA84 /* NetworkClock.h in Headers */,
+				5F0D7D881D7B4311007BDA84 /* NetAssociation.h in Headers */,
+				52A005881D973EF9000BC100 /* VoiceRecognitionHelper.h in Headers */,
+				5F0D7D8F1D7B4311007BDA84 /* ntp-log.h in Headers */,
+				5F0D7D8D1D7B4311007BDA84 /* NSDate+NetworkClock.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +823,22 @@
 					9402F42C1C120E1000B2C2D7 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 964QFWYN42;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					9402F4491C120E3500B2C2D7 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -751,6 +874,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0D7D8C1D7B4311007BDA84 /* Notes in Resources */,
 				5F7C5CF61D6713DC00EA24EC /* Memory.atlas in Resources */,
 				5F7C5D041D67140D00EA24EC /* Montserrat-Hairline.otf in Resources */,
 				5F7C5C8E1D66830300EA24EC /* Main.storyboard in Resources */,
@@ -759,18 +883,21 @@
 				5F7C5D131D67142C00EA24EC /* blop01.wav in Resources */,
 				5F6EC9CC1D68792400AF3489 /* Montserrat-Light.otf in Resources */,
 				5F7C5D161D67142C00EA24EC /* blop02.wav in Resources */,
+				52A005801D9725A7000BC100 /* AcousticModelEnglish.bundle in Resources */,
 				5F6F0BA01D67B92E008DE673 /* TutorialScene.sks in Resources */,
 				5F7C5C8C1D66830300EA24EC /* Assets.xcassets in Resources */,
 				5F7C5CE91D67139600EA24EC /* PMAlertController.xib in Resources */,
 				5F7C5D0A1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
 				5F7C5D011D67140D00EA24EC /* Montserrat-Bold.otf in Resources */,
 				5F7C5D101D67142C00EA24EC /* blipBlop.wav in Resources */,
-				5F7C5D5E1D6725BA00EA24EC /* GoogleService-Info.plist in Resources */,
 				943CF7651C1E46C000340CFD /* Game.xcassets in Resources */,
+				5F48B6C21D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */,
 				5F7C5CF31D6713DC00EA24EC /* Endless.atlas in Resources */,
 				5F7C5CF01D6713DC00EA24EC /* Build-Up.atlas in Resources */,
 				5F7C5CF91D6713DC00EA24EC /* Shoot.atlas in Resources */,
+				5FCBAED91D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */,
 				5F7C5D071D67140D00EA24EC /* Montserrat-Regular.otf in Resources */,
+				5FCBAE7D1D85950500EC5DF0 /* flatbox-text-icon copy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -789,9 +916,10 @@
 				5F44B8C81D6680470022FB81 /* Main.storyboard in Resources */,
 				5F7C5CEA1D67139600EA24EC /* PMAlertController.xib in Resources */,
 				5F7C5D081D67140D00EA24EC /* Montserrat-Regular.otf in Resources */,
+				5FCBAEDA1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */,
 				5F7C5D171D67142C00EA24EC /* blop02.wav in Resources */,
 				5F7C5D0B1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
-				5F7C5D5F1D6725BA00EA24EC /* GoogleService-Info.plist in Resources */,
+				5F48B6C31D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */,
 				5F7C5D141D67142C00EA24EC /* blop01.wav in Resources */,
 				5F7C5D111D67142C00EA24EC /* blipBlop.wav in Resources */,
 				5F7C5D051D67140D00EA24EC /* Montserrat-Hairline.otf in Resources */,
@@ -814,9 +942,10 @@
 				5F7C5C801D6682E500EA24EC /* MainMenu.xib in Resources */,
 				5F7C5CEB1D67139600EA24EC /* PMAlertController.xib in Resources */,
 				5F7C5D091D67140D00EA24EC /* Montserrat-Regular.otf in Resources */,
+				5FCBAEDB1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */,
 				5F7C5D181D67142C00EA24EC /* blop02.wav in Resources */,
 				5F7C5D0C1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
-				5F7C5D601D6725BA00EA24EC /* GoogleService-Info.plist in Resources */,
+				5F48B6C41D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */,
 				5F7C5D151D67142C00EA24EC /* blop01.wav in Resources */,
 				5F7C5D121D67142C00EA24EC /* blipBlop.wav in Resources */,
 				5F7C5D061D67140D00EA24EC /* Montserrat-Hairline.otf in Resources */,
@@ -1001,6 +1130,7 @@
 				9400FDAC1C1E1E47007FC1E7 /* CGPoint+Extensions.swift in Sources */,
 				5F7C5D311D67168400EA24EC /* MultiplayerMode.swift in Sources */,
 				5F7C5D2E1D67168400EA24EC /* MemoryMode.swift in Sources */,
+				5F48B6DD1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift in Sources */,
 				5F7C5CE31D67139600EA24EC /* PMAlertAction.swift in Sources */,
 				9400FDBC1C1E1E47007FC1E7 /* SKTEffects.swift in Sources */,
 				9400FDB21C1E1E47007FC1E7 /* SKAction+Extensions.swift in Sources */,
@@ -1023,8 +1153,10 @@
 				5F6EC9C91D685B5E00AF3489 /* UIColor+Hex.swift in Sources */,
 				5F7C5D251D67168400EA24EC /* BuildingModeScene.swift in Sources */,
 				5F7C5D2B1D67168400EA24EC /* FollowMode.swift in Sources */,
+				5FDDC5011D95D02400456DA8 /* LocalNotificationHelper.swift in Sources */,
 				9400FDBE1C1E1E47007FC1E7 /* SKTTimingFunctions.swift in Sources */,
 				5F7C5D281D67168400EA24EC /* FallingMode.swift in Sources */,
+				5F48B6DB1D725D4300FE4310 /* AppStoreReceiptValidator.swift in Sources */,
 				9400FDB41C1E1E47007FC1E7 /* SKAction+SpecialEffects.swift in Sources */,
 				5F7C5C8B1D66830300EA24EC /* AppDelegate.swift in Sources */,
 				5F7C5D4A1D671B8200EA24EC /* GameModes.swift in Sources */,
@@ -1037,9 +1169,16 @@
 				9400FDAE1C1E1E47007FC1E7 /* CGVector+Extensions.swift in Sources */,
 				9400FDBA1C1E1E47007FC1E7 /* SKTAudio.swift in Sources */,
 				9400FDAA1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */,
+				5F0D7D8B1D7B4311007BDA84 /* NetworkClock.m in Sources */,
 				5F7C5CBB1D67127000EA24EC /* Ribbon.swift in Sources */,
+				5F0D7D891D7B4311007BDA84 /* NetAssociation.m in Sources */,
+				5F0D7D8E1D7B4311007BDA84 /* NSDate+NetworkClock.m in Sources */,
+				5F0D7D901D7B4392007BDA84 /* ios-ntp.h in Sources */,
+				52A005891D973EF9000BC100 /* VoiceRecognitionHelper.m in Sources */,
+				5FCBAE7F1D859C1600EC5DF0 /* DailyRewardHelper.swift in Sources */,
 				5F7C5CAE1D67120900EA24EC /* GCHelper.swift in Sources */,
 				5F7C5C931D66867300EA24EC /* Constants.swift in Sources */,
+				5FDDC4FF1D95CA4B00456DA8 /* GameModeHelper.swift in Sources */,
 				5F7C5CCF1D6712C200EA24EC /* SKScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1267,18 +1406,45 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Number Tap iOS/Number Tap iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 964QFWYN42;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Analytics/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseRemoteConfig\"",
+					"\"${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleIPhoneUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/SupersonicSDK\"",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Number Tap iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.flatboxstudio.numbertap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Utilities/Number Tap iOS-Bridging-Header.h";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macbookpro/Desktop/Number Tap Universal (Swift 3)/Utilities/Number Tap iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1288,17 +1454,44 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "Number Tap iOS/Number Tap iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 964QFWYN42;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Analytics/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseRemoteConfig\"",
+					"\"${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleIPhoneUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/SupersonicSDK\"",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Number Tap iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.flatboxstudio.numbertap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Utilities/Number Tap iOS-Bridging-Header.h";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macbookpro/Desktop/Number Tap Universal (Swift 3)/Utilities/Number Tap iOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public class ProgressNode : SKShapeNode
+open class ProgressNode : SKShapeNode
 {
     var pro = 0
     
@@ -18,12 +18,12 @@ public class ProgressNode : SKShapeNode
     
     struct Constants {
         static let radius : CGFloat          = 32
-        static let color : SKColor           = SKColor.darkGrayColor()
-        static let backgroundColor : SKColor = SKColor.lightGrayColor()
+        static let color : SKColor           = SKColor.darkGray
+        static let backgroundColor : SKColor = SKColor.lightGray
         static let width : CGFloat           = 2.0
         static var progress : CGFloat        = 0.0
         static let startAngle : CGFloat      = CGFloat(M_PI_2)
-        static private let actionKey         = "_progressNodeCountdownActionKey"
+        static fileprivate let actionKey         = "_progressNodeCountdownActionKey"
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ public class ProgressNode : SKShapeNode
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     
     /// the radius of the progress node
-    public var radius: CGFloat = ProgressNode.Constants.radius {
+    open var radius: CGFloat = ProgressNode.Constants.radius {
         didSet {
             self.updateProgress(self.timeNode, progress: self.progress)
             self.updateProgress(self)
@@ -39,21 +39,21 @@ public class ProgressNode : SKShapeNode
     }
     
     //the active time color
-    public var color: SKColor = ProgressNode.Constants.color {
+    open var color: SKColor = ProgressNode.Constants.color {
         didSet {
             self.timeNode.strokeColor = self.color
         }
     }
     
     //the background color of the timer (to hide: use clear color)
-    public var backgroundColor: SKColor = ProgressNode.Constants.backgroundColor {
+    open var backgroundColor: SKColor = ProgressNode.Constants.backgroundColor {
         didSet {
             self.strokeColor = self.backgroundColor
         }
     }
     
     ///the line width of the progress node
-    public var width: CGFloat = ProgressNode.Constants.width {
+    open var width: CGFloat = ProgressNode.Constants.width {
         didSet {
             self.timeNode.lineWidth = self.width
             self.lineWidth          = self.width
@@ -61,20 +61,20 @@ public class ProgressNode : SKShapeNode
     }
     
     //the current progress of the progress node end progress is 1.0 and start is 0.0
-    public var progress: CGFloat = ProgressNode.Constants.progress {
+    open var progress: CGFloat = ProgressNode.Constants.progress {
         didSet {
             self.updateProgress(self.timeNode, progress: self.progress)
         }
     }
     
     // the start angle of the progress node
-    public var startAngle: CGFloat = ProgressNode.Constants.startAngle {
+    open var startAngle: CGFloat = ProgressNode.Constants.startAngle {
         didSet {
             self.updateProgress(self.timeNode, progress: self.progress)
         }
     }
     
-    private let timeNode = SKShapeNode()
+    fileprivate let timeNode = SKShapeNode()
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     //  MARK: init
@@ -114,11 +114,11 @@ public class ProgressNode : SKShapeNode
     //  MARK: helpers
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     
-    private func _init() {
+    fileprivate func _init() {
         self.timeNode.lineWidth   = self.width
         self.timeNode.strokeColor = self.color
         self.timeNode.zPosition   = 10
-        self.timeNode.position    = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        self.timeNode.position    = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         self.addChild(self.timeNode)
         self.updateProgress(self.timeNode, progress: self.progress)
@@ -130,15 +130,15 @@ public class ProgressNode : SKShapeNode
         self.updateProgress(self)
     }
     
-    public func updateProgress(node: SKShapeNode, progress: CGFloat = 0.0) {
+    open func updateProgress(_ node: SKShapeNode, progress: CGFloat = 0.0) {
         let progress   = 1.0 - progress
         _ = CGFloat(M_PI / 2.0)
         let endAngle   = self.startAngle + progress*CGFloat(2.0*M_PI)
-        node.path      = UIBezierPath(arcCenter: CGPointZero,
+        node.path      = UIBezierPath(arcCenter: CGPoint.zero,
                                       radius: self.radius,
                                       startAngle: self.startAngle,
                                       endAngle: endAngle,
-                                      clockwise: true).CGPath
+                                      clockwise: true).cgPath
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,25 +153,25 @@ public class ProgressNode : SKShapeNode
      :param: progressHandler   An optional callback method (always called on main thread)
      :param: callback An optional callback method (always called on main thread)
      */
-    public func countdown(time: NSTimeInterval = 1.0, completionHandler: ((Void) -> Void)?) {
+    open func countdown(_ time: TimeInterval = 1.0, completionHandler: ((Void) -> Void)?) {
         self.countdown(time, progressHandler: nil, completionHandler: completionHandler)
     }
     
-    public func countdown(time: NSTimeInterval = 1.0, progressHandler: ((Void) -> Void)?, completionHandler: ((Void) -> Void)?) {
+    open func countdown(_ time: TimeInterval = 1.0, progressHandler: ((Void) -> Void)?, completionHandler: ((Void) -> Void)?) {
         self.stopCountdown()
         
-        self.runAction(SKAction.customActionWithDuration(time, actionBlock: {(node: SKNode!, elapsedTime: CGFloat) -> Void in
+        self.run(SKAction.customAction(withDuration: time, actionBlock: {(node: SKNode!, elapsedTime: CGFloat) -> Void in
             self.progress = elapsedTime / CGFloat(time)
             
             if let cb = progressHandler {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     cb()
                 })
             }
             
             if self.progress == 1.0 {
                 if let cb = completionHandler {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         cb()
                     })
                 }
@@ -179,7 +179,7 @@ public class ProgressNode : SKShapeNode
         }), withKey:ProgressNode.Constants.actionKey)
     }
     
-    public func stopCountdown() {
-        self.removeActionForKey(ProgressNode.Constants.actionKey)
+    open func stopCountdown() {
+        self.removeAction(forKey: ProgressNode.Constants.actionKey)
     }
 }

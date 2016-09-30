@@ -12,6 +12,17 @@ import MBProgressHUD
 let kHasPlayedMultiplayer = "playedMultiplayer"
 
 class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
+    public func receivedElements(_ array: [Any]!, startingNumber num: Int32) {
+        if let arr = array as? [Int] {
+            self.array = arr
+            self.number = Int(num)
+        }
+    }
+
+    public func getNumber(_ array: [Any]!) {
+        
+    }
+
     var gameOverBlock:((Bool)->Void)!
     var gameEndedBlock:(()->Void)!
     var networkingEngine : MultiplayerNetworking!
@@ -23,24 +34,24 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     var blurEffect : UIBlurEffect!
     var progress : MBProgressHUD!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         randomWord()
         start(.kMultiplayer, cam: nil)
         
-        if !NSUserDefaults.keyAlreadyExists(kHasPlayedMultiplayer) {
+        if !UserDefaults.keyAlreadyExists(kHasPlayedMultiplayer) {
     
-            alert = PMAlertController(title: "Welcome to Multiplayer!", description: "Multiplayer in Number Tap! allows you to share the fun with friends, family or even strangers! \r\n\r\nThe first person to tap the number, get's the point! Simple as. Beat the clock, beat your opponent. \r\n\r\nThe person who tapped the most numbers wins!", image: nil, style: .AlertWithBlur)
+            alert = PMAlertController(title: "Welcome to Multiplayer!", description: "Multiplayer in Number Tap! allows you to share the fun with friends, family or even strangers! \r\n\r\nThe first person to tap the number, get's the point! Simple as. Beat the clock, beat your opponent. \r\n\r\nThe person who tapped the most numbers wins!", image: nil, style: .alertWithBlur)
             
-            let okAction = PMAlertAction(title: "Let's Go!", style: .Default) {
+            let okAction = PMAlertAction(title: "Let's Go!", style: .default) {
                 print("Selected ok!")
                 self.begin()
             }
             
-            let cancelAction = PMAlertAction(title: "Nah..", style: .Cancel) {
+            let cancelAction = PMAlertAction(title: "Nah..", style: .cancel) {
                 print("selected cancel")
                 
                 let gameModes = GameModes()
-                self.view?.presentScene(gameModes, transition: SKTransition.crossFadeWithDuration(1))
+                self.view?.presentScene(gameModes, transition: SKTransition.crossFade(withDuration: 1))
                 self.removeFromParent()
                 self.removeAllChildren()
             }
@@ -49,9 +60,9 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
             alert.addAction(cancelAction)
             
             let vc = self.view?.window?.rootViewController
-            vc!.presentViewController(alert, animated: true, completion: nil)
+            vc!.present(alert, animated: true, completion: nil)
             
-            //NSUserDefaults.standardUserDefaults().setBool(true, forKey: kHasPlayedMultiplayer)
+            //KeychainWrapper.defaultKeychainWrapper().setBool(true, forKey: kHasPlayedMultiplayer)
         } else {
             begin()
         }
@@ -59,22 +70,22 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     }
     
     func begin() {
-        self.blurEffect = UIBlurEffect(style: .Dark)
+        self.blurEffect = UIBlurEffect(style: .dark)
         self.blurView = UIVisualEffectView(effect: self.blurEffect)
         
         self.blurView.frame = view!.bounds
-        self.blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view!.insertSubview(self.blurView, aboveSubview: self.view!)
         print("Added Blur")
         
-        self.progress = MBProgressHUD.showHUDAddedTo(view!, animated: true)
-        self.progress.mode = .Indeterminate
+        self.progress = MBProgressHUD.showAdded(to: view!, animated: true)
+        self.progress.mode = .indeterminate
         self.progress.label.text = "Checking for WiFi Connection..."
         
         if Reachability.isConnectedToNetwork() == true {
             self.progress.label.text = "Starting Game Center"
             
-            let key = NSUserDefaults.standardUserDefaults().boolForKey("gcEnabled")
+            let key = UserDefaults.standard.bool(forKey: "gcEnabled")
             
             if key == true {
                 self.setupMultiplayer()
@@ -89,9 +100,9 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
 
     }
     
-    func showAuthenticatedVC(vc: UIViewController) {
+    func showAuthenticatedVC(_ vc: UIViewController) {
         let gameKitHelper = GCHelper.sharedGameKitHelper
-        vc.presentViewController(gameKitHelper.authenticationViewController!, animated: true, completion: {
+        vc.present(gameKitHelper.authenticationViewController!, animated: true, completion: {
             self.check()
         })
     }
@@ -99,32 +110,32 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     func check() {
         let vc = self.view!.window?.rootViewController
 
-        let key = NSUserDefaults.standardUserDefaults().boolForKey("gcEnabled")
+        let key = UserDefaults.standard.bool(forKey: "gcEnabled")
         if key {
             self.setupMultiplayer()
         } else {
-            let alert = PMAlertController(title: "Error", description: "Please enable/login to GameCenter to continue", image: nil, style: .AlertWithBlur)
-            alert.addAction(PMAlertAction(title: "Try Again", style: .Default, action: {
+            let alert = PMAlertController(title: "Error", description: "Please enable/login to GameCenter to continue", image: nil, style: .alertWithBlur)
+            alert.addAction(PMAlertAction(title: "Try Again", style: .default, action: {
                 let vc = self.view!.window?.rootViewController
                 self.showAuthenticatedVC(vc!)
             }))
             
-            alert.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: {
-                UIView.animateWithDuration(1) {
+            alert.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: {
+                UIView.animate(withDuration: 1) {
                     self.blurView.alpha = 0
                     self.blurView.removeFromSuperview()
                 }
                 
                 let gameModes = GameModes()
-                self.view?.presentScene(gameModes, transition: SKTransition.crossFadeWithDuration(1))
+                self.view?.presentScene(gameModes, transition: SKTransition.crossFade(withDuration: 1))
                 self.removeFromParent()
                 self.removeAllChildren()
                 
-                MBProgressHUD.hideAllHUDsForView(self.view!, animated: true)
+                MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
 
             }))
             
-            vc!.presentViewController(alert, animated: true, completion: nil)
+            vc!.present(alert, animated: true, completion: nil)
         }
         
         
@@ -150,13 +161,13 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     }
     
     func tryStartGame() {
-        NSTimer.after(0) {
+        Timer.after(0) {
             if Reachability.isConnectedToNetwork() {
                 self.progress.label.text = "Starting Multiplayer Game"
                 self.playerAuthenticated()
             } else {
                 self.progress.label.text = "Failed to find WiFi Network"
-                NSTimer.after(2, {
+                Timer.after(2, {
                     self.showWifiAlert()
                 })
             }
@@ -166,46 +177,46 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     func showWifiAlert()  {
         let vc = self.view!.window!.rootViewController!
 
-        let wifiAlert = PMAlertController(title: "No Wifi Connection", description: "Unfortunately, our robots were unable to start your game as it appears you are not connected to WiFi. All multiplayer games need a WiFi connection.", image: nil, style: .AlertWithBlur)
-        wifiAlert.addAction(PMAlertAction(title: "Retry", style: .Default, action: { 
+        let wifiAlert = PMAlertController(title: "No Wifi Connection", description: "Unfortunately, our robots were unable to start your game as it appears you are not connected to WiFi. All multiplayer games need a WiFi connection.", image: nil, style: .alertWithBlur)
+        wifiAlert.addAction(PMAlertAction(title: "Retry", style: .default, action: { 
             self.tryStartGame()
         }))
         
-        wifiAlert.addAction(PMAlertAction(title: "Cancel", style: .Cancel, action: {
-            MBProgressHUD.hideAllHUDsForView(self.view!, animated: true)
+        wifiAlert.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: {
+            MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
             
-            UIView.animateWithDuration(1) {
+            UIView.animate(withDuration: 1) {
                 self.blurView.alpha = 0
                 self.blurView.removeFromSuperview()
             }
             
             let gameModes = GameModes()
-            self.view?.presentScene(gameModes, transition: SKTransition.crossFadeWithDuration(1))
+            self.view?.presentScene(gameModes, transition: SKTransition.crossFade(withDuration: 1))
             self.removeFromParent()
             self.removeAllChildren()
         }))
         
-        vc.presentViewController(wifiAlert, animated: true, completion: nil)
+        vc.present(wifiAlert, animated: true, completion: nil)
     }
     
     func playerAuthenticated() {
         let vc = self.view!.window!.rootViewController!
         print("start :)")
         
-        GameKitHelper.sharedGameKitHelper().findMatchWithMinPlayers(2, maxPlayers: 2, viewController: vc, delegate: networkingEngine)
+        GameKitHelper.shared().findMatch(withMinPlayers: 2, maxPlayers: 2, viewController: vc, delegate: networkingEngine)
     }
     
-    func setCurrentPlayerIndex(index: UInt) {
+    func setCurrentPlayerIndex(_ index: UInt) {
         aindex = Int(index)
     }
     
     func foundMatch() {
-        UIView.animateWithDuration(1) {
+        UIView.animate(withDuration: 1) {
             self.blurView.alpha = 0
             self.blurView.removeFromSuperview()
         }
         
-        MBProgressHUD.hideAllHUDsForView(view!, animated: true)
+        MBProgressHUD.hideAllHUDs(for: view!, animated: true)
     }
     
     //MARK : MultiplayerNetworkingProtocol
@@ -215,22 +226,15 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
         }
     }
     
-    @objc func getNumberArray(array: [AnyObject]!) {
+    @objc func getNumber(_ array: [AnyObject]!) {
         if let arr = array as? [Int] {
             print(arr)
         }
     }
     
-    @objc func receivedElements(array: [AnyObject]!, startingNumber num: Int32) {
-        if let arr = array as? [Int] {
-            self.array = arr
-            self.number = Int(num)
-        }
-    }
-    
     @objc func matchStarted() {
         randomWord()
-        networkingEngine.sendArray(array)
+        networkingEngine.send(array)
         
         start(kGameMode.kMultiplayer, cam: nil)
     }
@@ -238,11 +242,11 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     @objc func gameBegan() {
         print("Game Began")
         
-        let alert = UIAlertController(title: "Game Begab!", message:"Yes!", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Okay.", style: .Default) { _ in })
+        let alert = UIAlertController(title: "Game Begab!", message:"Yes!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay.", style: .default) { _ in })
         
         let vc = self.view?.window?.rootViewController!
-        vc?.presentViewController(alert, animated: true, completion: nil)
+        vc?.present(alert, animated: true, completion: nil)
     }
     
     @objc func point() {
@@ -251,26 +255,26 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
         
         updateScore(numbersTapped)
         
-        let alert = UIAlertController(title: "Point!", message:"Yes!", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Okay.", style: .Default) { _ in })
+        let alert = UIAlertController(title: "Point!", message:"Yes!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay.", style: .default) { _ in })
         
         let vc = self.view?.window?.rootViewController!
-        vc?.presentViewController(alert, animated: true, completion: nil)
+        vc?.present(alert, animated: true, completion: nil)
     }
     
     func resetTimer() {
         
     }
     
-    func gameOver(player1Won: Bool) {
+    func gameOver(_ player1Won: Bool) {
         
     }
     
-    func newNumber(number: Int32) {
+    func newNumber(_ number: Int32) {
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         networkingEngine.sendPoint()
     }
     

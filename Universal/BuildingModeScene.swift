@@ -15,7 +15,7 @@ class BuildUp: BaseScene {
     var tutorial = 0
     
     //TODO: Create an invisible node that moves up the screen as the game goes on. The camera will follow this node. As the game goes on the camera moves faster. You must tao the number before the camera looses it. Name this mode mooving - 
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         addChild(background)
         
         setupBoxes()
@@ -70,8 +70,8 @@ class BuildUp: BaseScene {
                 posX = 470
             }
             
-            let box = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500) , index: nil)
-            box.position = CGPointMake(posX, posY)
+            let box = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500) , index: nil)
+            box.position = CGPoint(x: posX, y: posY)
             box.zPosition = background.zPosition + 1
             box.name = "numberBox" + String(i)
             box.indexs = array[index]
@@ -88,7 +88,7 @@ class BuildUp: BaseScene {
     }
     
     //MARK: Game Logic
-    func makeBoxVisible(box: NumberBox) {
+    func makeBoxVisible(_ box: NumberBox) {
         box.alpha = 1
         box.scaleToSmallerSize()
         touchableArray.append(box)
@@ -104,15 +104,15 @@ class BuildUp: BaseScene {
     }
     
     //MARK: Touch methods
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
             handleTouchedPoint(location)
         }
     }
     
-    override func handleTouchedPoint(location: CGPoint) {
+    override func handleTouchedPoint(_ location: CGPoint) {
         for touchableBox in touchableArray {
             touchableBox.flip()
             //touchableBox.indexs = spareArray[touchableBox.index]

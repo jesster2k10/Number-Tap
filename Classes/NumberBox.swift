@@ -9,7 +9,7 @@
 import SpriteKit
 
 extension Array {
-    func contain<T where T : Equatable>(obj: T) -> Bool {
+    func contain<T>(_ obj: T) -> Bool where T : Equatable {
         return self.filter({$0 as? T == obj}).count > 0
     }
 }
@@ -45,7 +45,7 @@ enum tutorialTypes : String {
     var numberShadow = SKLabelNode(fontNamed: "Montserrat-Bold")
     var numberInt = 0
     
-    var timer = NSTimer()
+    var timer = Timer()
     
     init(texture : SKTexture?, color: UIColor, size: CGSize, index: Int?) {
         currentTexture = normText
@@ -61,24 +61,24 @@ enum tutorialTypes : String {
         }
         
         number.text = "\(indexs)"
-        number.fontColor = UIColor.whiteColor()
+        number.fontColor = UIColor.white
         number.zPosition = 2
         number.fontSize = 30
-        number.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
-        number.horizontalAlignmentMode = .Center
-        number.verticalAlignmentMode = .Center
+        number.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        number.horizontalAlignmentMode = .center
+        number.verticalAlignmentMode = .center
         self.addChild(number)
         
         numberShadow.text = "\(indexs)"
         numberShadow.fontColor = UIColor(rgba: "#d24536")
         numberShadow.zPosition = 1
         numberShadow.fontSize = 30
-        numberShadow.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-5)
-        numberShadow.horizontalAlignmentMode = .Center
-        numberShadow.verticalAlignmentMode = .Center
+        numberShadow.position = CGPoint(x: self.frame.midX, y: self.frame.midY-5)
+        numberShadow.horizontalAlignmentMode = .center
+        numberShadow.verticalAlignmentMode = .center
         self.addChild(numberShadow)
         
-        timer = NSTimer.every(0.1, {
+        timer = Timer.every(0.1, {
             self.update()
         })
         
@@ -101,13 +101,13 @@ enum tutorialTypes : String {
                 timer.invalidate()
             }
             
-            let rotateAction = SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1)
-            self.runAction(rotateAction)
+            let rotateAction = SKAction.rotate(byAngle: CGFloat(M_PI * 2), duration: 1)
+            self.run(rotateAction)
             
             break;
         case .used:
-            let scaleSequence = SKAction.sequence([SKAction.scaleTo(0.9, duration: 0.2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0), SKAction.scaleTo(1, duration: 0.2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)])
-            self.runAction(scaleSequence)
+            let scaleSequence = SKAction.sequence([SKAction.scale(to: 0.9, duration: 0.2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0), SKAction.scale(to: 1, duration: 0.2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)])
+            self.run(scaleSequence)
             currentTexture = usedText
             self.texture = currentTexture
             
@@ -116,39 +116,39 @@ enum tutorialTypes : String {
     
     @objc func flip () {
         
-        let liftUp = SKAction.scaleTo(1.2, duration: 0.2)
-        let dropDown = SKAction.scaleTo(1.0, duration: 0.2)
+        let liftUp = SKAction.scale(to: 1.2, duration: 0.2)
+        let dropDown = SKAction.scale(to: 1.0, duration: 0.2)
         
         let touchAction = SKAction.sequence([liftUp, dropDown])
         
-        let flip = SKAction.scaleXTo(-1, duration: 0.4)
+        let flip = SKAction.scaleX(to: -1, duration: 0.4)
         
         self.setScale(1.0)
         
-        let changeColor = SKAction.runBlock( { self.number.alpha = 0; self.numberShadow.alpha = 0})
+        let changeColor = SKAction.run( { self.number.alpha = 0; self.numberShadow.alpha = 0})
         let action = SKAction.sequence([flip, changeColor] )
         
         let finishedAction = SKAction.group([touchAction, action])
         
-        self.runAction(finishedAction)
+        self.run(finishedAction)
     }
     
     @objc func reFlip () {
-        let liftUp = SKAction.scaleTo(1.2, duration: 0.2)
-        let dropDown = SKAction.scaleTo(1.0, duration: 0.2)
+        let liftUp = SKAction.scale(to: 1.2, duration: 0.2)
+        let dropDown = SKAction.scale(to: 1.0, duration: 0.2)
         
         let touchAction = SKAction.sequence([liftUp, dropDown])
         
-        let flip = SKAction.scaleXTo(-1, duration: 0.4)
+        let flip = SKAction.scaleX(to: -1, duration: 0.4)
         
         self.setScale(1.0)
         
-        let changeColor = SKAction.runBlock( { self.number.alpha = 1; self.numberShadow.alpha = 1})
+        let changeColor = SKAction.run( { self.number.alpha = 1; self.numberShadow.alpha = 1})
         let action = SKAction.sequence([flip, changeColor] )
         
         let finishedAction = SKAction.group([touchAction, action])
         
-        self.runAction(finishedAction)
+        self.run(finishedAction)
         
     }
     
@@ -170,28 +170,28 @@ enum tutorialTypes : String {
     }
     
     @objc func darken () {
-        let scaleSequence = SKAction.sequence([SKAction.scaleTo(0.95, duration: 0.1), SKAction.scaleTo(1, duration: 0.1)])
-        self.runAction(scaleSequence)
+        let scaleSequence = SKAction.sequence([SKAction.scale(to: 0.95, duration: 0.1), SKAction.scale(to: 1, duration: 0.1)])
+        self.run(scaleSequence)
         currentTexture = SKTexture(imageNamed: "numberGreyedOut")
         self.texture = currentTexture
     }
     
     @objc func scale () {
-        self.runAction(SKAction.scaleTo(1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        self.run(SKAction.scale(to: 1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
     }
     
     @objc func scaleToSmallerSize () {
-        self.runAction(SKAction.scaleTo(0.6, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        self.run(SKAction.scale(to: 0.6, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
     }
     
     
-    @objc func reScale (withCompletion completion: () -> ()) {
-        self.runAction(SKAction.scaleTo(0, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)) {
+    @objc func reScale (withCompletion completion: @escaping () -> ()) {
+        self.run(SKAction.scale(to: 0, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)) {
             completion()
         }
     }
     
-    @objc func randomSequenceGenerator(min: Int, max: Int) -> () -> Int {
+    @objc func randomSequenceGenerator(_ min: Int, max: Int) -> () -> Int {
         var numbers: [Int] = []
         return {
             if numbers.count == 0 {
@@ -199,7 +199,7 @@ enum tutorialTypes : String {
             }
             
             let index = Int(arc4random_uniform(UInt32(numbers.count)))
-            return numbers.removeAtIndex(index)
+            return numbers.remove(at: index)
         }
     }
     

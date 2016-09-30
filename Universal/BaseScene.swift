@@ -11,7 +11,7 @@ import GameKit
 import StoreKit
 import ReplayKit
 import MBProgressHUD
-import Armchair
+import Appirater
 
 enum kGameMode {
     case kMultiplayer
@@ -26,15 +26,15 @@ class BaseScene : SKScene {
     var products = [SKProduct]()
     var continueArray = [SKNode]()
     var topArray = [SKNode]()
-    var timerArray = [NSTimer]()
+    var timerArray = [Timer]()
     var countdownArray = [SKNode]()
     
     var currentMode: gameMode!
     
     var counter = 10
     
-    let countdown = CountdownNode(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
-    var countdownTimer = NSTimer()
+    let countdown = CountdownNode(texture: nil, color: UIColor.clear, size: CGSize(width: 0, height: 0))
+    var countdownTimer = Timer()
     
     let starVideo = SKSpriteNode(imageNamed: "starVideo")
     let records = SKSpriteNode(imageNamed: "records")
@@ -54,7 +54,7 @@ class BaseScene : SKScene {
     let timeToMemorizeCounter = AnimatedScoreLabel(text: "", score: 0, size: 38, color: UIColor(rgba: "#e74c3c"))
     let timeToMemorizeText = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     
-    var memorizeTimer = NSTimer()
+    var memorizeTimer = Timer()
 
     var number : Int = 0
     var numbersTapped = 0
@@ -62,37 +62,37 @@ class BaseScene : SKScene {
     var hasGameEnded = false
     var hasRun = 0
     
-    let numberBox1 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox2 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox3 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox4 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox5 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox6 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox7 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox8 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox9 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox10 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox11 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox12 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox13 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox14 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox15 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox16 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox17 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox18 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox19 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox20 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox21 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox22 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox23 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-    let numberBox24 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
+    let numberBox1 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox2 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox3 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox4 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox5 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox6 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox7 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox8 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox9 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox10 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox11 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox12 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox13 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox14 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox15 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox16 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox17 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox18 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox19 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox20 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox21 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox22 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox23 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+    let numberBox24 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
     
     var boxArray = [NumberBox]()
     
     var shareTitle = ""
     var shareMessage = ""
     var shareImage = UIImage()
-    var shareURL = NSURL()
+    var shareURL = URL(fileURLWithPath: "")
 
      override init(size: CGSize) {
         super.init(size: size)
@@ -104,35 +104,38 @@ class BaseScene : SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
     }
     
-    func start(mode: kGameMode, cam: SKCameraNode?)  {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.productPurchased), name: IAPHelperProductPurchasedNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(productCancelled), name: "cancelled", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rewardUser(_:)), name: "videoRewarded", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.setPaused), name: "pauseGame", object: nil)
+    func start(_ mode: kGameMode, cam: SKCameraNode?)  {
+        NotificationCenter.default.addObserver(self, selector: #selector(GameScene.productPurchased), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(productCancelled), name: NSNotification.Name(rawValue: "cancelled"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameScene.rewardUser(_:)), name: NSNotification.Name(rawValue: "videoRewarded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameScene.setPaused), name: NSNotification.Name(rawValue: "pauseGame"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showGameMode), name: NSNotification.Name(rawValue: kPlayGameModeNotification), object: nil)
+        
+        
         
         products = []
-        Products.store.requestProductsWithCompletionHandler { (success, products) in
+        Products.store.requestProducts{success, products in
             if success {
-                self.products = products
+                self.products = products!
             }
         }
         
-        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("hasRemovedAds") as? Bool {
+        if let _ = UserDefaults.standard.object(forKey: "hasRemovedAds") as? Bool {
             FTLogging().FTLog("all ads are gone")
             
         } else {
-            NSNotificationCenter.defaultCenter().postNotificationName("hideBanner", object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "hideBanner"), object: nil)
         }
         
-        size = CGSizeMake(640, 960)
+        size = CGSize(width: 640, height: 960)
         backgroundColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 1)
-        scaleMode = .AspectFill
+        scaleMode = .aspectFill
         
-        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         background.size = self.size
         background.zPosition = -10
         //addChild(background)
@@ -146,10 +149,13 @@ class BaseScene : SKScene {
                 box.scale()
             }
         }
+        
+        GameModeHelper.sharedHelper.pausePointsCheck()
+
     }
     
     func addNumbers() {
-        scoreLabel.text = ""
+        scoreLabel?.text = ""
         
         numberBox1.position = CGPoint(x:170, y:700)
         numberBox1.indexs = array[0]
@@ -247,12 +253,12 @@ class BaseScene : SKScene {
         numberBox24.position = CGPoint(x:numberBox3.position.x + 100, y:numberBox1.position.y - 500)
         self.addChild(numberBox24)
         
-        self.tapOnLabel.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-        self.numberLabel.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0), completion: {
+        self.tapOnLabel.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        self.numberLabel.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0), completion: {
         })
         
-        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("hasRemovedAds") as? Bool {
-            NSNotificationCenter.defaultCenter().postNotificationName("hideAds", object: nil)
+        if let _ = UserDefaults.standard.object(forKey: "hasRemovedAds") as? Bool {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "hideAds"), object: nil)
         }
         
         boxArray.append(numberBox1)
@@ -283,16 +289,16 @@ class BaseScene : SKScene {
     }
     
     func startCountDown() {
-        countdown.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        countdown.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         countdown.zPosition = 10
         addChild(countdown)
         
-        countdownTimer = NSTimer.every(1, { 
+        countdownTimer = Timer.every(1, { 
             self.countdownCheck()
         })
         
         let dbackground = SKSpriteNode(imageNamed: "background")
-        dbackground.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        dbackground.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         dbackground.size = self.size
         dbackground.alpha = 0.8
         dbackground.name = "bg"
@@ -308,57 +314,57 @@ class BaseScene : SKScene {
         countdown.counterUpdate()
     }
     
-    func updateScore(score: Int) {
-        let oldAmount = NSUserDefaults.standardUserDefaults().integerForKey(kNumbersKey)
+    func updateScore(_ score: Int) {
+        let oldAmount = UserDefaults.standard.integer(forKey: kNumbersKey)
         let newAmountToAdd = Int(oldAmount + score)
         let newAmount = Int(newAmountToAdd)
         
-        NSUserDefaults.standardUserDefaults().setInteger(newAmount, forKey: kNumbersKey)
-        print("old \(oldAmount) vs new \(newAmount) also before removing score \(newAmountToAdd) vs saved \(NSUserDefaults.standardUserDefaults().integerForKey(kNumbersKey))" )
+        UserDefaults.standard.set(newAmount, forKey: kNumbersKey)
+        print("old \(oldAmount) vs new \(newAmount) also before removing score \(newAmountToAdd) vs saved \(UserDefaults.standard.integer(forKey: kNumbersKey))" )
     }
     
-    func counterComplete(aNotification: NSNotification) {
+    func counterComplete(_ aNotification: Notification) {
     }
     
-    func setup(mode: kGameMode, cam: SKCameraNode?) {
+    func setup(_ mode: kGameMode, cam: SKCameraNode?) {
         
         let timerSpace = SKTexture(imageNamed: "timerSpace")
-        circularTimer.position = CGPointMake(470, 850)
+        circularTimer.position = CGPoint(x: 470, y: 850)
         circularTimer.radius = timerSpace.size().width / 2
         circularTimer.width = 8.0
         circularTimer.zPosition = 2
         circularTimer.color = UIColor(rgba: "#e74c3c")
         circularTimer.backgroundColor = UIColor(rgba: "#434343")
         
-        scoreLabel.position = CGPointMake(circularTimer.position.x - 320, circularTimer.position.y)
-        scoreLabel.horizontalAlignmentMode = .Left
-        scoreLabel.fontColor = UIColor(rgba: "#e74c3c")
+        scoreLabel?.position = CGPoint(x: circularTimer.position.x - 320, y: circularTimer.position.y)
+        scoreLabel?.horizontalAlignmentMode = .left
+        scoreLabel?.fontColor = UIColor(rgba: "#e74c3c")
         
         numbersTap.text = "NUMBERS TAPPED"
-        numbersTap.position = CGPointMake(scoreLabel.position.x + 15, scoreLabel.position.y)
-        numbersTap.horizontalAlignmentMode = .Left
-        numbersTap.fontColor = UIColor.whiteColor()
+        numbersTap.position = CGPoint(x: (scoreLabel?.position.x)! + 15, y: (scoreLabel?.position.y)!)
+        numbersTap.horizontalAlignmentMode = .left
+        numbersTap.fontColor = UIColor.white
         numbersTap.fontSize = 25
-        numbersTap.zPosition = scoreLabel.zPosition
+        numbersTap.zPosition = (scoreLabel?.zPosition)!
         
-        starVideo.position = CGPointMake(scoreLabel.position.x + 10, scoreLabel.position.y - 32)
+        starVideo.position = CGPoint(x: (scoreLabel?.position.x)! + 10, y: (scoreLabel?.position.y)! - 32)
         starVideo.name = "starVideo"
         starVideo.zPosition = 2
         
-        records.position = CGPointMake(starVideo.position.x + 65, starVideo.position.y)
+        records.position = CGPoint(x: starVideo.position.x + 65, y: starVideo.position.y)
         records.name = "records"
         records.zPosition = 2
         
         if mode == .kFollow && cam != nil{
             cam!.addChild(circularTimer)
-            cam!.addChild(scoreLabel)
+            cam!.addChild(scoreLabel!)
             cam!.addChild(numbersTap)
             cam!.addChild(starVideo)
             cam!.addChild(records)
 
         } else {
             addChild(circularTimer)
-            addChild(scoreLabel)
+            addChild(scoreLabel!)
             addChild(numbersTap)
             addChild(starVideo)
             addChild(records)
@@ -366,12 +372,12 @@ class BaseScene : SKScene {
         }
         
         if mode != .kMemory {
-            self.tapOnLabel.fontColor = UIColor.whiteColor()
+            self.tapOnLabel.fontColor = UIColor.white
             self.tapOnLabel.fontSize = 30
             self.tapOnLabel.text = "TAP NUMBER:"
-            self.tapOnLabel.horizontalAlignmentMode = .Center
-            self.tapOnLabel.verticalAlignmentMode = .Center
-            self.tapOnLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 25, -90)
+            self.tapOnLabel.horizontalAlignmentMode = .center
+            self.tapOnLabel.verticalAlignmentMode = .center
+            self.tapOnLabel.position = CGPoint(x: self.frame.midX - 25, y: -90)
             
             if mode == .kFollow && cam != nil{
                 cam!.addChild(tapOnLabel)
@@ -384,41 +390,41 @@ class BaseScene : SKScene {
             self.numberLabel.fontColor = UIColor(rgba: "#e74c3c")
             self.numberLabel.fontSize = 38
             self.numberLabel.text = String(self.number)
-            self.numberLabel.horizontalAlignmentMode = .Center
-            self.numberLabel.verticalAlignmentMode = .Center
-            self.numberLabel.position = CGPointMake(self.tapOnLabel.position.x + 130, -90)
+            self.numberLabel.horizontalAlignmentMode = .center
+            self.numberLabel.verticalAlignmentMode = .center
+            self.numberLabel.position = CGPoint(x: self.tapOnLabel.position.x + 130, y: -90)
             if mode == .kFollow && cam != nil{
                 cam!.addChild(numberLabel)
             } else {
                 addChild(numberLabel)
             }
             
-            self.tapOnLabel.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-            self.numberLabel.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+            self.tapOnLabel.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+            self.numberLabel.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
             
         } else {
-            timeToMemorizeText.fontColor = UIColor.whiteColor()
+            timeToMemorizeText.fontColor = UIColor.white
             timeToMemorizeText.fontSize = 30
             timeToMemorizeText.text = "TIME TO MEMORIZE:"
-            timeToMemorizeText.horizontalAlignmentMode = .Center
-            timeToMemorizeText.verticalAlignmentMode = .Center
-            timeToMemorizeText.position = CGPointMake(CGRectGetMidX(self.frame) - 45, -90)
+            timeToMemorizeText.horizontalAlignmentMode = .center
+            timeToMemorizeText.verticalAlignmentMode = .center
+            timeToMemorizeText.position = CGPoint(x: self.frame.midX - 45, y: -90)
             addChild(timeToMemorizeText)
             
-            timeToMemorizeCounter.fontColor = UIColor(rgba: "#e74c3c")
-            timeToMemorizeCounter.fontSize = 38
-            timeToMemorizeCounter.horizontalAlignmentMode = .Center
-            timeToMemorizeCounter.verticalAlignmentMode = .Center
-            timeToMemorizeCounter.position = CGPointMake(timeToMemorizeText.position.x + 180, -90)
-            addChild(timeToMemorizeCounter)
+            timeToMemorizeCounter?.fontColor = UIColor(rgba: "#e74c3c")
+            timeToMemorizeCounter?.fontSize = 38
+            timeToMemorizeCounter?.horizontalAlignmentMode = .center
+            timeToMemorizeCounter?.verticalAlignmentMode = .center
+            timeToMemorizeCounter?.position = CGPoint(x: timeToMemorizeText.position.x + 180, y: -90)
+            addChild(timeToMemorizeCounter!)
             
-            timeToMemorizeText.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-            timeToMemorizeCounter.runAction(SKAction.moveToY(75, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+            timeToMemorizeText.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+            timeToMemorizeCounter?.run(SKAction.moveTo(y: 75, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
 
-            memorizeTimer = NSTimer.every(1, {
+            memorizeTimer = Timer.every(1, {
                 if self.counter < 0 {
                     self.counter -= 1
-                    self.timeToMemorizeCounter.score = Int32(self.counter)
+                    self.timeToMemorizeCounter?.score = Int32(self.counter)
                 };
                 
                 if self.counter == 0 {
@@ -431,7 +437,7 @@ class BaseScene : SKScene {
         
     }
     
-    func setShareDetails(message: String, image: UIImage, url: NSURL) {
+    func setShareDetails(_ message: String, image: UIImage, url: URL) {
         shareMessage = message
         shareImage = image
         shareURL = url
@@ -450,7 +456,7 @@ class BaseScene : SKScene {
         
     }
     
-    func randomSequenceGenerator(min: Int, max: Int) -> () -> Int {
+    func randomSequenceGenerator(_ min: Int, max: Int) -> () -> Int {
         var numbers: [Int] = []
         return {
             if numbers.count == 0 {
@@ -458,7 +464,7 @@ class BaseScene : SKScene {
             }
             
             let index = Int(arc4random_uniform(UInt32(numbers.count)))
-            return numbers.removeAtIndex(index)
+            return numbers.remove(at: index)
         }
     }
     
@@ -474,7 +480,7 @@ class BaseScene : SKScene {
             randNum = array[arrayKey]
             
             // make sure the number isnt repeated
-            array.removeAtIndex(arrayKey)
+            array.remove(at: arrayKey)
             
             return randNum;
             
@@ -490,7 +496,7 @@ class BaseScene : SKScene {
             randNum = array[arrayKey]
             
             // make sure the number isnt repeated
-            array.removeAtIndex(arrayKey)
+            array.remove(at: arrayKey)
             
             return randNum;
             
@@ -498,7 +504,7 @@ class BaseScene : SKScene {
         
     }
     
-    func setScore(score: Int) {
+    func setScore(_ score: Int) {
         numbersTapped = score
     }
     
@@ -513,10 +519,12 @@ class BaseScene : SKScene {
     func gameOver() {
         prepareForGameOver()
         
+        GameModeHelper.sharedHelper.resetPointsCheck()
+
         let darkBG = SKSpriteNode(imageNamed: "background")
         darkBG.size = size
         darkBG.name = "darkBG"
-        darkBG.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
+        darkBG.position = CGPoint(x: frame.midX, y: frame.midY)
         darkBG.zPosition = 100
         darkBG.alpha = 0.8
         if self.children.contains(darkBG) != true {
@@ -525,61 +533,61 @@ class BaseScene : SKScene {
         
         hasGameEnded = true
         
-        NSUserDefaults.standardUserDefaults().highScore = numbersTapped
+        UserDefaults.standard.highScore = numbersTapped
         
         recentScore.setScale(1.12)
         recentScore.name = "recentScore"
-        recentScore.position = CGPointMake(CGRectGetMidX(self.frame) - 100, CGRectGetMidY(self.frame))
+        recentScore.position = CGPoint(x: self.frame.midX - 100, y: self.frame.midY)
         recentScore.zPosition = 101
         recentScore.setScale(0)
         
         let recentScoreText = SKLabelNode(fontNamed: "Montserrat-SemiBold")
         recentScoreText.text = String(numbersTapped)
-        recentScoreText.fontColor = UIColor.whiteColor()
+        recentScoreText.fontColor = UIColor.white
         recentScoreText.fontSize = 42
         recentScoreText.zPosition = recentScore.zPosition + 1
-        recentScoreText.horizontalAlignmentMode = .Center
-        recentScoreText.verticalAlignmentMode = .Center
+        recentScoreText.horizontalAlignmentMode = .center
+        recentScoreText.verticalAlignmentMode = .center
         recentScoreText.position.y = recentScore.size.height/2 - 28
         
         if recentScore.children.contains(recentScoreText) {} else { recentScore.addChild(recentScoreText) }
         
         if self.children.contains(recentScore) {} else { addChild(recentScore)
-            recentScore.runAction(SKAction.scaleTo(1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+            recentScore.run(SKAction.scale(to: 1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
         }
         
         gameCenter.name = "gameCenter"
-        gameCenter.position = CGPointMake(recentScore.position.x + 180, recentScore.position.y)
+        gameCenter.position = CGPoint(x: recentScore.position.x + 180, y: recentScore.position.y)
         gameCenter.zPosition = 101
         if self.children.contains(gameCenter) {} else { addChild(gameCenter) }
         
         removeAds.name = "removeAds"
-        removeAds.position = CGPointMake(gameCenter.position.x - 50, gameCenter.position.y + 140)
+        removeAds.position = CGPoint(x: gameCenter.position.x - 50, y: gameCenter.position.y + 140)
         removeAds.zPosition = 101
         removeAds.setScale(0.2)
         if self.children.contains(removeAds) {} else { addChild(removeAds) }
         
-        removeAds.runAction(SKAction.scaleTo(1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        removeAds.run(SKAction.scale(to: 1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
         
         share.name = "share"
-        share.position = CGPointMake(removeAds.position.x  - 20, removeAds.position.y - 270)
+        share.position = CGPoint(x: removeAds.position.x  - 20, y: removeAds.position.y - 270)
         share.zPosition = 101
         share.setScale(0.4)
         if self.children.contains(share) {} else { addChild(share) }
         
-        share.runAction(SKAction.scaleTo(1, duration: 0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        share.run(SKAction.scale(to: 1, duration: 0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
         
         beginGame.name = "beginGame"
-        beginGame.position = CGPointMake(CGRectGetMidX(self.frame), -90)
+        beginGame.position = CGPoint(x: self.frame.midX, y: -90)
         beginGame.zPosition = 101
         if self.children.contains(beginGame) {} else { addChild(beginGame) }
         
-        beginGame.runAction(SKAction.moveToY(90, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        beginGame.run(SKAction.moveTo(y: 90, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
         
         var arr = [SKSpriteNode]()
         
         home.name = "home"
-        home.position = CGPoint(x: CGRectGetMidX(self.frame) + 145, y: 150)
+        home.position = CGPoint(x: self.frame.midX + 145, y: 150)
         home.zPosition = 101
         home.alpha = 1
         home.setScale(0)
@@ -607,43 +615,43 @@ class BaseScene : SKScene {
         arr.append(sound)
         
         for item in arr {
-            if UIDevice.currentDevice().type == .iPadMini1 {
-                item.runAction(SKAction.scaleTo(0.4, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+            if UIScreen.main.isRetina() {
+                item.run(SKAction.scale(to: 0.4, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
             } else {
-                item.runAction(SKAction.scaleTo(1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+                item.run(SKAction.scale(to: 1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
             }
         }
         
         let gameOverText = SKLabelNode(fontNamed: "Montserrat-SemiBold")
-        gameOverText.color = UIColor.whiteColor()
-        gameOverText.horizontalAlignmentMode = .Center
+        gameOverText.color = UIColor.white
+        gameOverText.horizontalAlignmentMode = .center
         gameOverText.zPosition = 101
         gameOverText.text = "game over"
         gameOverText.name = "gameOver"
         gameOverText.fontSize = 55
-        gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), removeAds.position.y + 1000)
-        if self.childNodeWithName("gameOver") != nil {
+        gameOverText.position = CGPoint(x: self.frame.midX, y: removeAds.position.y + 1000)
+        if self.childNode(withName: "gameOver") != nil {
             addChild(gameOverText)
         }
         
-        gameOverText.runAction(SKAction.moveToY(removeAds.position.y + 140, duration: 1))
+        gameOverText.run(SKAction.moveTo(y: removeAds.position.y + 140, duration: 1))
         
         hasRun = 1
         
-        Armchair.userDidSignificantEvent(true)
+        Appirater.userDidSignificantEvent(true)
     }
     
     func clearGameOver() {
-        removeAds.runAction(SKAction.moveToY(-1000, duration: 2.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-        recentScore.runAction(SKAction.moveToY(-1000, duration: 2.1, delay: 1, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-        beginGame.runAction(SKAction.moveToY(-1000, duration: 2.2, delay: 2, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-        share.runAction(SKAction.moveToY(-1000, duration: 2.4, delay: 1.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-        gameCenter.runAction(SKAction.moveToY(-1000, duration: 2, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)) {
+        removeAds.run(SKAction.moveTo(y: -1000, duration: 2.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        recentScore.run(SKAction.moveTo(y: -1000, duration: 2.1, delay: 1, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        beginGame.run(SKAction.moveTo(y: -1000, duration: 2.2, delay: 2, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        share.run(SKAction.moveTo(y: -1000, duration: 2.4, delay: 1.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        gameCenter.run(SKAction.moveTo(y: -1000, duration: 2, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)) {
             
-            self.childNodeWithName("darkBG")?.removeFromParent()
-            self.childNodeWithName("gameOver")?.removeFromParent()
-            self.childNodeWithName("gameOver")?.removeAllActions()
-            self.childNodeWithName("gameOver")?.removeAllChildren()
+            self.childNode(withName: "darkBG")?.removeFromParent()
+            self.childNode(withName: "gameOver")?.removeFromParent()
+            self.childNode(withName: "gameOver")?.removeAllActions()
+            self.childNode(withName: "gameOver")?.removeAllChildren()
             
             self.recentScore.removeFromParent()
             self.recentScore.removeAllActions()
@@ -681,6 +689,40 @@ class BaseScene : SKScene {
         }
 
     }
+    
+    func showGameMode() {
+        print("Showing Game Mode")
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        visualEffectView.frame = view!.bounds
+        self.view!.addSubview(visualEffectView)
+        
+        let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
+        loadingNotification.mode = .indeterminate
+        loadingNotification.label.text = "Loading"
+        loadingNotification.isUserInteractionEnabled = false
+        
+        let atlas1 = SKTextureAtlas(named: "Endless")
+        let atlas2 = SKTextureAtlas(named: "Build-Up")
+        let atlas3 = SKTextureAtlas(named: "Memory")
+        let atlas4 = SKTextureAtlas(named: "Shoot")
+        
+        SKTextureAtlas.preloadTextureAtlases([atlas1, atlas2, atlas3, atlas4], withCompletionHandler: {
+            DispatchQueue.main.async(execute: {
+                self.removeFromParent()
+                self.removeAllActions()
+                self.removeAllChildren()
+                
+                visualEffectView.removeFromSuperview()
+                MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+                
+                let gameModes = GameModes()
+                self.view?.presentScene(gameModes, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))
+                
+            })
+            
+        })
+    }
 
     func resetScene() {
         
@@ -691,107 +733,107 @@ class BaseScene : SKScene {
         
     }
     
-    @objc private func productCancelled() {
-        MBProgressHUD.hideAllHUDsForView(self.view!, animated: true)
+    @objc fileprivate func productCancelled() {
+        MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
     }
     
-    func handleTouchedPoint(location: CGPoint) {
+    func handleTouchedPoint(_ location: CGPoint) {
         if hasGameEnded {
-            if gameCenter.containsPoint(location) {
+            if gameCenter.contains(location) {
                 FTLogging().FTLog("game center")
                 
-                gameCenter.runAction(k.Sounds.blopAction1)
+                gameCenter.run(k.Sounds.blopAction1)
                 
                 //let vC = self.view!.window?.rootViewController
                 //GameKitHelper.sharedGameKitHelper.showGameCenter(vC!, viewState: .Default)
             }
             
-            if home.containsPoint(location) {
+            if home.contains(location) {
                 FTLogging().FTLog("home")
                 let homeScene = HomeScene()
-                self.view?.presentScene(homeScene, transition: SKTransition.fadeWithColor(UIColor(rgba: "#434343"), duration: 2))
+                self.view?.presentScene(homeScene, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 2))
                 
             };
             
-            if sound.containsPoint(location) {
+            if sound.contains(location) {
                 FTLogging().FTLog("sound")
-                sound.runAction(k.Sounds.blopAction1)
-                let touchSound = NSUserDefaults.standardUserDefaults().integerForKey("sound")
+                sound.run(k.Sounds.blopAction1)
+                let touchSound = UserDefaults.standard.integer(forKey: "sound")
                 
                 if touchSound == 0 {
-                    NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "sound")
-                    NSNotificationCenter.defaultCenter().postNotificationName("stopMusic", object: nil)
+                    UserDefaults.standard.set(1, forKey: "sound")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "stopMusic"), object: nil)
                 };
                 
                 if touchSound == 1 {
-                    NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "sound")
-                    NSNotificationCenter.defaultCenter().postNotificationName("playMusic", object: nil)
+                    UserDefaults.standard.set(0, forKey: "sound")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "playMusic"), object: nil)
                 }
                 
                 
             };
             
-            if info.containsPoint(location) {
+            if info.contains(location) {
                 let vc = self.view?.window?.rootViewController
-                let alert = UIAlertController(title: "How To Play", message: "Simply tap the tile with the number that's displayed at the bottom of the screen while avoid to run out of time! \r\nHow fast can you tap? \r\n\r\nHow long can you last? \r\n\r\nMade by Jesse Onolememen 2016 \r\nIcons Provided by FreePik/FlatIcon", preferredStyle: .Alert) // 1
-                let firstAction = UIAlertAction(title: "Yeah I got it!", style: .Default) { (alert: UIAlertAction!) -> Void in
-                    let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view!, animated: true)
-                    loadingNotification.mode = .Indeterminate
+                let alert = UIAlertController(title: "How To Play", message: "Simply tap the tile with the number that's displayed at the bottom of the screen while avoid to run out of time! \r\nHow fast can you tap? \r\n\r\nHow long can you last? \r\n\r\nMade by Jesse Onolememen 2016 \r\nIcons Provided by FreePik/FlatIcon", preferredStyle: .alert) // 1
+                let firstAction = UIAlertAction(title: "Yeah I got it!", style: .default) { (alert: UIAlertAction!) -> Void in
+                    let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
+                    loadingNotification.mode = .indeterminate
                     loadingNotification.labelText = "Loading"
-                    loadingNotification.userInteractionEnabled = false
+                    loadingNotification.isUserInteractionEnabled = false
                     
                     NSLog("You pressed button one")
                     
                 } // 2
-                let restorePurchases = UIAlertAction(title: "Restore Purchases", style: .Default, handler: { (UIAlertAction) in
+                let restorePurchases = UIAlertAction(title: "Restore Purchases", style: .default, handler: { (UIAlertAction) in
                     //self.restoreTapped()
                 })
                 
                 alert.addAction(firstAction) // 4
                 alert.addAction(restorePurchases)
-                vc!.presentViewController(alert, animated: true, completion:nil) // 6
+                vc!.present(alert, animated: true, completion:nil) // 6
             }
             
-            if share.containsPoint(location) {
+            if share.contains(location) {
                 FTLogging().FTLog("share")
                 
-                share.runAction(k.Sounds.blopAction1)
+                share.run(k.Sounds.blopAction1)
                 
-                if let _ = NSURL(string: "") {
-                    let objectsToShare = [shareMessage, shareURL, shareImage]
+                if let _ = URL(string: "") {
+                    let objectsToShare = [shareMessage, shareURL, shareImage] as [Any]
                     let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                     
                     //New Excluded Activities Code
-                    activityVC.excludedActivityTypes = [UIActivityTypeAddToReadingList]
+                    activityVC.excludedActivityTypes = [UIActivityType.addToReadingList]
                     
                     let vC = self.view?.window?.rootViewController
-                    vC!.presentViewController(activityVC, animated: true, completion: nil)
+                    vC!.present(activityVC, animated: true, completion: nil)
                     
                 }
             }
-            if removeAds.containsPoint(location) {
+            if removeAds.contains(location) {
                 FTLogging().FTLog("remove ads")
-                let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view!, animated: true)
-                loadingNotification.mode = .Indeterminate
+                let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
+                loadingNotification.mode = .indeterminate
                 loadingNotification.labelText = "Loading"
-                loadingNotification.userInteractionEnabled = false
+                loadingNotification.isUserInteractionEnabled = false
                 
-                removeAds.runAction(k.Sounds.blopAction1)
+                removeAds.run(k.Sounds.blopAction1)
                 //purchaseProduct(0)
             }
             
-            if beginGame.containsPoint(location) {
+            if beginGame.contains(location) {
                 FTLogging().FTLog("begin game")
-                beginGame.runAction(k.Sounds.blopAction1)
+                beginGame.run(k.Sounds.blopAction1)
                 clearGameOver()
             }
             
         }
         
-        if home.containsPoint(location) {
+        if home.contains(location) {
             FTLogging().FTLog("home")
             let homeScene = HomeScene()
-            self.view?.presentScene(homeScene, transition: SKTransition.fadeWithColor(UIColor(rgba: "#434343"), duration: 2))
+            self.view?.presentScene(homeScene, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 2))
         };
 
     }

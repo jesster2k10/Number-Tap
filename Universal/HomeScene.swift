@@ -37,7 +37,7 @@ class HomeScene: InitScene {
     var products           = [SKProduct]()
     var settingsArray      = [SKNode]()
     var actionsArray       = [SKAction]()
-    let switchDemo         = UISwitch(frame:CGRectMake(75, 370, 0, 0))
+    let switchDemo         = UISwitch(frame:CGRect(x: 75, y: 370, width: 0, height: 0))
     var isShowingSettings  = false
     var scaling            = [SKNode]()
     var nonScaling         = [SKNode]()
@@ -47,71 +47,72 @@ class HomeScene: InitScene {
     // MARK: - didMoveToView
     // *************************************************************
     
-    override func didMoveToView(view: SKView) {
-        NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "sound")
-        NSNotificationCenter.defaultCenter().postNotificationName("showBanner", object: nil)
+    override func didMove(to view: SKView) {
+        UserDefaults.standard.set(0, forKey: "sound")
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "showBanner"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showGameMode), name: NSNotification.Name(rawValue: kPlayGameModeNotification), object: nil)
         
-        scaleMode = .AspectFill
-        size = CGSizeMake(640, 960)
+        scaleMode = .aspectFill
+        size = CGSize(width: 640, height: 960)
         
         setupScene()
     }
     
     func setupScene() {
-        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         background.zPosition = -10
         background.size = self.size
         addChild(background)
         
-        numberTap.position = CGPointMake(CGRectGetMidX(self.frame), 739) //324 322
+        numberTap.position = CGPoint(x: self.frame.midX, y: 739) //324 322
         numberTap.zPosition = 2
         addChild(numberTap)
         
-        info.position = CGPointMake(450, numberTap.position.y + 50)
+        info.position = CGPoint(x: 450, y: numberTap.position.y + 50)
         info.zPosition = 2
         addChild(info)
         
-        sound.position = CGPointMake(info.position.x - 50, info.position.y)
+        sound.position = CGPoint(x: info.position.x - 50, y: info.position.y)
         sound.zPosition = 2
         scaleForNonRetinaiPad(sound, aScale: 0.4)
         addChild(sound)
         
-        play.position = CGPointMake(numberTap.position.x, 335)
+        play.position = CGPoint(x: numberTap.position.x, y: 335)
         play.zPosition = 2
         addChild(play)
         scaleForNonRetinaiPad(play, aScale: 0.4)
         
-        favourite.position = CGPointMake(190, numberTap.position.y - 100)
+        favourite.position = CGPoint(x: 190, y: numberTap.position.y - 100)
         favourite.zPosition = 2
         addChild(favourite)
         
-        leaderboard.position = CGPointMake(favourite.position.x + 90, favourite.position.y)
+        leaderboard.position = CGPoint(x: favourite.position.x + 90, y: favourite.position.y)
         leaderboard.zPosition = 2
         addChild(leaderboard)
         
-        like.position = CGPointMake(leaderboard.position.x + 90, leaderboard.position.y)
+        like.position = CGPoint(x: leaderboard.position.x + 90, y: leaderboard.position.y)
         like.zPosition = 2
         addChild(like)
         
-        settings.position = CGPointMake(like.position.x + 90, like.position.y)
+        settings.position = CGPoint(x: like.position.x + 90, y: like.position.y)
         settings.zPosition = 2
         addChild(settings)
         
-        removeAds.position = CGPointMake(numberTap.position.x, leaderboard.position.y - 100)
+        removeAds.position = CGPoint(x: numberTap.position.x, y: leaderboard.position.y - 100)
         removeAds.zPosition = 2
         scaleForNonRetinaiPad(removeAds, aScale: 0.5)
-        let def = NSUserDefaults.standardUserDefaults()
-        if let _ = def.objectForKey("hasRemovedAds") as? Bool { print("all ads are gone") } else { addChild(removeAds) }
+        let def = UserDefaults.standard
+        if let _ = def.object(forKey: "hasRemovedAds") as? Bool { print("all ads are gone") } else { addChild(removeAds) }
         
-        gameMode.position = CGPointMake(play.position.x, play.position.y - 200)
+        gameMode.position = CGPoint(x: play.position.x, y: play.position.y - 200)
         gameMode.zPosition = 2
         addChild(gameMode)
         
-        starOne.position = CGPointMake(gameMode.position.x - 150, gameMode.position.y)
+        starOne.position = CGPoint(x: gameMode.position.x - 150, y: gameMode.position.y)
         starOne.zPosition = 5
         addChild(starOne)
         
-        starTwo.position = CGPointMake(gameMode.position.x + 150, gameMode.position.y)
+        starTwo.position = CGPoint(x: gameMode.position.x + 150, y: gameMode.position.y)
         starTwo.zPosition = 5
         addChild(starTwo)
         
@@ -133,77 +134,77 @@ class HomeScene: InitScene {
             child.setScale(0)
         }
         
-        let increaseAction = SKAction.scaleTo(1.1, duration: 0.5)
-        let decreaseAction = SKAction.scaleTo(1, duration: 0.5)
+        let increaseAction = SKAction.scale(to: 1.1, duration: 0.5)
+        let decreaseAction = SKAction.scale(to: 1, duration: 0.5)
         let completeAction = SKAction.sequence([increaseAction, decreaseAction])
-        let completeActions = SKAction.repeatActionForever(completeAction)
+        let completeActions = SKAction.repeatForever(completeAction)
         
-        let increaseActionAds = SKAction.scaleTo(0.4, duration: 0.5)
-        let decreaseActionAds = SKAction.scaleTo(0.3, duration: 0.5)
+        let increaseActionAds = SKAction.scale(to: 0.4, duration: 0.5)
+        let decreaseActionAds = SKAction.scale(to: 0.3, duration: 0.5)
         let completeActionAds = SKAction.sequence([increaseActionAds, decreaseActionAds])
-        let completeActionsAds = SKAction.repeatActionForever(completeActionAds)
+        let completeActionsAds = SKAction.repeatForever(completeActionAds)
         
-        let rotateAction = SKAction.rotateByAngle(CGFloat(M_PI*2), duration: 4)
-        let rotateRepeat = SKAction.repeatActionForever(rotateAction)
+        let rotateAction = SKAction.rotate(byAngle: CGFloat(M_PI*2), duration: 4)
+        let rotateRepeat = SKAction.repeatForever(rotateAction)
         
-        let rotateAction2 = SKAction.rotateByAngle(CGFloat(-M_PI*2), duration: 4)
-        let rotateRepeat2 = SKAction.repeatActionForever(rotateAction2)
+        let rotateAction2 = SKAction.rotate(byAngle: CGFloat(-M_PI*2), duration: 4)
+        let rotateRepeat2 = SKAction.repeatForever(rotateAction2)
         
         let completeRepeatAction = SKAction.group([completeActions, rotateRepeat])
         
-        starOne.runAction(rotateRepeat)
-        starTwo.runAction(rotateRepeat2)
+        starOne.run(rotateRepeat)
+        starTwo.run(rotateRepeat2)
         
-        let rotateAction1 = SKAction.rotateByAngle(CGFloat(-M_PI*2), duration: 4)
-        let rotateRepeat1 = SKAction.repeatActionForever(rotateAction1)
+        let rotateAction1 = SKAction.rotate(byAngle: CGFloat(-M_PI*2), duration: 4)
+        let rotateRepeat1 = SKAction.repeatForever(rotateAction1)
         let completeRepeatAction1 = SKAction.group([completeActions, rotateRepeat1])
         
-        favourite.runAction(completeRepeatAction)
-        leaderboard.runAction(completeRepeatAction1)
-        like.runAction(completeRepeatAction)
-        settings.runAction(completeRepeatAction1)
+        favourite.run(completeRepeatAction)
+        leaderboard.run(completeRepeatAction1)
+        like.run(completeRepeatAction)
+        settings.run(completeRepeatAction1)
         
         actionsArray.append(completeAction)
         actionsArray.append(completeRepeatAction1)
         actionsArray.append(completeActions)
         actionsArray.append(completeActionsAds)
         
-        if !UIScreen.mainScreen().isRetina() {
-            removeAds.runAction(completeActionsAds)
+        if !UIScreen.main.isRetina() {
+            removeAds.run(completeActionsAds)
         } else {
-            removeAds.runAction(completeActions)
+            removeAds.run(completeActions)
         }
         
-        gameMode.runAction(completeActions)
+        gameMode.run(completeActions)
         
-        NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "gameMode")
+        UserDefaults.standard.set(0, forKey: "gameMode")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.productPurchased), name: IAPHelperProductPurchasedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameScene.productPurchased), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setSceneEndless), name: "sceneSet", object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(productCancelled), name: "cancelled", object: nil)
         
         products = []
-        Products.store.requestProductsWithCompletionHandler { (success, products) in
+        Products.store.requestProducts{success, products in
             if success {
-                self.products = products
+                self.products = products!
             }
         }
         
-        if !UIScreen.mainScreen().isRetina() {
+        if !UIScreen.main.isRetina() {
             for node in scaling {
                 if node == sound {
-                    node.runAction(SKAction.scaleTo(0.35, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
+                    node.run(SKAction.scale(to: 0.35, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
                 } else {
-                    node.runAction(SKAction.scaleTo(0.4, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
+                    node.run(SKAction.scale(to: 0.4, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
                 }
             }
             
             for node in nonScaling {
-                node.runAction(SKAction.scaleTo(1, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
+                node.run(SKAction.scale(to: 1, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
             }
         } else {
             for node in children {
-                node.runAction(SKAction.scaleTo(1, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
+                node.run(SKAction.scale(to: 1, duration: 3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2))
             }
         }
     }
@@ -213,7 +214,7 @@ class HomeScene: InitScene {
         darkBG.alpha = 0.95
         darkBG.zPosition = 12
         darkBG.size = self.size
-        darkBG.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        darkBG.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         darkBG.name = "darkBG"
         addChild(darkBG)
         
@@ -224,20 +225,20 @@ class HomeScene: InitScene {
         settingsText.name = "settingsText"
         settingsText.text = NSLocalizedString("settings", comment: "settings-title")
         settingsText.fontSize = 75
-        settingsText.fontColor = UIColor.whiteColor()
+        settingsText.fontColor = UIColor.white
         settingsText.zPosition = darkBG.zPosition + 1
-        settingsText.horizontalAlignmentMode = .Center
-        settingsText.verticalAlignmentMode = .Baseline
-        settingsText.position = CGPointMake(CGRectGetMidX(self.frame), 700)
+        settingsText.horizontalAlignmentMode = .center
+        settingsText.verticalAlignmentMode = .baseline
+        settingsText.position = CGPoint(x: self.frame.midX, y: 700)
         addChild(settingsText)
         
         exit.name = "exit"
         exit.zPosition = settingsText.zPosition
-        exit.position = CGPointMake(100, 900)
+        exit.position = CGPoint(x: 100, y: 900)
         addChild(exit)
         
         sound = SKSpriteNode(texture: soundOnTexture)
-        sound.position = CGPointMake(settingsText.position.x - 120, settingsText.position.y - 90)
+        sound.position = CGPoint(x: settingsText.position.x - 120, y: settingsText.position.y - 90)
         sound.zPosition = exit.zPosition
         addChild(sound)
         
@@ -245,14 +246,14 @@ class HomeScene: InitScene {
         soundText.name = "sound-text"
         soundText.text = NSLocalizedString("sound-on", comment: "sound-on")
         soundText.fontSize = 35
-        soundText.horizontalAlignmentMode = .Center
-        soundText.verticalAlignmentMode = .Baseline
-        soundText.position = CGPointMake(sound.position.x + 130, sound.position.y - 10)
+        soundText.horizontalAlignmentMode = .center
+        soundText.verticalAlignmentMode = .baseline
+        soundText.position = CGPoint(x: sound.position.x + 130, y: sound.position.y - 10)
         soundText.zPosition = sound.zPosition
-        soundText.fontColor = UIColor.whiteColor()
+        soundText.fontColor = UIColor.white
         addChild(soundText)
         
-        restorePurchases.position = CGPointMake(sound.position.x, sound.position.y - 100)
+        restorePurchases.position = CGPoint(x: sound.position.x, y: sound.position.y - 100)
         restorePurchases.zPosition = soundText.zPosition
         addChild(restorePurchases)
         
@@ -260,25 +261,25 @@ class HomeScene: InitScene {
         restoreLabel.name = "restoreLabel"
         restoreLabel.text = NSLocalizedString("restore", comment: "restore-purchases")
         restoreLabel.fontSize = 35
-        restoreLabel.horizontalAlignmentMode = .Center
-        restoreLabel.verticalAlignmentMode = .Baseline
-        restoreLabel.position = CGPointMake(restorePurchases.position.x + 130, restorePurchases.position.y)
+        restoreLabel.horizontalAlignmentMode = .center
+        restoreLabel.verticalAlignmentMode = .baseline
+        restoreLabel.position = CGPoint(x: restorePurchases.position.x + 130, y: restorePurchases.position.y)
         restoreLabel.zPosition = restorePurchases.zPosition
-        restoreLabel.fontColor = UIColor.whiteColor()
+        restoreLabel.fontColor = UIColor.white
         addChild(restoreLabel)
         
         let restoreLabel2 = SKLabelNode(fontNamed: "Montserrat-Regular")
         restoreLabel2.name = "restore-two"
         restoreLabel2.text = NSLocalizedString("purchases", comment: "purchase-restore")
         restoreLabel2.fontSize = 35
-        restoreLabel2.horizontalAlignmentMode = .Center
-        restoreLabel2.verticalAlignmentMode = .Baseline
-        restoreLabel2.position = CGPointMake(restorePurchases.position.x + 130, restoreLabel.position.y - 30)
+        restoreLabel2.horizontalAlignmentMode = .center
+        restoreLabel2.verticalAlignmentMode = .baseline
+        restoreLabel2.position = CGPoint(x: restorePurchases.position.x + 130, y: restoreLabel.position.y - 30)
         restoreLabel2.zPosition = restorePurchases.zPosition
-        restoreLabel2.fontColor = UIColor.whiteColor()
+        restoreLabel2.fontColor = UIColor.white
         addChild(restoreLabel2)
         
-        help.position = CGPointMake(restorePurchases.position.x, restorePurchases.position.y - 100)
+        help.position = CGPoint(x: restorePurchases.position.x, y: restorePurchases.position.y - 100)
         help.zPosition = restorePurchases.zPosition
         addChild(help)
         
@@ -286,19 +287,19 @@ class HomeScene: InitScene {
         helpLabel.name = "help-label"
         helpLabel.text = NSLocalizedString("how-to-play", comment: "help")
         helpLabel.fontSize = 35
-        helpLabel.horizontalAlignmentMode = .Center
-        helpLabel.verticalAlignmentMode = .Baseline
-        helpLabel.position = CGPointMake(help.position.x + 150, help.position.y - 10)
+        helpLabel.horizontalAlignmentMode = .center
+        helpLabel.verticalAlignmentMode = .baseline
+        helpLabel.position = CGPoint(x: help.position.x + 150, y: help.position.y - 10)
         helpLabel.zPosition = help.zPosition
-        helpLabel.fontColor = UIColor.whiteColor()
+        helpLabel.fontColor = UIColor.white
         addChild(helpLabel)
         
         let darkGrey = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
         let lightGrey = UIColor(red: 110/255.0, green: 107/255.0, blue: 107/255.0, alpha: 1)
         
-        switchDemo.on = true
+        switchDemo.isOn = true
         switchDemo.setOn(true, animated: false)
-        switchDemo.addTarget(self, action: #selector(HomeScene.switchValueDidChange(_:)), forControlEvents: .ValueChanged)
+        switchDemo.addTarget(self, action: #selector(HomeScene.switchValueDidChange(_:)), for: .valueChanged)
         switchDemo.onTintColor = darkGrey
         switchDemo.thumbTintColor = lightGrey
         self.view!.addSubview(switchDemo)
@@ -306,24 +307,24 @@ class HomeScene: InitScene {
         
         let recordLabel = SKLabelNode(fontNamed: "Montserrat-Regular")
         recordLabel.fontSize = 35
-        recordLabel.fontColor = UIColor.whiteColor()
+        recordLabel.fontColor = UIColor.white
         recordLabel.text = NSLocalizedString("record", comment: "record-gameplay")
         recordLabel.name = "record-label"
-        recordLabel.position = CGPointMake(help.position.x + 150, help.position.y - 110)
+        recordLabel.position = CGPoint(x: help.position.x + 150, y: help.position.y - 110)
         recordLabel.zPosition = helpLabel.zPosition
-        recordLabel.horizontalAlignmentMode = .Center
-        recordLabel.verticalAlignmentMode = .Baseline
+        recordLabel.horizontalAlignmentMode = .center
+        recordLabel.verticalAlignmentMode = .baseline
         addChild(recordLabel)
         
         let recordLabel2 = SKLabelNode(fontNamed: "Montserrat-Regular")
         recordLabel2.fontSize = 35
-        recordLabel2.fontColor = UIColor.whiteColor()
+        recordLabel2.fontColor = UIColor.white
         recordLabel2.text = NSLocalizedString("gameplay", comment: "gameplay-record")
         recordLabel2.name = "gameplay-label"
-        recordLabel2.position = CGPointMake(help.position.x + 150, recordLabel.position.y - 30)
+        recordLabel2.position = CGPoint(x: help.position.x + 150, y: recordLabel.position.y - 30)
         recordLabel2.zPosition = helpLabel.zPosition
-        recordLabel2.horizontalAlignmentMode = .Center
-        recordLabel2.verticalAlignmentMode = .Baseline
+        recordLabel2.horizontalAlignmentMode = .center
+        recordLabel2.verticalAlignmentMode = .baseline
         addChild(recordLabel2)
         
         settingsArray.append(darkBG)
@@ -342,11 +343,11 @@ class HomeScene: InitScene {
         isShowingSettings = true
     }
     
-    func switchValueDidChange(sender: UISwitch) {
-        if sender.on == true {
-            NSNotificationCenter.defaultCenter().postNotificationName(k.NotificationCenter.RecordGameplay, object: nil, userInfo: ["isOn" : true])
+    func switchValueDidChange(_ sender: UISwitch) {
+        if sender.isOn == true {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil, userInfo: ["isOn" : true])
         } else {
-            NSNotificationCenter.defaultCenter().postNotificationName(k.NotificationCenter.RecordGameplay, object: nil, userInfo: ["isOn" : false])
+            NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil, userInfo: ["isOn" : false])
         }
     }
     
@@ -363,8 +364,8 @@ class HomeScene: InitScene {
         }
     }
     
-    func scaleForNonRetinaiPad(node : SKSpriteNode, aScale : CGFloat) {
-        if !UIScreen.mainScreen().isRetina() {
+    func scaleForNonRetinaiPad(_ node : SKSpriteNode, aScale : CGFloat) {
+        if !UIScreen.main.isRetina() {
             node.setScale(aScale)
         }
     }
@@ -375,49 +376,49 @@ class HomeScene: InitScene {
     
     func restoreTapped() {
         if Reachability.isConnectedToNetwork() {
-            Products.store.restoreCompletedTransactions()
+            Products.store.restorePurchases()
         } else {
             let vc = self.view?.window?.rootViewController
             
-            let alert = UIAlertController(title: NSLocalizedString("no-wifi-alert-title", comment: "alert-title-no-wifi"), message: NSLocalizedString("no-wifi-alert-message", comment: "alert-message-no-wifi"), preferredStyle: .Alert)
-            let action = UIAlertAction(title: NSLocalizedString("no-wifi-alert-action", comment: "alert-action-no-wifi"), style: .Cancel, handler: { (UIAlertAction) in
+            let alert = UIAlertController(title: NSLocalizedString("no-wifi-alert-title", comment: "alert-title-no-wifi"), message: NSLocalizedString("no-wifi-alert-message", comment: "alert-message-no-wifi"), preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("no-wifi-alert-action", comment: "alert-action-no-wifi"), style: .cancel, handler: { (UIAlertAction) in
                 FTLogging().FTLog("Alert")
             })
             
             alert.addAction(action)
-            vc!.presentViewController(alert, animated: true, completion: nil)
+            vc!.present(alert, animated: true, completion: nil)
             
         }
     }
     
-    func purchaseProduct(index: Int) {
+    func purchaseProduct(_ index: Int) {
         if Reachability.isConnectedToNetwork() {
             let product = products[index]
-            Products.store.purchaseProduct(product)
+            Products.store.buyProduct(product)
         } else {
             let vc = self.view?.window?.rootViewController
             
-            let alert = UIAlertController(title: NSLocalizedString("no-wifi-alert-title", comment: "alert-title-no-wifi"), message: NSLocalizedString("no-wifi-alert-message", comment: "alert-message-no-wifi"), preferredStyle: .Alert)
-            let action = UIAlertAction(title: NSLocalizedString("no-wifi-alert-action", comment: "alert-action-no-wifi"), style: .Cancel, handler: { (UIAlertAction) in
+            let alert = UIAlertController(title: NSLocalizedString("no-wifi-alert-title", comment: "alert-title-no-wifi"), message: NSLocalizedString("no-wifi-alert-message", comment: "alert-message-no-wifi"), preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("no-wifi-alert-action", comment: "alert-action-no-wifi"), style: .cancel, handler: { (UIAlertAction) in
                 FTLogging().FTLog("Alert")
             })
             
             alert.addAction(action)
-            vc!.presentViewController(alert, animated: true, completion: nil)
+            vc!.present(alert, animated: true, completion: nil)
             
         }
     }
     
-    func productPurchased(notification: NSNotification) {
+    func productPurchased(_ notification: Notification) {
         let productIdentifier = notification.object as! String
-        MBProgressHUD.hideAllHUDsForView(self.view!, animated: true)
-        for (_, product) in products.enumerate() {
+        MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+        for (_, product) in products.enumerated() {
             if product.productIdentifier == productIdentifier {
                 FTLogging().FTLog("product purchased with id \(productIdentifier) & \(product.productIdentifier)")
                 if productIdentifier == Products.RemoveAds {
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setBool(true, forKey: "hasRemovedAds")
-                    removeAds.runAction(SKAction.fadeAlphaTo(0, duration: 2), completion: {
+                    let defaults = UserDefaults.standard
+                    defaults.set(true, forKey: "hasRemovedAds")
+                    removeAds.run(SKAction.fadeAlpha(to: 0, duration: 2), completion: {
                         self.removeAds.removeFromParent()
                     })
                 }
@@ -426,96 +427,126 @@ class HomeScene: InitScene {
         }
     }
     
+    func showGameMode() {
+        print("Showing Game Mode")
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        visualEffectView.frame = view!.bounds
+        self.view!.addSubview(visualEffectView)
+        
+        let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
+        loadingNotification.mode = .indeterminate
+        loadingNotification.label.text = "Loading"
+        loadingNotification.isUserInteractionEnabled = false
+        
+        let atlas1 = SKTextureAtlas(named: "Endless")
+        let atlas2 = SKTextureAtlas(named: "Build-Up")
+        let atlas3 = SKTextureAtlas(named: "Memory")
+        let atlas4 = SKTextureAtlas(named: "Shoot")
+        
+        SKTextureAtlas.preloadTextureAtlases([atlas1, atlas2, atlas3, atlas4], withCompletionHandler: {
+            DispatchQueue.main.async(execute: {
+                self.removeFromParent()
+                self.removeAllActions()
+                self.removeAllChildren()
+                
+                visualEffectView.removeFromSuperview()
+                MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+                
+                let gameModes = GameModes()
+                self.view?.presentScene(gameModes, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))
+                
+            })
+            
+        })
+    }
+    
     // *************************************************************
     // MARK: - User Interaction
     // *************************************************************
     
-    override func userInteractionBegan(location: CGPoint) {
+    override func userInteractionBegan(_ location: CGPoint) {
         if isShowingSettings {
-            if restorePurchases.containsPoint(location) {
+            if restorePurchases.contains(location) {
                 print("Restore Purchases")
                 
-                _ = UIAlertAction(title: NSLocalizedString("restore-loading-view-title", comment: "restore-view-title"), style: .Default, handler: { (UIAlertAction) in
-                    let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view!, animated: true)
-                    loadingNotification.mode = .Indeterminate
+                _ = UIAlertAction(title: NSLocalizedString("restore-loading-view-title", comment: "restore-view-title"), style: .default, handler: { (UIAlertAction) in
+                    let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
+                    loadingNotification.mode = .indeterminate
                     loadingNotification.labelText = NSLocalizedString("restore-loading", comment: "restore-loading")
-                    loadingNotification.userInteractionEnabled = false
+                    loadingNotification.isUserInteractionEnabled = false
                     
                     self.restoreTapped()
                 })
                 
             };
             
-            if exit.containsPoint(location) {
+            if exit.contains(location) {
                 clearSettings()
             };
             
-            if help.containsPoint(location) {
+            if help.contains(location) {
                 let tutorialScene = TutorialScene()
-                self.view?.presentScene(tutorialScene, transition: SKTransition.crossFadeWithDuration(1))
+                self.view?.presentScene(tutorialScene, transition: SKTransition.crossFade(withDuration: 1))
             };
             
-            if sound.containsPoint(location) {
+            if sound.contains(location) {
                 FTLogging().FTLog("sound")
-                sound.runAction(k.Sounds.blopAction1)
+                sound.run(k.Sounds.blopAction1)
                 
-                let scoreAction = SKAction.scaleTo(1.25, duration: 0.2)
-                let revertAction = SKAction.scaleTo(1, duration: 0.2)
+                let scoreAction = SKAction.scale(to: 1.25, duration: 0.2)
+                let revertAction = SKAction.scale(to: 1, duration: 0.2)
                 let completeAction = SKAction.sequence([scoreAction, revertAction])
                 
-                let touchSound = NSUserDefaults.standardUserDefaults().integerForKey("sound")
+                let touchSound = UserDefaults.standard.integer(forKey: "sound")
                 
                 if touchSound == 0 {
-                    NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "sound")
-                    NSNotificationCenter.defaultCenter().postNotificationName("stopMusic", object: nil)
+                    UserDefaults.standard.set(1, forKey: "sound")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "stopMusic"), object: nil)
                     
-                    let soundLabel = self.childNodeWithName("sound-text") as! SKLabelNode
-                    soundLabel.runAction(completeAction)
+                    let soundLabel = self.childNode(withName: "sound-text") as! SKLabelNode
+                    soundLabel.run(completeAction)
                     soundLabel.text = NSLocalizedString("sound-off", comment: "sound-off")
                     
                 };
                 
                 if touchSound == 1 {
-                    NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "sound")
-                    NSNotificationCenter.defaultCenter().postNotificationName("playMusic", object: nil)
+                    UserDefaults.standard.set(0, forKey: "sound")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "playMusic"), object: nil)
                     
-                    let soundLabel = self.childNodeWithName("sound-text") as! SKLabelNode
-                    soundLabel.runAction(completeAction)
+                    let soundLabel = self.childNode(withName: "sound-text") as! SKLabelNode
+                    soundLabel.run(completeAction)
                     soundLabel.text = NSLocalizedString("sound-on", comment: "sound-on")
                 }
                 
             }
             
         } else {
-            if info.containsPoint(location) {
+            if info.contains(location) {
                 let tutorialScene = TutorialScene()
-                self.view?.presentScene(tutorialScene, transition: SKTransition.crossFadeWithDuration(1))
+                self.view?.presentScene(tutorialScene, transition: SKTransition.crossFade(withDuration: 1))
                 
             };
             
-            if play.containsPoint(location) {
-                play.runAction(k.Sounds.blopAction1)
-                NSNotificationCenter.defaultCenter().postNotificationName("hideBanner", object: nil)
+            if play.contains(location) {
+                play.run(k.Sounds.blopAction1)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "hideBanner"), object: nil)
                 
-                if NSUserDefaults.isFirstLaunch() {
-                    let tutorialScene = TutorialScene()
-                    self.view?.presentScene(tutorialScene, transition: SKTransition.crossFadeWithDuration(1))
-                } else {
-                    let gameScene = GameScene()
-                    self.view?.presentScene(gameScene, transition: SKTransition.fadeWithColor(UIColor(rgba: "#434343"), duration: 1))
-                }
+                let gameScene = GameScene()
+                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))
+                
             }
             
-            if gameMode.containsPoint(location) {
+            if gameMode.contains(location) {
                 
-                var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+                let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
                 visualEffectView.frame = view!.bounds
                 self.view!.addSubview(visualEffectView)
                 
-                let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view!, animated: true)
-                loadingNotification.mode = .Indeterminate
+                let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
+                loadingNotification.mode = .indeterminate
                 loadingNotification.label.text = "Loading"
-                loadingNotification.userInteractionEnabled = false
+                loadingNotification.isUserInteractionEnabled = false
                 
                 let atlas1 = SKTextureAtlas(named: "Endless")
                 let atlas2 = SKTextureAtlas(named: "Build-Up")
@@ -523,73 +554,73 @@ class HomeScene: InitScene {
                 let atlas4 = SKTextureAtlas(named: "Shoot")
                 
                 SKTextureAtlas.preloadTextureAtlases([atlas1, atlas2, atlas3, atlas4], withCompletionHandler: {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.removeFromParent()
                         self.removeAllActions()
                         self.removeAllChildren()
                         
                         visualEffectView.removeFromSuperview()
-                        MBProgressHUD.hideAllHUDsForView(self.view!, animated: true)
+                        MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
                         
                         let gameModes = GameModes()
-                        self.view?.presentScene(gameModes, transition: SKTransition.fadeWithColor(UIColor(rgba: "#434343"), duration: 1))
+                        self.view?.presentScene(gameModes, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))
                         
                     })
                     
                 })
             }
             
-            if like.containsPoint(location) {
-                SocialNetwork.Facebook.openPage()
+            if like.contains(location) {
+                SocialNetwork.facebook.openPage()
             }
             
-            if favourite.containsPoint(location) {
+            if favourite.contains(location) {
                 let iTunesBaseUrl = "number-tap!/id1097322101?ls=1&mt=8"
-                let url = NSURL(string: "itms://itunes.apple.com/us/app/" + iTunesBaseUrl)
+                let url = URL(string: "itms://itunes.apple.com/us/app/" + iTunesBaseUrl)
                 
-                if UIApplication.sharedApplication().canOpenURL(url!) {
-                    UIApplication.sharedApplication().openURL(url!)
+                if UIApplication.shared.canOpenURL(url!) {
+                    UIApplication.shared.openURL(url!)
                 } else {
-                    UIApplication.sharedApplication().openURL(NSURL(string: "https://facebook.com/831944953601016")!)
+                    UIApplication.shared.openURL(URL(string: "https://facebook.com/831944953601016")!)
                 }
             }
             
-            if leaderboard.containsPoint(location) {
-                GCHelper.sharedGameKitHelper.showGameCenter((view?.window?.rootViewController)!, viewState: .Leaderboards)
+            if leaderboard.contains(location) {
+                GCHelper.sharedGameKitHelper.showGameCenter((view?.window?.rootViewController)!, viewState: .leaderboards)
             };
             
-            if settings.containsPoint(location) {
+            if settings.contains(location) {
                 showSettings()
             };
             
-            if removeAds.containsPoint(location) {
-                removeAds.runAction(k.Sounds.blopAction1)
+            if removeAds.contains(location) {
+                removeAds.run(k.Sounds.blopAction1)
                 
                 purchaseProduct(0)
             }
             
-            if sound.containsPoint(location) {
-                sound.runAction(k.Sounds.blopAction1)
-                let touchSound = NSUserDefaults.standardUserDefaults().integerForKey("sound")
+            if sound.contains(location) {
+                sound.run(k.Sounds.blopAction1)
+                let touchSound = UserDefaults.standard.integer(forKey: "sound")
                 
                 if touchSound == 0 {
-                    NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "sound")
-                    NSNotificationCenter.defaultCenter().postNotificationName("stopMusic", object: nil)
+                    UserDefaults.standard.set(1, forKey: "sound")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "stopMusic"), object: nil)
                 };
                 
                 if touchSound == 1 {
-                    NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "sound")
-                    NSNotificationCenter.defaultCenter().postNotificationName("playMusic", object: nil)
+                    UserDefaults.standard.set(0, forKey: "sound")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "playMusic"), object: nil)
                 }
             }
         }
     }
     
-    override func userInteractionMoved(location: CGPoint) {
+    override func userInteractionMoved(_ location: CGPoint) {
         // touch/mouse moved
     }
     
-    override func userInteractionEnded(location: CGPoint) {
+    override func userInteractionEnded(_ location: CGPoint) {
         
     }
     

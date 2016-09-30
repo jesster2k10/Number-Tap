@@ -18,6 +18,7 @@
 #import "SupersonicPlacementInfo.h"
 #import "SupersonicIntegrationHelper.h"
 #import "SupersonicEventsReporting.h"
+#import "SUSupersonicAdsConfiguration.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -90,6 +91,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)showRVWithViewController:(nullable UIViewController*)viewController;
+
+- (void)showRVWithViewController:(nullable UIViewController *)viewController
+                   placementName:(nullable NSString *)placementName;
+
+
 
 /*!
  * @discussion  Check for Rewarded Video Ad availability directly.

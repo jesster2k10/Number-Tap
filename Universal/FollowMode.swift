@@ -10,17 +10,17 @@ import SpriteKit
 
 class Follow: BaseScene {
     let followNode = SKNode()
-    var cameraTimer = NSTimer()
+    var cameraTimer = Timer()
     var cam = SKCameraNode()
     var world = SKNode()
     var firstBox = true
     var touchedBoxesArray = [NumberBox]()
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         randomWord()
         start(kGameMode.kFollow, cam: nil)
         
-        followNode.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
+        followNode.position = CGPoint(x: frame.midX, y: frame.midY)
         cam.position = followNode.position
         
         world.position = followNode.position
@@ -34,18 +34,18 @@ class Follow: BaseScene {
             box.zPosition = -1
         }
         
-        NSTimer.every(0.1) {
-            self.followNode.position = CGPointMake(self.followNode.position.x, self.followNode.position.y + 1)
+        Timer.every(0.1) {
+            self.followNode.position = CGPoint(x: self.followNode.position.x, y: self.followNode.position.y + 1)
         }
     }
     
-    func point(box: NumberBox) {
+    func point(_ box: NumberBox) {
         box.darken()
         touchedBoxesArray.append(box)
         numbersTapped += 1
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for box in boxArray {
             point(box)
             if firstBox == true {
@@ -54,7 +54,7 @@ class Follow: BaseScene {
         }
     }
 
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         cam.position.y = followNode.position.y
     }
 }

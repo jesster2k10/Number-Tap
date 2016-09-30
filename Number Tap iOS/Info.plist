@@ -11,11 +11,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>Tap!</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.2.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>647</string>
+	<string>845</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -47,8 +47,12 @@
 	<string>1757391874533738</string>
 	<key>FacebookDisplayName</key>
 	<string>Number Tap!</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -63,6 +67,18 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We use this for gamplay recording &amp; multiplayer games.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We use this to allow us to check the date for daily rewards.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This will let us see your friend and their high scores!</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We use this purely for gameplay recordings. It can be disabled.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>We use this for gameplay enchancment.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This let's us save gameplay and pictures to your camera roll!</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Bold.otf</string>
@@ -88,6 +104,10 @@
 			</dict>
 		</dict>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -95,9 +115,12 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>gamekit</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

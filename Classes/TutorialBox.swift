@@ -20,7 +20,7 @@ class TutorialBox : SKSpriteNode {
     
     init(withType type: tutorialTypes, lineOne l1: String, lineTwo l2: String?, lineThree l3: String?, fontSize size: CGFloat) {
         currentTexture = SKTexture(imageNamed: tutorialTypes.Regular.rawValue)
-        super.init(texture: currentTexture, color: UIColor.clearColor(), size: currentTexture.size())
+        super.init(texture: currentTexture, color: UIColor.clear, size: currentTexture.size())
         
         currentType = type
         
@@ -34,56 +34,56 @@ class TutorialBox : SKSpriteNode {
         
         if l2 == nil && l3 == nil {
             
-            lineOne.verticalAlignmentMode = .Baseline
-            lineOne.horizontalAlignmentMode = .Center
+            lineOne.verticalAlignmentMode = .baseline
+            lineOne.horizontalAlignmentMode = .center
             lineOne.text = l1
             lineOne.fontSize = size
-            lineOne.fontColor = UIColor.blackColor()
+            lineOne.fontColor = UIColor.black
             //lineOne.position = CGPointMake(-0.5, 0.947)
             addChild(lineOne)
             
         } else if l2 != nil || l3 != nil{
             
-            lineOne.verticalAlignmentMode = .Baseline
-            lineOne.horizontalAlignmentMode = .Center
+            lineOne.verticalAlignmentMode = .baseline
+            lineOne.horizontalAlignmentMode = .center
             lineOne.text = l1
             lineOne.fontSize = 15
-            lineOne.fontColor = UIColor.blackColor()
-            lineOne.position = CGPointMake(-1.013, 17.7)
+            lineOne.fontColor = UIColor.black
+            lineOne.position = CGPoint(x: -1.013, y: 17.7)
             addChild(lineOne)
             
-            lineTwo.verticalAlignmentMode = .Baseline
-            lineTwo.horizontalAlignmentMode = .Center
+            lineTwo.verticalAlignmentMode = .baseline
+            lineTwo.horizontalAlignmentMode = .center
             lineTwo.text = l2
             lineTwo.fontSize = 15
-            lineTwo.fontColor = UIColor.blackColor()
-            lineTwo.position = CGPointMake(-1.013, 2.081)
+            lineTwo.fontColor = UIColor.black
+            lineTwo.position = CGPoint(x: -1.013, y: 2.081)
             addChild(lineTwo)
             
-            lineThree.verticalAlignmentMode = .Baseline
-            lineThree.horizontalAlignmentMode = .Center
+            lineThree.verticalAlignmentMode = .baseline
+            lineThree.horizontalAlignmentMode = .center
             lineThree.text = l3
             lineThree.fontSize = 15
-            lineThree.fontColor = UIColor.blackColor()
-            lineThree.position = CGPointMake(-1.013, -13.538)
+            lineThree.fontColor = UIColor.black
+            lineThree.position = CGPoint(x: -1.013, y: -13.538)
             addChild(lineThree)
             
         } else if l2 != nil && l3 == nil {
             
-            lineOne.verticalAlignmentMode = .Top
-            lineOne.horizontalAlignmentMode = .Center
+            lineOne.verticalAlignmentMode = .top
+            lineOne.horizontalAlignmentMode = .center
             lineOne.text = l1
             lineOne.fontSize = 15
-            lineOne.fontColor = UIColor.blackColor()
-            lineOne.position = CGPointMake(-0.771, 25.947)
+            lineOne.fontColor = UIColor.black
+            lineOne.position = CGPoint(x: -0.771, y: 25.947)
             addChild(lineOne)
             
-            lineTwo.verticalAlignmentMode = .Baseline
-            lineTwo.horizontalAlignmentMode = .Center
+            lineTwo.verticalAlignmentMode = .baseline
+            lineTwo.horizontalAlignmentMode = .center
             lineTwo.text = l2!
             lineTwo.fontSize = 15
-            lineTwo.fontColor = UIColor.blackColor()
-            lineTwo.position = CGPointMake(-0.771, -8.053)
+            lineTwo.fontColor = UIColor.black
+            lineTwo.position = CGPoint(x: -0.771, y: -8.053)
             addChild(lineTwo)
         }
         setScale(0)
@@ -93,18 +93,18 @@ class TutorialBox : SKSpriteNode {
         var scale = SKAction()
         
         if currentType == .BigRegular || currentType == .BigDown {
-            scale = SKAction.scaleTo(1.088, duration: 2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)
+            scale = SKAction.scale(to: 1.088, duration: 2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)
         } else {
             
-            scale = SKAction.scaleTo(1, duration: 2, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)
+            scale = SKAction.scale(to: 1, duration: 2, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)
         }
         
-        runAction(scale)
+        run(scale)
     }
     
     func reBounce() {
-        let scale = SKAction.scaleTo(0.005, duration: 2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)
-        runAction(scale) {
+        let scale = SKAction.scale(to: 0.005, duration: 2, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0)
+        run(scale) {
             self.hasAnimationFinished = true
         }
         

@@ -84,22 +84,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Armchair-iOS/Armchair.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Appirater/Appirater.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BEMCheckBox/BEMCheckBox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CocoaAsyncSocket/CocoaAsyncSocket.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/IBAnimatable/IBAnimatable.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Instructions/Instructions.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MTMigration/MTMigration.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NHNetworkTime/NHNetworkTime.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PermissionScope/PermissionScope.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Armchair-iOS/Armchair.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Appirater/Appirater.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BEMCheckBox/BEMCheckBox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CocoaAsyncSocket/CocoaAsyncSocket.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/IBAnimatable/IBAnimatable.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Instructions/Instructions.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MTMigration/MTMigration.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NHNetworkTime/NHNetworkTime.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PermissionScope/PermissionScope.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
 fi

@@ -23,27 +23,27 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     let secondsLabel = SKLabelNode(fontNamed: k.Montserrat.Regular)
     let millisecondsLabel = SKLabelNode(fontNamed: k.Montserrat.Regular)
 
-    var boxTimer = NSTimer()
-    var scoreTimer = NSTimer()
-    var gameTimer = NSTimer()
-    var timeArray: [NSTimer] = [NSTimer]()
-    var stopwatchTimer : NSTimer?
-    var visibleBoxTimer = NSTimer()
+    var boxTimer = Timer()
+    var scoreTimer = Timer()
+    var gameTimer = Timer()
+    var timeArray: [Timer] = [Timer]()
+    var stopwatchTimer : Timer?
+    var visibleBoxTimer = Timer()
 
     var hits = 3
     var index = 0
     var length = 3.0
     var numbersShot = 0
-    var startDate : NSDate!
+    var startDate : Date!
     
     var hasGameStarted = false
     var visibleBoxesArray = [NumberBox]()
     var snapshot = UIImage()
     
     //TODO: Configure sharing to take screenshot and work well.
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         //TODO: Change it to save the boolean in NSUserDefaults
-        if NSUserDefaults.keyAlreadyExists(kHasPlayedShoot) == false {
+        if UserDefaults.keyAlreadyExists(kHasPlayedShoot) == false {
             showShootAlert()
         } else {
             startTheGame()
@@ -53,16 +53,16 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     func startTheGame() {
         physicsWorld.contactDelegate = self
         view!.showsPhysics = false
-        size = CGSizeMake(640, 960)
-        scaleMode = .AspectFill
+        size = CGSize(width: 640, height: 960)
+        scaleMode = .aspectFill
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(counterIsComplete), name: k.NotificationCenter.Counter, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(counterIsComplete), name: NSNotification.Name(rawValue: k.NotificationCenter.Counter), object: nil)
         
         randomWord()
         
-        mainBall.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        mainBall.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         mainBall.fillColor = k.flatColors.red
-        mainBall.strokeColor = UIColor.clearColor()
+        mainBall.strokeColor = UIColor.clear
         mainBall.zPosition = 10.0
         mainBall.name = "ball"
         
@@ -71,29 +71,29 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         mainBall.physicsBody?.contactTestBitMask = Physics.Box
         mainBall.physicsBody?.collisionBitMask = Physics.Box
         mainBall.physicsBody?.affectedByGravity = false
-        mainBall.physicsBody?.dynamic = false
+        mainBall.physicsBody?.isDynamic = false
         addChild(mainBall)
         
         shotNumberLabel.score = Int32(numbersShot)
-        shotNumberLabel.horizontalAlignmentMode = .Left
-        shotNumberLabel.position = CGPointMake(90,890)
+        shotNumberLabel.horizontalAlignmentMode = .left
+        shotNumberLabel.position = CGPoint(x: 90,y: 890)
         shotNumberLabel.fontColor = k.flatColors.red
         shotNumberLabel.zPosition = 10.0
         addChild(shotNumberLabel)
         
         numbersShotLabel.text = NSLocalizedString("numbers-shot", comment: "Numbers Shot")
         numbersShotLabel.fontSize = shotNumberLabel.fontSize
-        numbersShotLabel.fontColor = UIColor.whiteColor()
-        numbersShotLabel.horizontalAlignmentMode = .Left
-        numbersShotLabel.position = CGPointMake(shotNumberLabel.position.x + 20, shotNumberLabel.position.y)
+        numbersShotLabel.fontColor = UIColor.white
+        numbersShotLabel.horizontalAlignmentMode = .left
+        numbersShotLabel.position = CGPoint(x: shotNumberLabel.position.x + 20, y: shotNumberLabel.position.y)
         numbersShotLabel.zPosition = 10.0
         addChild(numbersShotLabel)
         
-        secondsLabel.position = CGPointMake(shotNumberLabel.position.x - 10, shotNumberLabel.position.y - 40)
-        secondsLabel.horizontalAlignmentMode = .Left
+        secondsLabel.position = CGPoint(x: shotNumberLabel.position.x - 10, y: shotNumberLabel.position.y - 40)
+        secondsLabel.horizontalAlignmentMode = .left
         secondsLabel.text = "00:00:00"
         secondsLabel.fontSize = 26
-        secondsLabel.fontColor = UIColor.whiteColor()
+        secondsLabel.fontColor = UIColor.white
         secondsLabel.zPosition = 10.0
         addChild(secondsLabel)
         
@@ -101,14 +101,14 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     }
     
     func showShootAlert() {
-        let alert = PMAlertController(title: "Welcome to Shoot!", description: "Hey, this is Shoot Mode in Number Tap! Shoot all the numbers and keep the ball safe. Avoid allowing the numbers attack the ball as it can be fatal.. \r\n\r\nThe aim is to shoot as many numbers as you can in the shortest amount of time but luckily time is infinite.\r\n\r\nAre you ready?", image: nil, style: .AlertWithBlur)
-        alert.addAction(PMAlertAction(title: "Let's Go!", style: .Default, action: { 
+        let alert = PMAlertController(title: "Welcome to Shoot!", description: "Hey, this is Shoot Mode in Number Tap! Shoot all the numbers and keep the ball safe. Avoid allowing the numbers attack the ball as it can be fatal.. \r\n\r\nThe aim is to shoot as many numbers as you can in the shortest amount of time but luckily time is infinite.\r\n\r\nAre you ready?", image: nil, style: .alertWithBlur)
+        alert.addAction(PMAlertAction(title: "Let's Go!", style: .default, action: { 
             self.startTheGame()
         }))
         
-        alert.addAction(PMAlertAction(title: "Nah..", style: .Cancel, action: { 
+        alert.addAction(PMAlertAction(title: "Nah..", style: .cancel, action: { 
             let gameModes = GameModes()
-            let transition = SKTransition.crossFadeWithDuration(1)
+            let transition = SKTransition.crossFade(withDuration: 1)
             self.view?.presentScene(gameModes, transition: transition)
             self.removeAllActions()
             self.removeAllChildren()
@@ -116,14 +116,14 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         }))
         
         let vc = self.view?.window?.rootViewController
-        vc!.presentViewController(alert, animated: true, completion: nil)
+        vc!.present(alert, animated: true, completion: nil)
         
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kHasPlayedShoot)
+        UserDefaults.standard.set(true, forKey: kHasPlayedShoot)
     }
     
     func setupGameTimers() {
-        var five = NSTimer()
-        five = NSTimer.every(0.001) {
+        var five = Timer()
+        five = Timer.every(0.001) {
             if self.numbersShot == 3 {
                 print("5 Numbers Shot")
                 self.changeTimer(2)
@@ -131,8 +131,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        var eight = NSTimer()
-        eight = NSTimer.every(0.001) {
+        var eight = Timer()
+        eight = Timer.every(0.001) {
             if self.numbersShot == 7 {
                 print("8 Numbers Shot")
                 self.changeTimer(1.5)
@@ -140,8 +140,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        var eleven = NSTimer()
-        eleven = NSTimer.every(0.001) {
+        var eleven = Timer()
+        eleven = Timer.every(0.001) {
             if self.numbersShot == 11 {
                 print("11 Numbers Shot")
                 self.changeTimer(1.25)
@@ -149,8 +149,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        var fifteen = NSTimer()
-        fifteen = NSTimer.every(0.001) {
+        var fifteen = Timer()
+        fifteen = Timer.every(0.001) {
             if self.numbersShot == 15 {
                 print("15 Numbers Shot")
                 self.changeTimer(1)
@@ -158,8 +158,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        var seventeen = NSTimer()
-        seventeen = NSTimer.every(0.001) {
+        var seventeen = Timer()
+        seventeen = Timer.every(0.001) {
             if self.numbersShot == 17 {
                 print("17 Numbers Shot")
                 self.changeTimer(0.9)
@@ -167,8 +167,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        var twentyone = NSTimer()
-        twentyone = NSTimer.every(0.001) {
+        var twentyone = Timer()
+        twentyone = Timer.every(0.001) {
             if self.numbersShot == 21 {
                 print("21 Numbers Shot")
                 self.changeTimer(0.85)
@@ -176,8 +176,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        var thirty = NSTimer()
-        thirty = NSTimer.every(0.001) {
+        var thirty = Timer()
+        thirty = Timer.every(0.001) {
             if self.numbersShot == 30 {
                 print("30 Numbers Shot")
                 self.changeTimer(0.8)
@@ -185,7 +185,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         }
         
-        NSTimer.after(6, { 
+        Timer.after(6, {
             if self.hasGameStarted {
                 self.snapshot = self.view!.takeSnapshot()
             }
@@ -200,19 +200,19 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         timerArray.append(thirty)
     }
     
-    func changeTimer(time: Double) {
+    func changeTimer(_ time: Double) {
         boxTimer.invalidate()
         
-        boxTimer = NSTimer.every(time, {
+        boxTimer = Timer.every(time, {
             self.spawnNumbers(withDuration: time)
         })
     }
     
-    func counterIsComplete(aNotification: NSNotification) {
-        countdown.runAction(SKAction.fadeAlphaTo(0, duration: 1), completion: {
+    func counterIsComplete(_ aNotification: Notification) {
+        countdown.run(SKAction.fadeAlpha(to: 0, duration: 1), completion: {
             print("Removed")
             self.countdown.removeFromParent()
-            self.childNodeWithName("bg")?.removeFromParent()
+            self.childNode(withName: "bg")?.removeFromParent()
             
             self.gameBegin()
         })
@@ -220,7 +220,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     }
     
     func gameBegin() {
-        if let box = self.childNodeWithName("box") as? NumberBox {
+        if let box = self.childNode(withName: "box") as? NumberBox {
             box.removeFromParent()
         }
         
@@ -230,26 +230,26 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         
         self.hasGameStarted = true
         
-        self.boxTimer = NSTimer.every(self.length, {
+        self.boxTimer = Timer.every(self.length, {
             self.spawnNumbers(withDuration: 3.0)
         })
         
-        startDate = NSDate()
-        stopwatchTimer = NSTimer.every(1.0/1.0, {
-            let currentDate = NSDate()
-            let timeInterval = currentDate.timeIntervalSinceDate(self.startDate)
-            let timerDate = NSDate(timeIntervalSince1970: timeInterval)
+        startDate = Date()
+        stopwatchTimer = Timer.every(1.0/1.0, {
+            let currentDate = Date()
+            let timeInterval = currentDate.timeIntervalSince(self.startDate)
+            let timerDate = Date(timeIntervalSince1970: timeInterval)
             
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm:ss"
-            dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: Int(0.0))
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: Int(0.0))
             
-            let timeString = dateFormatter.stringFromDate(timerDate)
+            let timeString = dateFormatter.string(from: timerDate)
             self.secondsLabel.text = timeString
         })
         
-        var reginerateTimer = NSTimer()
-        reginerateTimer = NSTimer.every(0.01) {
+        var reginerateTimer = Timer()
+        reginerateTimer = Timer.every(0.01) {
             if self.array.count > 1{
                 self.randomWord()
             }
@@ -261,15 +261,15 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         
         self.setupGameTimers()
         
-        NSNotificationCenter.defaultCenter().postNotificationName("showBanner", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "showBanner"), object: nil)
 
     }
     
-    func stringFromTimeInterval(interval:NSTimeInterval) -> NSString {
+    func stringFromTimeInterval(_ interval:TimeInterval) -> NSString {
         
         let ti = NSInteger(interval)
         
-        let ms = Int((interval % 1) * 1000)
+        let ms = Int((interval.truncatingRemainder(dividingBy: 1)) * 1000)
         
         let seconds = ti % 60
         let minutes = (ti / 60) % 60
@@ -278,17 +278,17 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         return NSString(format: "%0.2d:%0.2d:%0.2d.%0.3d",hours,minutes,seconds,ms)
     }
     
-    func spawnNumbers(withDuration duration: NSTimeInterval) {
-        let numberBox = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
+    func spawnNumbers(withDuration duration: TimeInterval) {
+        let numberBox = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
         numberBox.indexs = array[index]
         numberBox.zPosition = 0
         index += 1
         
-        numberBox.physicsBody = SKPhysicsBody(rectangleOfSize: numberBox.texture!.size())
+        numberBox.physicsBody = SKPhysicsBody(rectangleOf: numberBox.texture!.size())
         numberBox.physicsBody?.categoryBitMask = Physics.Box
         numberBox.physicsBody?.contactTestBitMask = Physics.Ball
         numberBox.physicsBody?.collisionBitMask = Physics.Ball
-        numberBox.physicsBody?.dynamic = false
+        numberBox.physicsBody?.isDynamic = false
         numberBox.physicsBody?.affectedByGravity = false
         numberBox.name = "box"
         
@@ -332,11 +332,11 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             numberBox.scale()
         }
         
-        numberBox.runAction(SKAction.moveTo(mainBall.position, duration: duration))
+        numberBox.run(SKAction.move(to: mainBall.position, duration: duration))
         checkBox(numberBox)
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         let firstBody = contact.bodyA.node!
         let secondBody = contact.bodyB.node!
         
@@ -356,7 +356,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             boxTimer.invalidate()
             gameOver()
             
-            box.physicsBody?.dynamic = true
+            box.physicsBody?.isDynamic = true
             box.physicsBody?.affectedByGravity = true
             box.physicsBody?.mass = 5.0
 
@@ -368,8 +368,8 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     }
     
     func collisionBullet(withBox box: NumberBox, andBullet bullet: SKShapeNode) {
-        if bullet.used.used == false && intersectsNode(box){
-            box.physicsBody?.dynamic = true
+        if bullet.used.used == false && intersects(box){
+            box.physicsBody?.isDynamic = true
             box.physicsBody?.affectedByGravity = true
             box.physicsBody?.mass = 5.0
             
@@ -403,9 +403,9 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         
         updateScore(numbersShot)
         
-        setShareDetails("I just shot \(numbersShot) numbers playing shoot mode in a FREE game called Number Tap!  Download today! #numbertapgame", image: snapshot, url: NSURL(string: "http://apple.co/2bvrooQ")!)
+        setShareDetails("I just shot \(numbersShot) numbers playing shoot mode in a FREE game called Number Tap!  Download today! #numbertapgame", image: snapshot, url: URL(string: "http://apple.co/2bvrooQ")!)
         
-        NSNotificationCenter.defaultCenter().postNotificationName("hideBanner", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "hideBanner"), object: nil)
     }
     
     override func resetScene() {
@@ -420,9 +420,9 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         gameBegin()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
             if hasGameStarted == true {
                 let bullet = SKShapeNode(circleOfRadius: 15)
@@ -458,26 +458,26 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         }
     }
     
-    func distanceBetween(p1 : CGPoint, p2 : CGPoint) -> CGFloat {
+    func distanceBetween(_ p1 : CGPoint, p2 : CGPoint) -> CGFloat {
         let dx : CGFloat = p1.x - p2.x
         let dy : CGFloat = p1.y - p2.y
         return sqrt(dx * dx + dy * dy)
     }
     
-    func checkBox(box: NumberBox) {
-        var _ = NSTimer()
+    func checkBox(_ box: NumberBox) {
+        var _ = Timer()
         
         
-        visibleBoxTimer = NSTimer.every(0.0001, {
-            if self.intersectsNode(box) && box.usedBox == false {
+        visibleBoxTimer = Timer.every(0.0001, {
+            if self.intersects(box) && box.usedBox == false {
                 self.visibleBoxesArray.append(box)
             }
         })
         
-        _ = NSTimer.every(0.0001, {
+        _ = Timer.every(0.0001, {
             if self.distanceBetween(box.position, p2: self.mainBall.position) < 110 {
                 box.removeAllActions()
-                box.physicsBody?.dynamic = true
+                box.physicsBody?.isDynamic = true
                 box.physicsBody?.restitution = 1.0
             }
         })

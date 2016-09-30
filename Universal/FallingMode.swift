@@ -33,19 +33,19 @@ class FallingMode: SKScene {
     let numberLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     let circularTimer = ProgressNode()
                                 
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         FTLogging().FTLog("Falling scene initiated")
         
-        size = CGSizeMake(640, 960)
+        size = CGSize(width: 640, height: 960)
         backgroundColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 1)
-        scaleMode = .AspectFill
+        scaleMode = .aspectFill
         
         setup()
     }
     
     func setup() {
         let timerSpace = SKTexture(imageNamed: "timerSpace")
-        circularTimer.position = CGPointMake(470, 850)
+        circularTimer.position = CGPoint(x: 470, y: 850)
         circularTimer.radius = timerSpace.size().width / 2
         circularTimer.width = 8.0
         circularTimer.zPosition = 2
@@ -53,35 +53,35 @@ class FallingMode: SKScene {
         circularTimer.backgroundColor = UIColor(rgba: "#434343")
         addChild(circularTimer)
         
-        scoreLabel.position = CGPointMake(circularTimer.position.x - 320, circularTimer.position.y)
-        scoreLabel.horizontalAlignmentMode = .Left
-        scoreLabel.fontColor = UIColor(rgba: "#e74c3c")
-        addChild(scoreLabel)
+        scoreLabel?.position = CGPoint(x: circularTimer.position.x - 320, y: circularTimer.position.y)
+        scoreLabel?.horizontalAlignmentMode = .left
+        scoreLabel?.fontColor = UIColor(rgba: "#e74c3c")
+        addChild(scoreLabel!)
         
         numbersTap.text = "NUMBERS TAPPED"
-        numbersTap.position = CGPointMake(scoreLabel.position.x + 15, scoreLabel.position.y)
-        numbersTap.horizontalAlignmentMode = .Left
-        numbersTap.fontColor = UIColor.whiteColor()
+        numbersTap.position = CGPoint(x: (scoreLabel?.position.x)! + 15, y: (scoreLabel?.position.y)!)
+        numbersTap.horizontalAlignmentMode = .left
+        numbersTap.fontColor = UIColor.white
         numbersTap.fontSize = 25
-        numbersTap.zPosition = scoreLabel.zPosition
+        numbersTap.zPosition = (scoreLabel?.zPosition)!
         addChild(numbersTap)
         
-        starVideo.position = CGPointMake(scoreLabel.position.x + 10, scoreLabel.position.y - 32)
+        starVideo.position = CGPoint(x: (scoreLabel?.position.x)! + 10, y: (scoreLabel?.position.y)! - 32)
         starVideo.name = "starVideo"
         starVideo.zPosition = 2
         addChild(starVideo)
         
-        records.position = CGPointMake(starVideo.position.x + 65, starVideo.position.y)
+        records.position = CGPoint(x: starVideo.position.x + 65, y: starVideo.position.y)
         records.name = "records"
         records.zPosition = 2
         addChild(records)
         
-        self.tapOnLabel.fontColor = UIColor.whiteColor()
+        self.tapOnLabel.fontColor = UIColor.white
         self.tapOnLabel.fontSize = 30
         self.tapOnLabel.text = "TAP NUMBER:"
-        self.tapOnLabel.horizontalAlignmentMode = .Center
-        self.tapOnLabel.verticalAlignmentMode = .Center
-        self.tapOnLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 25, -90)
+        self.tapOnLabel.horizontalAlignmentMode = .center
+        self.tapOnLabel.verticalAlignmentMode = .center
+        self.tapOnLabel.position = CGPoint(x: self.frame.midX - 25, y: -90)
         self.addChild(self.tapOnLabel)
         
         self.number = self.randomNumber()
@@ -89,43 +89,43 @@ class FallingMode: SKScene {
         self.numberLabel.fontColor = UIColor(rgba: "#e74c3c")
         self.numberLabel.fontSize = 38
         self.numberLabel.text = String(self.number)
-        self.numberLabel.horizontalAlignmentMode = .Center
-        self.numberLabel.verticalAlignmentMode = .Center
-        self.numberLabel.position = CGPointMake(self.tapOnLabel.position.x + 130, -90)
+        self.numberLabel.horizontalAlignmentMode = .center
+        self.numberLabel.verticalAlignmentMode = .center
+        self.numberLabel.position = CGPoint(x: self.tapOnLabel.position.x + 130, y: -90)
         self.addChild(self.numberLabel)
         
-        self.tapOnLabel.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
-        self.numberLabel.runAction(SKAction.moveToY(90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0), completion: {
+        self.tapOnLabel.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
+        self.numberLabel.run(SKAction.moveTo(y: 90, duration: 1, delay: 0.5, usingSpringWithDamping: 0.2, initialSpringVelocity: 0), completion: {
         })
         
         randomWord()
     }
     
     
-    func addNumber(indexOne: Int, indexTwo: Int, indexThree: Int, indexFour: Int) {
-        let numberBox1 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-        let numberBox2 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-        let numberBox3 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
-        let numberBox4 = NumberBox(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(400, 500), index: nil)
+    func addNumber(_ indexOne: Int, indexTwo: Int, indexThree: Int, indexFour: Int) {
+        let numberBox1 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+        let numberBox2 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+        let numberBox3 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
+        let numberBox4 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
         
         numberBox1.indexs = indexOne
         numberBox1.zPosition = 222
-        numberBox1.position = CGPointMake(170, circularTimer.position.y - 120)
+        numberBox1.position = CGPoint(x: 170, y: circularTimer.position.y - 120)
         addChild(numberBox1)
         
         numberBox2.indexs = indexTwo
         numberBox2.zPosition = 222
-        numberBox2.position = CGPointMake(270, circularTimer.position.y - 120)
+        numberBox2.position = CGPoint(x: 270, y: circularTimer.position.y - 120)
         addChild(numberBox2)
         
         numberBox3.indexs = indexThree
         numberBox3.zPosition = 222
-        numberBox3.position = CGPointMake(370, circularTimer.position.y - 120)
+        numberBox3.position = CGPoint(x: 370, y: circularTimer.position.y - 120)
         addChild(numberBox3)
         
         numberBox4.indexs = indexFour
         numberBox4.zPosition = 222
-        numberBox4.position = CGPointMake(470, circularTimer.position.y - 120)
+        numberBox4.position = CGPoint(x: 470, y: circularTimer.position.y - 120)
         addChild(numberBox4)
         
         avaliableBoxes.append(numberBox1)
@@ -142,9 +142,9 @@ class FallingMode: SKScene {
         let rangeDuration = maxDuration - minDuration
         _ = arc4random() % UInt32(rangeDuration + minDuration)
         
-        let actionMove = SKAction.moveToY(tapOnLabel.position.y + 100, duration: maxDuration)
+        let actionMove = SKAction.moveTo(y: tapOnLabel.position.y + 100, duration: maxDuration)
         
-        numberBox1.runAction(actionMove, completion: {
+        numberBox1.run(actionMove, completion: {
             numberBox1.reScale(withCompletion: {
                 numberBox1.removeAllActions()
                 numberBox1.removeFromParent()
@@ -154,7 +154,7 @@ class FallingMode: SKScene {
             })
         })
         
-        numberBox2.runAction(actionMove, completion: {
+        numberBox2.run(actionMove, completion: {
             numberBox2.reScale(withCompletion: {
                 numberBox2.removeAllActions()
                 numberBox2.removeFromParent()
@@ -164,7 +164,7 @@ class FallingMode: SKScene {
             })
         })
         
-        numberBox3.runAction(actionMove, completion: {
+        numberBox3.run(actionMove, completion: {
             numberBox3.reScale(withCompletion: {
                 numberBox3.removeAllActions()
                 numberBox3.removeFromParent()
@@ -174,7 +174,7 @@ class FallingMode: SKScene {
             })
         })
         
-        numberBox4.runAction(actionMove, completion: {
+        numberBox4.run(actionMove, completion: {
             numberBox4.reScale(withCompletion: {
                 numberBox4.removeAllActions()
                 numberBox4.removeFromParent()
@@ -197,7 +197,7 @@ class FallingMode: SKScene {
         
     }
     
-    func randomSequenceGenerator(min: Int, max: Int) -> () -> Int {
+    func randomSequenceGenerator(_ min: Int, max: Int) -> () -> Int {
         var numbers: [Int] = []
         return {
             if numbers.count == 0 {
@@ -205,7 +205,7 @@ class FallingMode: SKScene {
             }
             
             let index = Int(arc4random_uniform(UInt32(numbers.count)))
-            return numbers.removeAtIndex(index)
+            return numbers.remove(at: index)
         }
     }
     
@@ -221,7 +221,7 @@ class FallingMode: SKScene {
             randNum = avaliableNumbers[arrayKey]
             
             // make sure the number isnt repeated
-            avaliableNumbers.removeAtIndex(arrayKey)
+            avaliableNumbers.remove(at: arrayKey)
             
             return randNum;
             
@@ -237,7 +237,7 @@ class FallingMode: SKScene {
             randNum = avaliableNumbers[arrayKey]
             
             // make sure the number isnt repeated
-            avaliableNumbers.removeAtIndex(arrayKey)
+            avaliableNumbers.remove(at: arrayKey)
             
             return randNum;
             
@@ -303,18 +303,18 @@ class FallingMode: SKScene {
         
         //score += Int(randScore)
         numbersTapped += 1
-        scoreLabel.score = Int32(numbersTapped)
+        scoreLabel?.score = Int32(numbersTapped)
         
     }
 
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
             for box in avaliableBoxes {
-                if box.containsPoint(location) {
-                    if box.containsPoint(location) {
+                if box.contains(location) {
+                    if box.contains(location) {
                         playSound(fileName: k.Sounds.blop01, onSprite: box)
                         
                         if box.indexs == number {
@@ -336,13 +336,13 @@ class FallingMode: SKScene {
     }
     
     func playSound(fileName sound: String, onSprite node: SKNode?) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let isSoundEnabled = defaults.boolForKey("isSoundEnabled")
+        let defaults = UserDefaults.standard
+        let isSoundEnabled = defaults.bool(forKey: "isSoundEnabled")
         
         let soundAction = SKAction.playSoundFileNamed(sound, waitForCompletion: false)
         
         if isSoundEnabled {
-            node!.runAction(soundAction, completion: {
+            node!.run(soundAction, completion: {
                 FTLogging().FTLog("\n Played sound with file named \r\n \(sound) \n")
             })
         } else {
@@ -350,7 +350,7 @@ class FallingMode: SKScene {
         }
     }
     
-    func updateWithTimeSinceLastUpdate(timeSinceLast: CFTimeInterval) {
+    func updateWithTimeSinceLastUpdate(_ timeSinceLast: CFTimeInterval) {
         
         lastSpawnTimeInterval += timeSinceLast
         if lastSpawnTimeInterval > 1 {
@@ -359,16 +359,16 @@ class FallingMode: SKScene {
                 lastSpawnTimeInterval = 0
                 
                 let index1 = Int(arc4random_uniform(UInt32(avaliableNumbers.count)))
-                avaliableNumbers.removeAtIndex(index1)
+                avaliableNumbers.remove(at: index1)
                 
                 let index2 = Int(arc4random_uniform(UInt32(avaliableNumbers.count)))
-                avaliableNumbers.removeAtIndex(index2)
+                avaliableNumbers.remove(at: index2)
                 
                 let index3 = Int(arc4random_uniform(UInt32(avaliableNumbers.count)))
-                avaliableNumbers.removeAtIndex(index3)
+                avaliableNumbers.remove(at: index3)
                 
                 let index4 = Int(arc4random_uniform(UInt32(avaliableNumbers.count)))
-                avaliableNumbers.removeAtIndex(index4)
+                avaliableNumbers.remove(at: index4)
                 
                 addNumber(index1, indexTwo: index2, indexThree: index3, indexFour: index4)
                 index += 1
@@ -377,7 +377,7 @@ class FallingMode: SKScene {
         }
     }
     
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         var timeSinceLast : CFTimeInterval = currentTime - lastUpdateTimeInterval
         lastUpdateTimeInterval = currentTime
         if timeSinceLast > 1 {

@@ -16,12 +16,12 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
     func foundMatch()
     func matchStarted()
     func matchEnded()
-    func matchReceivedData(match: GKMatch, data: NSData, fromPlayer player: String)
+    func matchReceivedData(_ match: GKMatch, data: Data, fromPlayer player: String)
 }
 
-@objc public class GCHelper: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate {
+@objc open class GCHelper: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate {
     var authenticationViewController: UIViewController?
-    var lastError:NSError?
+    var lastError:Error?
     var gameCenterEnabled: Bool
     var achievements = [String: GKAchievement]()
     
@@ -32,7 +32,7 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
     
     var gcVC: GKGameCenterViewController!
     
-    var timer = NSTimer()
+    var timer = Timer()
     var playersDict = [String: AnyObject]()
     
     class var sharedGameKitHelper: GCHelper {
@@ -46,14 +46,14 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
     }
     
     func wasNotAuthenticated() {
-        NSUserDefaults.standardUserDefaults().setBool(self.gameCenterEnabled, forKey: "gcEnabled")
+        UserDefaults.standard.set(self.gameCenterEnabled, forKey: "gcEnabled")
         FTLogging().FTLog("Local player could not be authenticated, disabling game center")
     }
     
     func wasAuthenticated() {
-        NSNotificationCenter.defaultCenter().postNotificationName(k.NotificationCenter.Authenticated, object: nil)
-        NSUserDefaults.standardUserDefaults().setBool(self.gameCenterEnabled, forKey: "gcEnabled")
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.checkIfAchivement), userInfo: nil, repeats: true)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.Authenticated), object: nil)
+        UserDefaults.standard.set(self.gameCenterEnabled, forKey: "gcEnabled")
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkIfAchivement), userInfo: nil, repeats: true)
         print("Authenticated!")
         
     }
@@ -69,8 +69,8 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
                 // if user hasnt logged into game center show game center login controller
                 self.authenticationViewController = viewController
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(PresentAuthenticationViewController, object: self)
-            } else if localPlayer.authenticated {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: PresentAuthenticationViewController), object: self)
+            } else if localPlayer.isAuthenticated {
                 // if logged in
                 self.gameCenterEnabled = true
                 NSLog("Authenticated")
@@ -83,38 +83,37 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         }
     }
     
-    func showGameCenter(viewController: UIViewController, viewState: GKGameCenterViewControllerState) {
+    func showGameCenter(_ viewController: UIViewController, viewState: GKGameCenterViewControllerState) {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let gc = defaults.boolForKey("gcEnabled")
+        let defaults = UserDefaults.standard
+        let gc = defaults.bool(forKey: "gcEnabled")
         
         if gc == true {
             gcVC = GKGameCenterViewController()
             gcVC.gameCenterDelegate = self
             gcVC.viewState = viewState
             
-            viewController.presentViewController(gcVC, animated: true, completion: {
+            viewController.present(gcVC, animated: true, completion: {
                 
                 
             })
         } else {
-            let alert = UIAlertController(title: "Game Center Unavaliable", message: "Game Center is diabled", preferredStyle: .Alert) // 1
-            let firstAction = UIAlertAction(title: "Ok", style: .Default) { (alert: UIAlertAction!) -> Void in
+            let alert = UIAlertController(title: "Game Center Unavaliable", message: "Game Center is diabled", preferredStyle: .alert) // 1
+            let firstAction = UIAlertAction(title: "Ok", style: .default) { (alert: UIAlertAction!) -> Void in
                 
                 NSLog("You pressed button one")
                 
             }
             
             alert.addAction(firstAction)
-            viewController.presentViewController(alert, animated: true, completion:nil) // 6
+            viewController.present(alert, animated: true, completion:nil) // 6
             
         }
         
     }
     
     func checkIfAchivement() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let score = defaults.integerForKey("highScore")
+        let score = UserDefaults.standard.highScore
         
         if score == 100 || score < 100 {
             reportAchievementIdentifier(k.GameCenter.Achivements.Points100, percent: 100.0)
@@ -150,14 +149,14 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         
     }
     
-    func reportAchievementIdentifier(identifier: String, percent: Double) {
+    func reportAchievementIdentifier(_ identifier: String, percent: Double) {
         let achievement = GKAchievement(identifier: identifier)
         
         if !achievementIsCompleted(identifier) {
             achievement.percentComplete = percent
             achievement.showsCompletionBanner = true
             
-            GKAchievement.reportAchievements([achievement]) { (error) -> Void in
+            GKAchievement.report([achievement]) { (error) -> Void in
                 guard error == nil else {
                     print("Error in reporting achievements: \(error)")
                     return
@@ -166,8 +165,8 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         }
     }
     
-    public func loadAllAchivements(completion: (() -> Void)? = nil) {
-        GKAchievement.loadAchievementsWithCompletionHandler { (achievements, error) -> Void in
+    open func loadAllAchivements(_ completion: (() -> Void)? = nil) {
+        GKAchievement.loadAchievements { (achievements, error) -> Void in
             guard error == nil, let achievements = achievements else {
                 print("Error in loading achievements: \(error)")
                 return
@@ -188,7 +187,7 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
      
      :param: identifier A string that matches the identifier string used to create an achievement in iTunes Connect.
      */
-    public func achievementIsCompleted(identifier: String) -> Bool{
+    open func achievementIsCompleted(_ identifier: String) -> Bool{
         if let achievement = achievements[identifier] {
             return achievement.percentComplete == 100
         }
@@ -199,8 +198,8 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
     /**
      Resets all achievements that have been reported to GameKit.
      */
-    public func resetAllAchievements() {
-        GKAchievement.resetAchievementsWithCompletionHandler { (error) -> Void in
+    open func resetAllAchievements() {
+        GKAchievement.resetAchievements { (error) -> Void in
             guard error == nil else {
                 print("Error resetting achievements: \(error)")
                 return
@@ -214,10 +213,10 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
      :param: identifier A string that matches the identifier string used to create a leaderboard in iTunes Connect.
      :param: score The score earned by the user.
      */
-    public func reportLeaderboardIdentifier(identifier: String, score: Int) {
+    open func reportLeaderboardIdentifier(_ identifier: String, score: Int) {
         let scoreObject = GKScore(leaderboardIdentifier: identifier)
         scoreObject.value = Int64(score)
-        GKScore.reportScores([scoreObject]) { (error) -> Void in
+        GKScore.report([scoreObject]) { (error) -> Void in
             guard error == nil else {
                 print("Error in reporting leaderboard scores: \(error)")
                 return
@@ -228,7 +227,7 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
     
     // MARK: GameCenter Methods
     
-    func showGKGameCenterViewController(viewController: UIViewController!) {
+    func showGKGameCenterViewController(_ viewController: UIViewController!) {
         if !gameCenterEnabled {
             print("Local player is not authenticated")
             return
@@ -240,13 +239,13 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         gameCenterViewController.gameCenterDelegate = self
         
         // set default view state to Leaderboards
-        gameCenterViewController.viewState = .Leaderboards
+        gameCenterViewController.viewState = .leaderboards
         
         // present controller
-        viewController.presentViewController(gameCenterViewController, animated: true, completion: nil)
+        viewController.present(gameCenterViewController, animated: true, completion: nil)
     }
     
-    func reportScore(score: Int64, forLeaderboardId leaderBoardId: String) {
+    func reportScore(_ score: Int64, forLeaderboardId leaderBoardId: String) {
         if !gameCenterEnabled {
             print("Local player is not authenticated")
             return
@@ -260,14 +259,14 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         let scores = [scoreReporter]
         
         // This code calls the completion handler when Game Center is done processing the scores, and again, this method takes care of auto-sensing scores on network failures.
-        GKScore.reportScores(scores) { (error) in
+        GKScore.report(scores) { (error) in
             self.lastError = error
         }
     }
     
     // MARK: GameCenter - Multiplayer Methods
     
-    func findMatch(minPlayers: Int, maxPlayers: Int, presentingViewController viewController: UIViewController, delegate: GCHelperDelegate) {
+    func findMatch(_ minPlayers: Int, maxPlayers: Int, presentingViewController viewController: UIViewController, delegate: GCHelperDelegate) {
         // exit if player is not authenticated
         if !gameCenterEnabled {
             print("Local player is not authenticated")
@@ -290,21 +289,21 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         //
         let matchMakerViewController = GKMatchmakerViewController(matchRequest: matchRequest)
         matchMakerViewController!.matchmakerDelegate = self
-        presentingViewController?.presentViewController(matchMakerViewController!, animated: true, completion: {
+        presentingViewController?.present(matchMakerViewController!, animated: true, completion: {
             self.delegate!.foundMatch()
         })
     }
     
     // MARK: GameCenter - GKMatchDelegate Methods
     
-    public func match(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+    open func match(_ match: GKMatch, didReceive data: Data, fromPlayer playerID: String) {
         if multiplayerMatch != match {
             return
         }
         delegate?.matchReceivedData(match, data: data, fromPlayer: playerID)
     }
     
-    public func match(match: GKMatch, didFailWithError error: NSError?) {
+    open func match(_ match: GKMatch, didFailWithError error: Error?) {
         if multiplayerMatch != match {
             return
         }
@@ -312,49 +311,49 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         delegate?.matchEnded()
     }
     
-    public func match(match: GKMatch, player playerID: String, didChangeState state: GKPlayerConnectionState) {
+    open func match(_ match: GKMatch, player playerID: String, didChange state: GKPlayerConnectionState) {
         if multiplayerMatch != match {
             return
         }
         switch state {
-        case .StateConnected:
+        case .stateConnected:
             print("Player connected")
             if !multiplayerMatchStarted && multiplayerMatch?.expectedPlayerCount == 0 {
                 print("Ready to start the match")
                 multiplayerMatchStarted = true
                 delegate?.matchStarted()
             }
-        case .StateDisconnected:
+        case .stateDisconnected:
             print("Player disconnected")
             multiplayerMatchStarted = false
             delegate?.matchEnded()
-        case .StateUnknown:
+        case .stateUnknown:
             print("Initial player state")
         }
     }
     
     // MARK: GKGameCenterControllerDelegate methods
     
-    public func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    open func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
     }
     
     // MARK: GameCenter - GKMatchmakerViewControllerDelegate Methods
     
-    public func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    open func matchmakerViewControllerWasCancelled(_ viewController: GKMatchmakerViewController) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
         delegate?.matchEnded()
     }
     
-    public func matchmakerViewController(viewController: GKMatchmakerViewController, didFailWithError error: NSError) {
-        presentingViewController?.dismissViewControllerAnimated(true
+    open func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
+        presentingViewController?.dismiss(animated: true
             , completion: nil)
         print("Error creating match: \(error.localizedDescription)")
         delegate?.matchEnded()
     }
     
-    public func matchmakerViewController(viewController: GKMatchmakerViewController, didFindMatch match: GKMatch) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    open func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
         multiplayerMatch = match
         multiplayerMatch!.delegate = self
         
@@ -369,7 +368,7 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
         
         print("Looking up players %@", playerIDs)
         
-        GKPlayer.loadPlayersForIdentifiers(playerIDs) { (players, error) in
+        GKPlayer.loadPlayers(forIdentifiers: playerIDs) { (players, error) in
             guard error == nil else {
                 print("Error retreving player info: %@", error?.localizedDescription)
                 self.multiplayerMatchStarted = false
@@ -388,7 +387,7 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
             }
             
             self.multiplayerMatchStarted = true
-            GKMatchmaker.sharedMatchmaker().finishMatchmakingForMatch(self.multiplayerMatch!)
+            GKMatchmaker.shared().finishMatchmaking(for: self.multiplayerMatch!)
             self.delegate?.matchStarted()
             
         }

@@ -11,28 +11,28 @@ import SpriteKit
 class CountdownNode: SKSpriteNode {
     
     var counter = 3
-    var counterTimer = NSTimer()
+    var counterTimer = Timer()
     let counterText = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(0, 0))
+        super.init(texture: nil, color: UIColor.clear, size: CGSize(width: 0, height: 0))
         
         let counterBG = SKSpriteNode(imageNamed: "counter")
-        counterBG.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
+        counterBG.position = CGPoint(x: frame.midX, y: frame.midY)
         counterBG.alpha = 1
         counterBG.zPosition = 1
         counterBG.setScale(1.5)
         addChild(counterBG)
         
         counterText.text = String(counter)
-        counterText.verticalAlignmentMode = .Center
-        counterText.horizontalAlignmentMode = .Center
-        counterText.fontColor = UIColor.whiteColor()
+        counterText.verticalAlignmentMode = .center
+        counterText.horizontalAlignmentMode = .center
+        counterText.fontColor = UIColor.white
         counterText.fontSize = 100
         counterText.zPosition = 20
         addChild(counterText)
         
-        NSUserDefaults.standardUserDefaults().setInteger(counter, forKey: k.NotificationCenter.Counter)
+        UserDefaults.standard.set(counter, forKey: k.NotificationCenter.Counter)
     }
     
     func counterUpdate () {
@@ -44,7 +44,7 @@ class CountdownNode: SKSpriteNode {
         } else {
             counterText.text = NSLocalizedString("go-countdown", comment: "go")
             counterTimer.invalidate()
-            NSNotificationCenter.defaultCenter().postNotificationName(k.NotificationCenter.Counter, object: nil, userInfo: ["counter" : counter])
+            NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.Counter), object: nil, userInfo: ["counter" : counter])
         }
     }
     

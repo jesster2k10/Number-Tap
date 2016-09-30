@@ -10,43 +10,100 @@ import UIKit
 import Fabric
 import Crashlytics
 import iAd
-import AVFoundation
 import Firebase
 import FirebaseMessaging
 import NHNetworkTime
-import Armchair
 import FBSDKCoreKit
+import Appirater
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
+    public func supersonicRVAdFailedWithError(_ error: Error!) {
+        NSLog("Rewarded video  failed with error \(error.localizedDescription)")
+    }
+
+    public func supersonicRVInitFailedWithError(_ error: Error!) {
+        NSLog("Rewarded video init failed with error \(error.localizedDescription)")
+    }
 
     var window: UIWindow?
     var type: NotificationType?
     
-    var backgroundMusicPlayer = AVAudioPlayer()
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        NHNetworkClock.sharedNetworkClock().synchronize()
-        //FIRApp.configure()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enableDeveloperMode), name: "DeveloperMode", object: nil)
-        
-        if ((NSUserDefaults.standardUserDefaults().boolForKey("adsGone") == true) != nil){
-            Supersonic.sharedInstance()
+        DispatchQueue.global(qos: .background).async {
+            print("This is run on the background queue")
             
-            let idfv = NSUUID().UUIDString
-            Supersonic.sharedInstance().setRVDelegate(self)
-            Supersonic.sharedInstance().initRVWithAppKey("4d9a08fd", withUserId: idfv)
+            NHNetworkClock.shared()
             
-            NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "videoSave")
-        }
-        
-        
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            //TODO: Delete this
+            //UserDefaults.standard.set(0, forKey: kNumbersKey)
             
-            self.loadApp(debugMode: true, application: application, launchOptions: launchOptions)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.enableDeveloperMode), name: NSNotification.Name(rawValue: "DeveloperMode"), object: nil)
+            
+            if UserDefaults.isFirstLaunch() || !UserDefaults.keyAlreadyExists("highScore") {
+                UserDefaults.standard.highScore = 0
+            }
+            
+            if !UserDefaults.keyAlreadyExists("adsGone") {
+                Supersonic.sharedInstance()
+                
+                let idfv = UUID().uuidString
+                Supersonic.sharedInstance().setRVDelegate(self)
+                Supersonic.sharedInstance().initRV(withAppKey: "4d9a08fd", withUserId: idfv)
+                
+                UserDefaults.standard.set(0, forKey: "videoSave")
+            }
+            
+            let ln = LocalNotificationHelper.sharedHelper
+
+            for lNotification in UIApplication.shared.scheduledLocalNotifications! {
+                if lNotification.alertBody == ln.notificationMessage(.comeBack) {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kComeBackNotification), object: nil, userInfo: lNotification.userInfo)
+                    UIApplication.shared.cancelLocalNotification(lNotification)
+                    break
+                };
+                
+                if lNotification.alertBody == ln.notificationMessage(.dailyReward) {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kDailyRewardNotification), object: nil, userInfo: lNotification.userInfo)
+                    UIApplication.shared.cancelLocalNotification(lNotification)
+                    break
+                };
+                
+                if lNotification.alertBody == ln.notificationMessage(.dailyRewardAlmostGone) {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kDailyRewardAlmostGoneNotification), object: nil, userInfo: lNotification.userInfo)
+                    UIApplication.shared.cancelLocalNotification(lNotification)
+                    break
+                };
+                
+                if lNotification.alertBody == ln.notificationMessage(.wheelOfFortune) {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kWheelOfFortuneNotification), object: nil, userInfo: lNotification.userInfo)
+                    UIApplication.shared.cancelLocalNotification(lNotification)
+                    break
+                }
+            }
+            
+            Appirater.setAppId("1097322101")
+            Appirater.setSignificantEventsUntilPrompt(8)
+            Appirater.appLaunched(true)
+            
+            Fabric.sharedSDK().debug = true
+            Fabric.with([Crashlytics.self])
+            
+            FTLogging().setup(true)
+            
+            if !UserDefaults.keyAlreadyExists(k.isUnlocked.endless) {
+                UserDefaults.standard.set(true, forKey: k.isUnlocked.endless)
+            }
+            
+            FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
+            
+            DispatchQueue.main.async {
+                print("This is run on the main queue, after the previous code in outer block")
+                FIRApp.configure()
+            }
         }
         
         return true
@@ -54,202 +111,131 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
 
     func loadApp(debugMode debug: Bool, application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
         
-        for lNotification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-            if lNotification.alertBody == self.notificationMessage(.ComeBack) {
-                UIApplication.sharedApplication().cancelLocalNotification(lNotification)
-                break
-            }
-        }
-        
-        Armchair.appID("1097322101")
-        Armchair.significantEventsUntilPrompt(5)
-        
-        Fabric.sharedSDK().debug = true
-        Fabric.with([Crashlytics.self])
-        
-        FTLogging().setup(debug)
-        
-        if !NSUserDefaults.keyAlreadyExists(k.isUnlocked.endless) {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: k.isUnlocked.endless)
-        }
-        
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
     }
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        GameModeHelper.sharedHelper.resetPointsCheck()
         
-        for lNotification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-            if lNotification.alertBody == notificationMessage(.ComeBack) {
-                UIApplication.sharedApplication().cancelLocalNotification(lNotification)
+        for lNotification in UIApplication.shared.scheduledLocalNotifications! {
+            if lNotification.alertBody == LocalNotificationHelper.sharedHelper.notificationMessage(.comeBack) {
+                UIApplication.shared.cancelLocalNotification(lNotification)
                 break
             }
         }
     }
     
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(NSCalendarUnit.Year.union(NSCalendarUnit.Month).union(NSCalendarUnit.Day),fromDate: date)
+        GameModeHelper.sharedHelper.pausePointsCheck()
         
-        components.hour = 18
-        components.minute = 30
-        components.second = 00
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.day,.month,.year], from: Date())
         
-        let tempDate = calendar.dateFromComponents(components)!
-        let comps = NSDateComponents()
+        let randHour = arc4random_uniform(24) + 0
+        let randMinute = arc4random_uniform(60) + 0
+        let randSecond = arc4random_uniform(60) + 0
+        
+        components.hour = Int(randHour)
+        components.minute = Int(randMinute)
+        components.second = Int(randSecond)
+        
+        let tempDate = calendar.date(from: components)!
+        var comps = DateComponents()
         comps.day = 2
-        let fireDateOfNotification = calendar.dateByAddingComponents(comps, toDate: tempDate, options:[])
+        let fireDateOfNotification = (calendar as NSCalendar).date(byAdding: comps, to: tempDate, options:[])
         
-        scheduleNotificationWith(message: notificationMessage(.ComeBack)!, badgeNumber: 1, fireDate: fireDateOfNotification!)
-        
-        //NSNotificationCenter.defaultCenter().postNotificationName("pauseGame", object: nil)
+        let message = LocalNotificationHelper.sharedHelper.notificationMessage(.comeBack, gameMode: nil)
+        LocalNotificationHelper.sharedHelper.scheduleNotificationWith(message: message!, fireDate: fireDateOfNotification!, badgeNumber: 1)
     }
     
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
+        application.applicationIconBadgeNumber = 0
     }
     
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
         
     }
     
     func enableDeveloperMode() {
-        for key in Array(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys) {
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
-        }
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    private func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : Any], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         print(userInfo)
-        print("Message ID: \(userInfo["gcm_message_id"]!)")
+        let badgeNumber = application.applicationIconBadgeNumber + 1
+        application.applicationIconBadgeNumber = badgeNumber
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     //MARK: Supersonic ADS :: RVDelegate
-    func supersonicRVInitSuccess() {
+    public func supersonicRVInitSuccess() {
         FTLogging().FTLog("Initialised rewarded video")
     }
     
-    func supersonicRVInitFailedWithError(error: NSError!) {
-        FTLogging().FTLog("Rewarded video init failed with error \(error.localizedDescription)")
-    }
-    
-    func supersonicRVAdAvailabilityChanged(hasAvailableAds: Bool) {
+    public func supersonicRVAdAvailabilityChanged(_ hasAvailableAds: Bool) {
         FTLogging().FTLog("Avaliability changed")
     }
     
-    func supersonicRVAdRewarded(placementInfo: SupersonicPlacementInfo!) {
+    public func supersonicRVAdRewarded(_ placementInfo: SupersonicPlacementInfo!) {
         FTLogging().FTLog("Ad Rewarded!")
-        NSNotificationCenter.defaultCenter().postNotificationName("videoRewarded", object: nil, userInfo: ["rewardAmount" : placementInfo.rewardAmount,
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "videoRewarded"), object: nil, userInfo: ["rewardAmount" : placementInfo.rewardAmount,
             "rewardName"   : placementInfo.rewardName])
     }
     
-    func supersonicRVAdOpened() {
+    public func supersonicRVAdOpened() {
         FTLogging().FTLog("Ad Opened")
-        NSNotificationCenter.defaultCenter().postNotificationName("videoOpened", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "videoOpened"), object: nil)
     }
     
-    func supersonicRVAdClosed() {
+    public func supersonicRVAdClosed() {
         FTLogging().FTLog("Ad closed")
-        NSNotificationCenter.defaultCenter().postNotificationName("videoClosed", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "videoClosed"), object: nil)
     }
     
-    func supersonicRVAdStarted() {
+    public func supersonicRVAdStarted() {
         FTLogging().FTLog("Ad Started")
     }
     
-    func supersonicRVAdEnded() {
+    public func supersonicRVAdEnded() {
         FTLogging().FTLog("Ad Ended")
-    }
-    func supersonicRVAdFailedWithError(error: NSError!) {
-        FTLogging().FTLog("Rewarded video  failed with error \(error.localizedDescription)")
-        
     }
     
     //MARK: Notification
     
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         application.applicationIconBadgeNumber = 0
-        if notification.alertBody == notificationMessage(.ComeBack) {
-            let pointsAdded = 20
-            let defaults = NSUserDefaults.standardUserDefaults()
-            let oldScore = defaults.integerForKey("score")
+        if notification.alertBody == LocalNotificationHelper.sharedHelper.notificationMessage(.comeBack) {
+            let pointsAdded = 5
+            let defaults = UserDefaults.standard
+            let oldScore = defaults.integer(forKey: "score")
             let newScore = oldScore + pointsAdded
             
-            defaults.setInteger(newScore, forKey: "score")
+            defaults.set(newScore, forKey: "score")
             
+            //TODO: Add a toast or something to show the added coins.
+        } else {
+            LocalNotificationHelper.sharedHelper.notificationReceivedWhileInApp(notification: notification)
         }
     }
     
     @available(iOS 9.0, *)
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    private func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
         if shortcutItem.type == "com.flatboxstudio.numbertap.open-endless" {
-            NSNotificationCenter.defaultCenter().postNotificationName("sceneSet", object: nil)
-        }
-    }
-    
-    func scheduleNotificationWith(message message: String, badgeNumber: Int, fireDate date: NSDate) {
-        // 1 Create empty notification
-        let localNotification = UILocalNotification()
-        
-        // 2 Set properties of your notification
-        localNotification.alertBody = message
-        localNotification.fireDate = date
-        localNotification.timeZone = NSTimeZone.defaultTimeZone()
-        localNotification.applicationIconBadgeNumber = badgeNumber
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        
-        if type == .ComeBack {
-            localNotification.userInfo = ["information" : "teset"]
-        }
-        
-        // 3 Schedule the notification
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-    }
-    
-    
-    func notificationMessage(type: NotificationType) -> String? {
-        switch type {
-        case .ComeBack:
-            type == .ComeBack
-            return "Come back! It's been a while... How about a couple of points?"
-        case .Waited:
-            type == .Waited
-            return "Your time has been set back and it's time to play!"
-        }
-    }
-    
-    
-    func playBackgroundMusic(filename: String) {
-        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
-        guard let newURL = url else {
-            print("Could not find file: \(filename)")
-            return
-        }
-        do {
-            backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: newURL)
-            backgroundMusicPlayer.numberOfLoops = -1
-            backgroundMusicPlayer.prepareToPlay()
-            backgroundMusicPlayer.play()
-            backgroundMusicPlayer.volume = 0.7
-        } catch let error as NSError {
-            print(error.description)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "sceneSet"), object: nil)
         }
     }
 

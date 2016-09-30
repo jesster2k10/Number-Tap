@@ -8,20 +8,20 @@
 
 import Foundation
 
-public class FTLogging {
+open class FTLogging {
     
-    private var isDebug: Bool
+    fileprivate var isDebug: Bool
     
     init() {
         self.isDebug = false
     }
     
-    public func setup (isDebug: Bool) {
+    open func setup (_ isDebug: Bool) {
         self.isDebug = isDebug
         print("Project is Debug = \(isDebug)")
     }
     
-    public func FTLog<T> (value : T) {
+    open func FTLog<T> (_ value : T) {
         if isDebug == true {
             print(value)
         }

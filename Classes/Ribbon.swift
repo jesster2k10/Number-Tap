@@ -13,16 +13,16 @@ import UIKit
 let shootAnimKey = "shootAnimKey"
 
 enum GameMode : UInt32 {
-    case Shoot = 0
-    case Memory = 1
-    case Build = 2
-    case Challenge = 3
-    case Multiplayer = 4
-    case Endless = 5
-    case Easy = 6
-    case Medium = 7
-    case Hard = 8
-    case Locked = 9
+    case shoot = 0
+    case memory = 1
+    case build = 2
+    case challenge = 3
+    case multiplayer = 4
+    case endless = 5
+    case easy = 6
+    case medium = 7
+    case hard = 8
+    case locked = 9
 }
 
 class Ribbon: SKSpriteNode {
@@ -55,25 +55,25 @@ class Ribbon: SKSpriteNode {
     
     internal var currentBodyColour : String = BodyColour.Red.rawValue
     internal var currentDotsColour : String = DotsColour.Red.rawValue
-    internal var currentText : UInt32 = GameMode.Shoot.rawValue
+    internal var currentText : UInt32 = GameMode.shoot.rawValue
     
-    private let currentTexture = SKTexture(imageNamed: "ribbon")
-    private var currentSize = CGSizeMake(566, 164)
-    internal var currentMode : GameMode = .Shoot
+    fileprivate let currentTexture = SKTexture(imageNamed: "ribbon")
+    fileprivate var currentSize = CGSize(width: 566, height: 164)
+    internal var currentMode : GameMode = .shoot
     
-    private let textLabel = SKLabelNode()
+    fileprivate let textLabel = SKLabelNode()
     
-    private var shootFrames : [SKTexture]?
-    private var shootAtlas : SKTextureAtlas?
+    fileprivate var shootFrames : [SKTexture]?
+    fileprivate var shootAtlas : SKTextureAtlas?
     
-    private var endlessFrames : [SKTexture]?
-    private var endlessAtlas : SKTextureAtlas?
+    fileprivate var endlessFrames : [SKTexture]?
+    fileprivate var endlessAtlas : SKTextureAtlas?
     
-    private var memoryFrames : [SKTexture]?
-    private var memoryAtlas : SKTextureAtlas?
+    fileprivate var memoryFrames : [SKTexture]?
+    fileprivate var memoryAtlas : SKTextureAtlas?
     
-    private var buildUpFrames : [SKTexture]?
-    private var buildUpAtlas : SKTextureAtlas?
+    fileprivate var buildUpFrames : [SKTexture]?
+    fileprivate var buildUpAtlas : SKTextureAtlas?
     
     internal var mainScene : SKScene?
     internal var numbersLeftToUnlock : Int?
@@ -89,7 +89,7 @@ class Ribbon: SKSpriteNode {
     init(ribbonType type: GameMode, bodyColour colour: BodyColour, dotsColour dotColor: DotsColour, text: String) {
         currentSize = currentTexture.size()
         currentMode = type
-        super.init(texture: currentTexture, color: UIColor.clearColor(), size: currentSize)
+        super.init(texture: currentTexture, color: UIColor.clear, size: currentSize)
         
         colorBlendFactor = 1.0
         color = UIColor(rgba: colour.rawValue)
@@ -100,7 +100,7 @@ class Ribbon: SKSpriteNode {
         let dotTexture = SKTexture(imageNamed: "dots")
         
         let dots1 = SKSpriteNode(texture: dotTexture)
-        dots1.position = CGPointMake(-12, 32)
+        dots1.position = CGPoint(x: -12, y: 32)
         dots1.zPosition = 55
         dots1.colorBlendFactor = 1.0
         dots1.name = "dots1"
@@ -108,7 +108,7 @@ class Ribbon: SKSpriteNode {
         addChild(dots1)
         
         let dots2 = SKSpriteNode(texture: dotTexture)
-        dots2.position = CGPointMake(-12, -32)
+        dots2.position = CGPoint(x: -12, y: -32)
         dots2.zPosition = 55
         dots2.colorBlendFactor = 1.0
         dots2.name = "dots2"
@@ -118,11 +118,11 @@ class Ribbon: SKSpriteNode {
         createTextWithType(type, text: text)
     }
     
-    func setNumbersLeft(left: Int) {
+    func setNumbersLeft(_ left: Int) {
         numbersLeftToUnlock = left
     }
     
-    func setSuperScene(scene: SKScene?)  {
+    func setSuperScene(_ scene: SKScene?)  {
         mainScene = scene!
     }
     
@@ -130,21 +130,21 @@ class Ribbon: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func unlocked(mode: GameMode, text: String) {
+    func unlocked(_ mode: GameMode, text: String) {
         
         self.removeAllChildren()
         
         let dotTexture = SKTexture(imageNamed: "dots")
         
         let dots1 = SKSpriteNode(texture: dotTexture)
-        dots1.position = CGPointMake(-12, 32)
+        dots1.position = CGPoint(x: -12, y: 32)
         dots1.zPosition = 55
         dots1.colorBlendFactor = 1.0
         dots1.name = "dots1"
         addChild(dots1)
         
         let dots2 = SKSpriteNode(texture: dotTexture)
-        dots2.position = CGPointMake(-12, -32)
+        dots2.position = CGPoint(x: -12, y: -32)
         dots2.zPosition = 55
         dots2.colorBlendFactor = 1.0
         dots2.name = "dots2"
@@ -166,14 +166,14 @@ class Ribbon: SKSpriteNode {
         let dotTexture = SKTexture(imageNamed: "dots")
         
         let dots1 = SKSpriteNode(texture: dotTexture)
-        dots1.position = CGPointMake(-12, 32)
+        dots1.position = CGPoint(x: -12, y: 32)
         dots1.zPosition = 55
         dots1.colorBlendFactor = 1.0
         dots1.name = "dots1"
         addChild(dots1)
         
         let dots2 = SKSpriteNode(texture: dotTexture)
-        dots2.position = CGPointMake(-12, -32)
+        dots2.position = CGPoint(x: -12, y: -32)
         dots2.zPosition = 55
         dots2.colorBlendFactor = 1.0
         dots2.name = "dots2"
@@ -208,33 +208,33 @@ class Ribbon: SKSpriteNode {
         
     }
     
-    func createTextWithType(type : GameMode, text: String) {
+    func createTextWithType(_ type : GameMode, text: String) {
         switch type {
-        case .Endless:
+        case .endless:
             createEndless()
             break;
-        case .Shoot:
+        case .shoot:
             createShoot()
             break
             
-        case .Memory:
+        case .memory:
             createMemory()
             break
             
-        case .Build:
+        case .build:
             //Set mode to Build-Up
             createBuildUp()
             break;
             
-        case .Challenge:
+        case .challenge:
             //createChallenge()
             break;
             
-        case .Multiplayer:
+        case .multiplayer:
             createMultiplayer()
             break;
             
-        case .Locked:
+        case .locked:
             locked()
             break;
             
@@ -245,38 +245,38 @@ class Ribbon: SKSpriteNode {
         
     }
     
-    private func createMultiplayer() {
+    fileprivate func createMultiplayer() {
         let multiLabel = SKLabelNode(fontNamed: k.Montserrat.Regular)
         multiLabel.text = "MULTIPLAYER"
         multiLabel.zPosition = 38
-        multiLabel.fontColor = UIColor.whiteColor()
-        multiLabel.horizontalAlignmentMode = .Center
-        multiLabel.verticalAlignmentMode = .Center
+        multiLabel.fontColor = UIColor.white
+        multiLabel.horizontalAlignmentMode = .center
+        multiLabel.verticalAlignmentMode = .center
         multiLabel.fontSize = 28
         addChild(multiLabel)
     }
     
     
-    private func createCustom(text: String) {
+    fileprivate func createCustom(_ text: String) {
         let customText = SKLabelNode(fontNamed: k.Montserrat.Regular)
         customText.name = "customText"
         customText.text = text
         customText.zPosition = 38
-        customText.fontColor = UIColor.whiteColor()
-        customText.horizontalAlignmentMode = .Center
-        customText.verticalAlignmentMode = .Center
+        customText.fontColor = UIColor.white
+        customText.horizontalAlignmentMode = .center
+        customText.verticalAlignmentMode = .center
         customText.fontSize = 28
         addChild(customText)
     }
     
-    private func createShoot() {
+    fileprivate func createShoot() {
         shootFrames = [SKTexture]()
         shootAtlas = SKTextureAtlas(named: "Shoot")
         
         let numImages = shootAtlas!.textureNames.count
         var shootAnimFrames = [SKTexture]()
         
-        for var i = 0; i <= numImages - 1; i += 1 {
+        for i in 0...numImages - 1 {
             let imgName = "Shoot" + String(i) + ".png"
             var temp = shootAtlas?.textureNamed(imgName)
             shootAnimFrames.append(temp!)
@@ -287,7 +287,7 @@ class Ribbon: SKSpriteNode {
         var temp : SKTexture? = shootFrames![0]
         
         shoot = SKSpriteNode(texture: temp)
-        shoot.position = CGPointMake(2, -0)
+        shoot.position = CGPoint(x: 2, y: -0)
         shoot.zPosition = 33
         shoot.name = "shoot"
         shoot.setScale(0.30)
@@ -298,14 +298,14 @@ class Ribbon: SKSpriteNode {
         animate(shoot, frames: shootFrames!, speed: 0.33)
     }
     
-    private func createEndless() {
+    fileprivate func createEndless() {
         endlessFrames = [SKTexture]()
         endlessAtlas = SKTextureAtlas(named: "Endless")
         
         let numImages = endlessAtlas!.textureNames.count
         var endlessAnimFrames = [SKTexture]()
         
-        for var i = 0; i <= numImages - 1; i += 1 {
+        for i in 0...numImages - 1 {
             let imgName = "Endless" + String(i) + ".png"
             var temp = endlessAtlas?.textureNamed(imgName)
             endlessAnimFrames.append(temp!)
@@ -316,7 +316,7 @@ class Ribbon: SKSpriteNode {
         var temp : SKTexture? = endlessFrames![0]
         
         endless = SKSpriteNode(texture: temp)
-        endless.position = CGPointMake(2, -0)
+        endless.position = CGPoint(x: 2, y: -0)
         endless.zPosition = 33
         endless.name = "endless"
         endless.setScale(0.30)
@@ -327,14 +327,14 @@ class Ribbon: SKSpriteNode {
         animate(endless, frames: endlessFrames!, speed: 0.33)
     }
     
-    private func createBuildUp() {
+    fileprivate func createBuildUp() {
         buildUpFrames = [SKTexture]()
         buildUpAtlas = SKTextureAtlas(named: "Build-Up")
         
         let numImages = buildUpAtlas!.textureNames.count
         var buildUpAnimFrames = [SKTexture]()
         
-        for var i = 0; i <= numImages - 1; i += 1 {
+        for i in 0...numImages - 1 {
             let imgName = "BuildUp" + String(i) + ".png"
             var temp = buildUpAtlas?.textureNamed(imgName)
             buildUpAnimFrames.append(temp!)
@@ -345,7 +345,7 @@ class Ribbon: SKSpriteNode {
         var temp : SKTexture? = buildUpFrames![0]
         
         buildUp = SKSpriteNode(texture: temp)
-        buildUp.position = CGPointMake(2, -0)
+        buildUp.position = CGPoint(x: 2, y: -0)
         buildUp.zPosition = 33
         buildUp.name = "endless"
         buildUp.setScale(0.30)
@@ -356,14 +356,14 @@ class Ribbon: SKSpriteNode {
         animate(buildUp, frames: buildUpFrames!, speed: 0.33)
     }
     
-    private func createMemory() {
+    fileprivate func createMemory() {
         memoryFrames = [SKTexture]()
         memoryAtlas = SKTextureAtlas(named: "Memory")
         
         let numImages = memoryAtlas!.textureNames.count
         var memoryAnimFrames = [SKTexture]()
         
-        for var i = 0; i <= numImages - 1; i += 1 {
+        for i in 0...numImages - 1 {
             let imgName = "Memory" + String(i) + ".png"
             var temp = memoryAtlas?.textureNamed(imgName)
             memoryAnimFrames.append(temp!)
@@ -375,7 +375,7 @@ class Ribbon: SKSpriteNode {
         var temp : SKTexture? = memoryFrames![0]
         
         memory = SKSpriteNode(texture: temp)
-        memory.position = CGPointMake(2, -0)
+        memory.position = CGPoint(x: 2, y: -0)
         memory.zPosition = 33
         memory.name = "memory"
         memory.setScale(0.28)
@@ -386,27 +386,27 @@ class Ribbon: SKSpriteNode {
         animate(memory, frames: memoryFrames!, speed: 0.5)
     }
     
-    func animate(sprite: SKSpriteNode, frames: [SKTexture], speed : CGFloat) {
+    func animate(_ sprite: SKSpriteNode, frames: [SKTexture], speed : CGFloat) {
         
-        let anim = SKAction.animateWithTextures(frames, timePerFrame: 0.033, resize: false, restore: true)
-        sprite.runAction(SKAction.repeatActionForever(anim))
+        let anim = SKAction.animate(with: frames, timePerFrame: 0.033, resize: false, restore: true)
+        sprite.run(SKAction.repeatForever(anim))
         
     }
     
-    func animateBall(ball  : SKShapeNode, word : SKLabelNode) {
-        ball.runAction(SKAction.moveToX(word.position.x, duration: 2)) {
-            word.runAction(SKAction.fadeOutWithDuration(2), completion: {
-                ball.runAction(SKAction.hide())
+    func animateBall(_ ball  : SKShapeNode, word : SKLabelNode) {
+        ball.run(SKAction.moveTo(x: word.position.x, duration: 2)) {
+            word.run(SKAction.fadeOut(withDuration: 2), completion: {
+                ball.run(SKAction.hide())
                 ball.position.x = -171
             })
         }
     }
     
-    private func presentScene(aScene : SKScene, _ mode: GameMode) {
+    fileprivate func presentScene(_ aScene : SKScene, _ mode: GameMode) {
         currentMode = mode
         
         var color : UIColor? = UIColor(rgba: "#434343")
-        var transition : SKTransition? = SKTransition.fadeWithColor(color!, duration: 2)
+        var transition : SKTransition? = SKTransition.fade(with: color!, duration: 2)
         
         mainScene?.view?.presentScene(scene!, transition: transition!)
         
@@ -419,13 +419,13 @@ class Ribbon: SKSpriteNode {
         shootFrames = nil
         shootAtlas = nil
         
-        childNodeWithName("shoot")?.removeAllChildren()
-        childNodeWithName("shoot")?.removeAllActions()
-        childNodeWithName("shoot")?.removeFromParent()
+        childNode(withName: "shoot")?.removeAllChildren()
+        childNode(withName: "shoot")?.removeAllActions()
+        childNode(withName: "shoot")?.removeFromParent()
         
-        childNodeWithName("memory")?.removeAllChildren()
-        childNodeWithName("memory")?.removeAllActions()
-        childNodeWithName("memory")?.removeFromParent()
+        childNode(withName: "memory")?.removeAllChildren()
+        childNode(withName: "memory")?.removeAllActions()
+        childNode(withName: "memory")?.removeFromParent()
         
         removeAllActions()
         removeAllChildren()

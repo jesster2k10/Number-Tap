@@ -1,25 +1,26 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
+
+ inhibit_all_warnings!
 
 target 'Number Tap iOS' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+pod 'SwiftKeychainWrapper'
 pod 'MBProgressHUD'
-pod 'Armchair'
+pod 'Appirater'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'PermissionScope'
-pod "MTMigration"
 pod 'SupersonicSDK'
-pod 'Instructions'
 pod 'NHNetworkTime'
 pod 'Firebase'
 pod 'Firebase/Messaging'
 pod 'Firebase/AdMob'
 pod 'Firebase/Core'
 pod 'Firebase/RemoteConfig'
-pod 'IBAnimatable'
+pod 'BEMCheckBox'
 
   # Pods for Number Tap iOS
 
@@ -31,7 +32,6 @@ target 'Number Tap OSX' do
 
   # Pods for Number Tap OSX
 
-pod 'Armchair'
 pod 'Fabric'
 pod 'Crashlytics'
 

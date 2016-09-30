@@ -7,10 +7,19 @@
 //  Copyright © 2016 Denver Swift Heads. All rights reserved.
 //
 
-public enum NotificationType {
-    case ComeBack
-    case Waited
-}
+let kComeBackNotification = "comeBack"
+let kDailyRewardNotification = "dailyReward"
+let kDailyRewardAlmostGoneNotification = "almostGone"
+let kWheelOfFortuneNotification = "wheel"
+
+let kEndlessGameMode = "Endless"
+let kEasyGameMode = "Easy"
+let kMediumGameMode = "Medium"
+let kImpossibleGameMode = "Impossible"
+let kShootGameMode = "Shoot"
+let kMemoryGameMode = "Memory"
+let kMultiplayerGameMode = "Multiplayer"
+let kBuildUpGameMode = "Build Up"
 
 enum gameMode: String {
     case Timed   = "Timed"
@@ -24,39 +33,39 @@ enum gameMode: String {
 // Use enum as a simple namespace.  (It has no cases so you can't instantiate it.)
 public enum Products {
     
-    private static let Prefix = "com.flatboxstudio.numbertap."
+    fileprivate static let Prefix = "com.flatboxstudio.numbertap."
     
     /// MARK: - Supported Product Identifiers
     public static let RemoveAds           = Prefix + "removeAds"
     public static let UnlockAllLevel      = Prefix + "unlockAllLevels"
     
     // All of the products assembled into a set of product identifiers.
-    private static let productIdentifiers: Set<ProductIdentifier> = [Products.RemoveAds, Products.UnlockAllLevel]
+    public static let productIdentifiers: Set<ProductIdentifier> = [Products.RemoveAds, Products.UnlockAllLevel]
     
     /// Static instance of IAPHelper that for rage products.
-    public static let store = IAPHelper(productIdentifiers: Products.productIdentifiers)
+    public static let store = IAPHelper(productIds: Products.productIdentifiers)
 }
 
 /// Return the resourcename for the product identifier.
-func resourceNameForProductIdentifier(productIdentifier: String) -> String? {
-    return productIdentifier.componentsSeparatedByString(".").last
+func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
+    return productIdentifier.components(separatedBy: ".").last
 }
 
 struct k {
     
-    private static let Prefix    = "com.flatboxstudio.numbertap."
-    private static let wavEnding = ".wav"
-    private static let MontserratPrefix = "Montserrat"
+    fileprivate static let Prefix    = "com.flatboxstudio.numbertap."
+    fileprivate static let wavEnding = ".wav"
+    fileprivate static let MontserratPrefix = "Montserrat"
     
     struct isUnlocked {
-        static let shoot = "shoot"
-        static let endless = "endlesss"
-        static let memory = "memory"
-        static let multiplayer = "multiplayer"
-        static let easy = "easy"
-        static let medium = "medium"
-        static let hard = "hard"
-        static let buildUp = "build-up"
+        static let shoot = "Shoot"
+        static let endless = "Endlesss"
+        static let memory = "Memory"
+        static let multiplayer = "Multiplayer"
+        static let easy = "Easy"
+        static let medium = "Medium"
+        static let hard = "Impossible"
+        static let buildUp = "Build Up"
     }
     
     struct numbersToUnlock {
@@ -74,6 +83,8 @@ struct k {
         static let Regular = MontserratPrefix + "-Regular"
         static let SemiBold = MontserratPrefix + "-SemiBold"
         static let Light = MontserratPrefix + "-Light"
+        static let UltraLight = MontserratPrefix + "-UltraLight"
+        static let Hairline = MontserratPrefix + "-Harline"
     }
     
     struct NotificationCenter {
