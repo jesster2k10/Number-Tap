@@ -151,6 +151,8 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             }
         }
         
+        UserDefaults.standard.set(false, forKey: "nk")
+
         randomWord()
         
         if let _ = UserDefaults.standard.object(forKey: "hasRemovedAds") as? Bool {

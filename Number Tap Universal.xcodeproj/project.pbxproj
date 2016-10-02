@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52910F681DA039B000781236 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52910F6A1DA039B000781236 /* Localizable.strings */; };
 		52A005801D9725A7000BC100 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */; };
 		52A005811D9725A7000BC100 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A0057E1D9725A6000BC100 /* OpenEars.framework */; };
 		52A005821D9725A7000BC100 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A0057F1D9725A6000BC100 /* Slt.framework */; };
@@ -30,9 +31,6 @@
 		5F44B8C71D6680470022FB81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F44B8C11D6680470022FB81 /* Assets.xcassets */; };
 		5F44B8C81D6680470022FB81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F44B8C21D6680470022FB81 /* Main.storyboard */; };
 		5F44B8C91D6680470022FB81 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F44B8C41D6680470022FB81 /* GameViewController.swift */; };
-		5F48B6C21D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */; };
-		5F48B6C31D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */; };
-		5F48B6C41D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */; };
 		5F48B6DB1D725D4300FE4310 /* AppStoreReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */; };
 		5F48B6DD1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */; };
 		5F6EC9C51D685B3B00AF3489 /* SKAction+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */; };
@@ -238,6 +236,40 @@
 		005DD5D9C75CADC7FF65F826 /* Pods-Number Tap tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Number Tap tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Number Tap tvOS/Pods-Number Tap tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		0530AF982121349456056E90 /* Pods-Number Tap OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Number Tap OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Number Tap OSX/Pods-Number Tap OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		17253E4DC810DC5B2265E38A /* Pods-Number Tap iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Number Tap iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Number Tap iOS/Pods-Number Tap iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		52910F4A1DA0381000781236 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		52910F4B1DA0381100781236 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F4C1DA0381100781236 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F4D1DA0381200781236 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		52910F4E1DA0381200781236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		52910F4F1DA0381200781236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F501DA0381200781236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F511DA0381300781236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		52910F521DA0381900781236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		52910F531DA0381A00781236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F541DA0381A00781236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F551DA0381A00781236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		52910F561DA0382A00781236 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		52910F571DA0382B00781236 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F581DA0382B00781236 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F591DA0382B00781236 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		52910F5A1DA038A100781236 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		52910F5B1DA038A100781236 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		52910F5C1DA038A100781236 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		52910F5D1DA038A100781236 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		52910F5E1DA038A800781236 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		52910F5F1DA038A800781236 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		52910F601DA038A800781236 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		52910F611DA038A800781236 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		52910F621DA038B500781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		52910F631DA038B500781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F641DA038B500781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		52910F651DA038B500781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		52910F691DA039B000781236 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		52910F6B1DA039BE00781236 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		52910F6C1DA039BF00781236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		52910F6D1DA039C400781236 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		52910F6E1DA039C500781236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		52910F701DA039D000781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AcousticModelEnglish.bundle; path = Libraries/AcousticModelEnglish.bundle; sourceTree = "<group>"; };
 		52A0057E1D9725A6000BC100 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEars.framework; path = Libraries/OpenEars.framework; sourceTree = "<group>"; };
 		52A0057F1D9725A6000BC100 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Slt.framework; path = Libraries/Slt.framework; sourceTree = "<group>"; };
@@ -261,7 +293,6 @@
 		5F44B8C31D6680470022FB81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F44B8C41D6680470022FB81 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5F44B8C51D6680470022FB81 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
 		5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptValidator.swift; sourceTree = "<group>"; };
 		5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptObtainer.swift; sourceTree = "<group>"; };
 		5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+Spring.swift"; sourceTree = "<group>"; };
@@ -464,6 +495,7 @@
 				5F7C5C891D66830200EA24EC /* GameViewController.swift */,
 				5F7C5C8A1D66830300EA24EC /* Info.plist */,
 				5F7C5CA01D670EAF00EA24EC /* Number Tap iOS-Bridging-Header.h */,
+				52910F6A1DA039B000781236 /* Localizable.strings */,
 			);
 			path = "Number Tap iOS";
 			sourceTree = "<group>";
@@ -645,7 +677,6 @@
 			isa = PBXGroup;
 			children = (
 				5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */,
-				5F48B6C11D724C4800FE4310 /* AppleIncRootCertificate.cer */,
 				5F7C5CB51D67124D00EA24EC /* Classes */,
 				5F7C5C911D66862B00EA24EC /* Utilities */,
 				943373221C1DC1D100D222D6 /* Assets */,
@@ -846,6 +877,7 @@
 					94D409371C1E3D460043171E = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 964QFWYN42;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -856,6 +888,11 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				fr,
+				es,
+				ko,
+				it,
 			);
 			mainGroup = 9402F4241C120E1000B2C2D7;
 			productRefGroup = 9402F42E1C120E1000B2C2D7 /* Products */;
@@ -887,11 +924,11 @@
 				5F6F0BA01D67B92E008DE673 /* TutorialScene.sks in Resources */,
 				5F7C5C8C1D66830300EA24EC /* Assets.xcassets in Resources */,
 				5F7C5CE91D67139600EA24EC /* PMAlertController.xib in Resources */,
+				52910F681DA039B000781236 /* Localizable.strings in Resources */,
 				5F7C5D0A1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
 				5F7C5D011D67140D00EA24EC /* Montserrat-Bold.otf in Resources */,
 				5F7C5D101D67142C00EA24EC /* blipBlop.wav in Resources */,
 				943CF7651C1E46C000340CFD /* Game.xcassets in Resources */,
-				5F48B6C21D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */,
 				5F7C5CF31D6713DC00EA24EC /* Endless.atlas in Resources */,
 				5F7C5CF01D6713DC00EA24EC /* Build-Up.atlas in Resources */,
 				5F7C5CF91D6713DC00EA24EC /* Shoot.atlas in Resources */,
@@ -919,7 +956,6 @@
 				5FCBAEDA1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */,
 				5F7C5D171D67142C00EA24EC /* blop02.wav in Resources */,
 				5F7C5D0B1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
-				5F48B6C31D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */,
 				5F7C5D141D67142C00EA24EC /* blop01.wav in Resources */,
 				5F7C5D111D67142C00EA24EC /* blipBlop.wav in Resources */,
 				5F7C5D051D67140D00EA24EC /* Montserrat-Hairline.otf in Resources */,
@@ -945,7 +981,6 @@
 				5FCBAEDB1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */,
 				5F7C5D181D67142C00EA24EC /* blop02.wav in Resources */,
 				5F7C5D0C1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
-				5F48B6C41D724C4800FE4310 /* AppleIncRootCertificate.cer in Resources */,
 				5F7C5D151D67142C00EA24EC /* blop01.wav in Resources */,
 				5F7C5D121D67142C00EA24EC /* blipBlop.wav in Resources */,
 				5F7C5D061D67140D00EA24EC /* Montserrat-Hairline.otf in Resources */,
@@ -1282,10 +1317,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		52910F6A1DA039B000781236 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52910F691DA039B000781236 /* Base */,
+				52910F6B1DA039BE00781236 /* en */,
+				52910F6C1DA039BF00781236 /* de */,
+				52910F6D1DA039C400781236 /* fr */,
+				52910F6E1DA039C500781236 /* es */,
+				52910F701DA039D000781236 /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		5F44B8C21D6680470022FB81 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5F44B8C31D6680470022FB81 /* Base */,
+				52910F4C1DA0381100781236 /* fr */,
+				52910F501DA0381200781236 /* de */,
+				52910F541DA0381A00781236 /* es */,
+				52910F581DA0382B00781236 /* ko */,
+				52910F5C1DA038A100781236 /* zh-Hans */,
+				52910F601DA038A800781236 /* zh-Hant */,
+				52910F641DA038B500781236 /* it */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1294,6 +1349,13 @@
 			isa = PBXVariantGroup;
 			children = (
 				5F7C5C7C1D6682E400EA24EC /* Base */,
+				52910F4D1DA0381200781236 /* fr */,
+				52910F511DA0381300781236 /* de */,
+				52910F551DA0381A00781236 /* es */,
+				52910F591DA0382B00781236 /* ko */,
+				52910F5D1DA038A100781236 /* zh-Hans */,
+				52910F611DA038A800781236 /* zh-Hant */,
+				52910F651DA038B500781236 /* it */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1302,6 +1364,13 @@
 			isa = PBXVariantGroup;
 			children = (
 				5F7C5C861D66830200EA24EC /* Base */,
+				52910F4A1DA0381000781236 /* fr */,
+				52910F4E1DA0381200781236 /* de */,
+				52910F521DA0381900781236 /* es */,
+				52910F561DA0382A00781236 /* ko */,
+				52910F5A1DA038A100781236 /* zh-Hans */,
+				52910F5E1DA038A800781236 /* zh-Hant */,
+				52910F621DA038B500781236 /* it */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1310,6 +1379,13 @@
 			isa = PBXVariantGroup;
 			children = (
 				5F7C5C881D66830200EA24EC /* Base */,
+				52910F4B1DA0381100781236 /* fr */,
+				52910F4F1DA0381200781236 /* de */,
+				52910F531DA0381A00781236 /* es */,
+				52910F571DA0382B00781236 /* ko */,
+				52910F5B1DA038A100781236 /* zh-Hans */,
+				52910F5F1DA038A800781236 /* zh-Hant */,
+				52910F631DA038B500781236 /* it */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1321,6 +1397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1366,6 +1443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1562,6 +1640,7 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Utilities/Number Tap OSX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1586,6 +1665,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Utilities/Number Tap OSX-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

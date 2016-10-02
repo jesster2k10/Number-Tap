@@ -7,6 +7,9 @@
 //  Copyright © 2016 Denver Swift Heads. All rights reserved.
 //
 
+let kPausedNotification = "gamePaused"
+let kUnPausedNotification = "gameUnpaused"
+
 let kComeBackNotification = "comeBack"
 let kDailyRewardNotification = "dailyReward"
 let kDailyRewardAlmostGoneNotification = "almostGone"

@@ -31,6 +31,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     var visibleBoxTimer = Timer()
 
     var hits = 3
+    var count = 0
     var index = 0
     var length = 3.0
     var numbersShot = 0
@@ -39,6 +40,12 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
     var hasGameStarted = false
     var visibleBoxesArray = [NumberBox]()
     var snapshot = UIImage()
+    
+    var delta:TimeInterval = TimeInterval(0)
+    var last_update_time:TimeInterval = TimeInterval(0)
+    
+    var timeSinceTouched = TimeInterval(0)
+    let timeLimit = TimeInterval(0.1)
     
     //TODO: Configure sharing to take screenshot and work well.
     override func didMove(to view: SKView) {
@@ -91,7 +98,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         
         secondsLabel.position = CGPoint(x: shotNumberLabel.position.x - 10, y: shotNumberLabel.position.y - 40)
         secondsLabel.horizontalAlignmentMode = .left
-        secondsLabel.text = "00:00:00"
+        secondsLabel.text = "00h 00m 00s"
         secondsLabel.fontSize = 26
         secondsLabel.fontColor = UIColor.white
         secondsLabel.zPosition = 10.0
@@ -126,7 +133,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         five = Timer.every(0.001) {
             if self.numbersShot == 3 {
                 print("5 Numbers Shot")
-                self.changeTimer(2)
+                self.changeTimer(1.5)
                 five.invalidate()
             }
         }
@@ -135,7 +142,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         eight = Timer.every(0.001) {
             if self.numbersShot == 7 {
                 print("8 Numbers Shot")
-                self.changeTimer(1.5)
+                self.changeTimer(1.25)
                 eight.invalidate()
             }
         }
@@ -144,7 +151,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         eleven = Timer.every(0.001) {
             if self.numbersShot == 11 {
                 print("11 Numbers Shot")
-                self.changeTimer(1.25)
+                self.changeTimer(1.15)
                 eleven.invalidate()
             }
         }
@@ -191,6 +198,13 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             }
         })
         
+        gameTimer = Timer.every(1, { 
+            self.count += 1
+            let (h, m, s) = self.convertSeconds(totalSeconds: self.count)
+            
+            self.secondsLabel.text = self.timeToString(h: h, m: m, s: s)
+        })
+        
         timerArray.append(five)
         timerArray.append(eight)
         timerArray.append(eleven)
@@ -198,6 +212,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         timerArray.append(seventeen)
         timerArray.append(twentyone)
         timerArray.append(thirty)
+        timerArray.append(gameTimer)
     }
     
     func changeTimer(_ time: Double) {
@@ -415,7 +430,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         
         stopwatchTimer = nil
         
-        secondsLabel.text = "00:00:00"
+        secondsLabel.text = "00h 00m 00s"
         
         gameBegin()
     }
@@ -425,9 +440,9 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
             let location = touch.location(in: self)
             
             if hasGameStarted == true {
-                let bullet = SKShapeNode(circleOfRadius: 15)
+                let bullet = SKShapeNode(circleOfRadius: 12)
                 bullet.position = mainBall.position
-                bullet.physicsBody = SKPhysicsBody(circleOfRadius: 15)
+                bullet.physicsBody = SKPhysicsBody(circleOfRadius: 12)
                 bullet.physicsBody?.affectedByGravity = false
                 bullet.fillColor = mainBall.fillColor
                 bullet.strokeColor = mainBall.fillColor
@@ -446,16 +461,17 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
                 dx /= magnitude
                 dy /= magnitude
                 
-                let vector = CGVector(dx: 18.0 * dx, dy: 18.0 * dy)
+                let vector = CGVector(dx: 20.0 * dx, dy: 20.0 * dy)
                 
                 addChild(bullet)
                 
                 bullet.physicsBody?.applyImpulse(vector)
-
+                
             }
             
             handleTouchedPoint(location)
         }
+        
     }
     
     func distanceBetween(_ p1 : CGPoint, p2 : CGPoint) -> CGFloat {
@@ -483,6 +499,30 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         })
     }
     
+    func convertSeconds(totalSeconds: Int) -> (h:Int, m:Int, s:Int){
+        let seconds = totalSeconds % 60
+        let minutes = (totalSeconds / 60) % 60
+        let hours = totalSeconds / 3600
+        return (hours, minutes, seconds)
+    }
     
+    func timeToString(h:Int, m:Int, s:Int) -> String {
+        
+        let h = String(format: "%02d", h)
+        let m = String(format: "%02d", m)
+        let s = String(format: "%02d", s)
+        return "\(h)h \(m)m \(s)s"
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        if self.timeSinceTouched < self.timeLimit {
+            self.timeSinceTouched += delta
+        } else {
+            // 0.1 seconds has elapsed
+            isUserInteractionEnabled = true
+        }
+        
+        
+    }
     
 }

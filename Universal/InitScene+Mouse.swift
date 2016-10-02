@@ -16,17 +16,17 @@ extension InitScene {
     // ****************************************************
     
     override func mouseDown(theEvent: NSEvent) {
-       let mouseLocation = theEvent.locationInNode(self)
+       let mouseLocation = theEvent.location(in: self)
        userInteractionBegan(mouseLocation)
     }
     
     override func mouseDragged(theEvent: NSEvent) {
-        let mouseLocation = theEvent.locationInNode(self)
+        let mouseLocation = theEvent.location(in: self)
         userInteractionMoved(mouseLocation)
     }
     
     override func mouseUp(theEvent: NSEvent) {
-        let mouseLocation = theEvent.locationInNode(self)
+        let mouseLocation = theEvent.location(in: self)
         userInteractionEnded(mouseLocation)
     }
     

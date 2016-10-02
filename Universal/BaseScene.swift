@@ -109,6 +109,8 @@ class BaseScene : SKScene {
     }
     
     func start(_ mode: kGameMode, cam: SKCameraNode?)  {
+        UserDefaults.standard.set(false, forKey: "nk")
+
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.productPurchased), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(productCancelled), name: NSNotification.Name(rawValue: "cancelled"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.rewardUser(_:)), name: NSNotification.Name(rawValue: "videoRewarded"), object: nil)
@@ -615,7 +617,7 @@ class BaseScene : SKScene {
         arr.append(sound)
         
         for item in arr {
-            if UIScreen.main.isRetina() {
+            if !UIScreen.main.isRetina() {
                 item.run(SKAction.scale(to: 0.4, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))
             } else {
                 item.run(SKAction.scale(to: 1, duration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0))

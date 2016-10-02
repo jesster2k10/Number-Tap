@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  Number Tap Universal
+
+  Created by Esther Onolememen on 01/10/2016.
+  Copyright © 2016 Flatbox Studio. All rights reserved.
+*/
+
+/* ASSETS */
+"banner"        = "banner_spanish";
+"play"          = "play_spanish";
+"beginGame"     = "beginGame_spanish";
+"free"          = "free_spanish";
+"gameCenter"    = "gameCenter_spanish";
+"no"            = "no_spanish";
+"removeAds"     = "removeAds_spanish";
+"removeAdsLong" = "removeAdsLong_spanish";
+"score"         = "score_spanish";
+"share"         = "share_spanish";
+
+/* TEXT */
+"settings"      = "preferencias";
+"how-to-play"   = "Cómo jugar";
+"sound-on"      = "Ruido";
+"sound-off"     = "Silencio";
+"record"        = "Video";
+"gameplay"      = "el juego";
+"restore"       = "Recuperar";
+"purchases"     = "Productors Comprados";
+
+"no-wifi-alert-title" = "No hay Internet";
+"no-wifi-alert-message" = "No se puede comprar el producto. Por favor, Conectar a internet";
+"no-wifi-alert-action" = "Anular";
+"restore-loading-view-title" = "Recuperar Productors Comprados";
+
+"game-over" = "juego terminado";
+"continue" = "continuar?";
+
+"tap-number" = "PULSE EL NÚMERO:";
+"numbers-tapped" = "JUGADO NÚMERO";
+
+// SHARE
+"share-text" = "I just tapped %@ tiles in a FREE game called 'Number Tap' that's made by a 13-YEAR-OLD! Tap the numbers, beat the clock! Download Today!";

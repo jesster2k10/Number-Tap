@@ -11,10 +11,12 @@ import UIKit
 @objc public enum PMAlertControllerStyle : Int {
     case alert // The alert will adopt a width of 270 (like UIAlertController).
     case alertWithBlur //Adds a blur to the background (Requires iOS 8.0)
-    case walkthrough //The alert will adopt a width of the screen size minus 18 (from the left and right side). This style is designed to accommodate localization, push notifications and more.
+    case walkthrough
+    case walkthroughWithBlur
+    //The alert will adopt a width of the screen size minus 18 (from the left and right side). This style is designed to accommodate localization, push notifications and more.
 }
 
-@objc open class PMAlertController: UIViewController {
+open class PMAlertController: UIViewController {
     
     // MARK: Properties
     @IBOutlet weak open var alertMaskBackground: UIImageView!
@@ -56,7 +58,7 @@ import UIKit
         style == .alert ? (alertViewWidthConstraint.constant = 270) : (alertViewWidthConstraint.constant = UIScreen.main.bounds.width - 36)
         
         //check if style is blur
-        if style == .alertWithBlur {
+        if style == .alertWithBlur || style == .walkthroughWithBlur {
             blurEffect = UIBlurEffect(style: .dark)
             blurView = UIVisualEffectView(effect: blurEffect)
             

@@ -143,6 +143,9 @@ class TutorialScene: InitScene {
         backgroundColor = SKColor(red: 27/255, green: 27/255, blue: 27/255, alpha: 1)
         
         boxArray = NSMutableArray()
+        
+        UserDefaults.standard.set(false, forKey: "nk")
+
     }
     
     func setupFinger() {

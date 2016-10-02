@@ -6,7 +6,75 @@
 //  Copyright © 2016 Flatbox Studio. All rights reserved.
 //
 
+class TimerArrayHelper: NSObject {
+    static let sharedHelper = TimerArrayHelper()
+    var timerArray : [Timer] = [Timer]()
+    var backgroundTimer = false
+    
+    override init() {
+    }
+    
+    func initHelper() {
+        timerArray = []
+    }
+    
+    func addTheTimer(timer: Timer) {
+        timerArray.append(timer)
+    }
+    
+    func aPauseAllTimers() {
+        for timer in timerArray {
+            timer.invalidate()
+        }
+    }
+    
+    func aResumeAllTimers() {
+        for timer in timerArray {
+            timer.fire()
+        }
+    }
+    
+    func aRemoveTimer(timer: Timer) {
+        for object in timerArray
+        {
+            if object == timer {
+                timerArray.remove(at: timerArray.index(of: timer)!)
+            }
+        }
+    }
+    
+    func aSetBackgroundTimer(bg: Bool) {
+        backgroundTimer = bg
+    }
+    
+}
 extension Timer {
+    
+    // MARK: Timer Arrays
+    public class func initArray () {
+        let helper = TimerArrayHelper()
+        helper.initHelper()
+    }
+    
+    public class func addTimer(timer: Timer) {
+        TimerArrayHelper.sharedHelper.addTheTimer(timer: timer)
+    }
+    
+    public class func removeTimer(timer: Timer) {
+        TimerArrayHelper.sharedHelper.aRemoveTimer(timer: timer)
+    }
+    
+    public class func pauseAllTimers() {
+        TimerArrayHelper.sharedHelper.aPauseAllTimers()
+    }
+    
+    public class func resumeAllTimers() {
+        TimerArrayHelper.sharedHelper.aResumeAllTimers()
+    }
+    
+    public class func setBackgroundTimer(bg: Bool) {
+        TimerArrayHelper.sharedHelper.backgroundTimer = bg
+    }
     
     // MARK: Schedule timers
     
@@ -14,6 +82,9 @@ extension Timer {
     
     public class func after(_ interval: TimeInterval, _ block: @escaping () -> Void) -> Timer {
         let timer = Timer.new(after: interval, block)
+        if TimerArrayHelper.sharedHelper.backgroundTimer == false {
+            addTimer(timer: timer)
+        }
         timer.start()
         return timer
     }
@@ -22,6 +93,9 @@ extension Timer {
     
     public class func every(_ interval: TimeInterval, _ block: @escaping () -> Void) -> Timer {
         let timer = Timer.new(every: interval, block)
+        if TimerArrayHelper.sharedHelper.backgroundTimer == false {
+            addTimer(timer: timer)
+        }
         timer.start()
         return timer
     }
@@ -31,6 +105,9 @@ extension Timer {
     
     @nonobjc public class func every(_ interval: TimeInterval, _ block: @escaping (Timer) -> Void) -> Timer {
         let timer = Timer.new(every: interval, block)
+        if TimerArrayHelper.sharedHelper.backgroundTimer == false {
+            addTimer(timer: timer)
+        }
         timer.start()
         return timer
     }

@@ -44,7 +44,7 @@ class GameModeHelper {
         
         UserDefaults.standard.set(true, forKey: level)
         
-        let notification = PMAlertController(title: title, description: desc, image: nil, style: .alertWithBlur)
+        let notification = PMAlertController(title: title, description: desc, image: nil, style: .walkthroughWithBlur)
         let playAction = PMAlertAction(title: "Play Now!", style: .default) {
             //TODO: Play Game Mode
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPlayGameModeNotification), object: nil)
@@ -58,8 +58,11 @@ class GameModeHelper {
             }
         }
         
+        let idk = PMAlertAction(title: "I Dont Care..", style: .cancel)
+        
         notification.addAction(playAction)
         notification.addAction(laterAction)
+        notification.addAction(idk)
         
         let appDelegate  = UIApplication.shared.delegate as! AppDelegate
         let rootVC = appDelegate.window!.rootViewController
@@ -86,7 +89,6 @@ extension GameModeHelper {
         isTimerActive = true
         pointsCheckTimer = Timer.every(0.01) {
             let numbersTapped = UserDefaults.standard.integer(forKey: kNumbersKey)
-            print("Tapped : \(numbersTapped)")
             
             if numbersTapped >= k.numbersToUnlock.easy && !self.modeIsUnlocked(kEasyGameMode) {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLevelUnlockedNotificationName), object: nil, userInfo: ["level": kEasyGameMode])

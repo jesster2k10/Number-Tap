@@ -60,6 +60,7 @@ class GameModes: SKScene {
     
     //TODO: Create new leaderboards for the different game modes
     override func didMove(to view: SKView) {
+        UserDefaults.standard.set(true, forKey: "nk")
         scaleMode = .aspectFill
         size = CGSize(width: 640, height: 960)
         

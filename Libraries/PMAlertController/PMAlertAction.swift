@@ -14,7 +14,7 @@ import UIKit
     case cancel
 }
 
-@objc open class PMAlertAction: UIButton {
+open class PMAlertAction: UIButton {
     
     fileprivate var action: (() -> Void)?
     

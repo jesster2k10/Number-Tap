@@ -56,6 +56,8 @@ class HomeScene: InitScene {
         size = CGSize(width: 640, height: 960)
         
         setupScene()
+        
+        UserDefaults.standard.set(true, forKey: "nk")
     }
     
     func setupScene() {

@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
             
+            Timer.initArray()
             NHNetworkClock.shared()
             
             //TODO: Delete this
@@ -154,17 +155,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPausedNotification), object: nil)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
         application.applicationIconBadgeNumber = 0
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUnPausedNotification), object: nil)
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        
         
     }
     
