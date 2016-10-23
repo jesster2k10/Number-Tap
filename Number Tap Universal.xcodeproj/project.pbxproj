@@ -13,6 +13,7 @@
 		52A005821D9725A7000BC100 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A0057F1D9725A6000BC100 /* Slt.framework */; };
 		52A005881D973EF9000BC100 /* VoiceRecognitionHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 52A005861D973EF9000BC100 /* VoiceRecognitionHelper.h */; };
 		52A005891D973EF9000BC100 /* VoiceRecognitionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A005871D973EF9000BC100 /* VoiceRecognitionHelper.m */; };
+		5F04661A1DA9013700A168C5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0466191DA9013700A168C5 /* iAd.framework */; };
 		5F0D7D681D7AEB55007BDA84 /* Appirater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0D7D671D7AEB55007BDA84 /* Appirater.framework */; };
 		5F0D7D7C1D7B42A7007BDA84 /* Number Tap iOS-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7C5CA01D670EAF00EA24EC /* Number Tap iOS-Bridging-Header.h */; };
 		5F0D7D871D7B4311007BDA84 /* ios-ntp.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0D7D7E1D7B4311007BDA84 /* ios-ntp.h */; };
@@ -33,6 +34,7 @@
 		5F44B8C91D6680470022FB81 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F44B8C41D6680470022FB81 /* GameViewController.swift */; };
 		5F48B6DB1D725D4300FE4310 /* AppStoreReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */; };
 		5F48B6DD1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */; };
+		5F5AB0231DB372D00059CC6B /* Share Polaroid.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F5AB0221DB372D00059CC6B /* Share Polaroid.sks */; };
 		5F6EC9C51D685B3B00AF3489 /* SKAction+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */; };
 		5F6EC9C71D685B4C00AF3489 /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */; };
 		5F6EC9C91D685B5E00AF3489 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */; };
@@ -172,6 +174,11 @@
 		5F7C5D561D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */; };
 		5F7C5D571D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */; };
 		5F7C5D581D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */; };
+		5F8FDF991DBCCF6C0020EEFF /* iPhone 5s - Screenshot 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F8FDF981DBCCF6C0020EEFF /* iPhone 5s - Screenshot 1.png */; };
+		5F91C5A91DBBD0CC0005F34E /* Share.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F91C5A81DBBD0CC0005F34E /* Share.sks */; };
+		5FA364531DBACCB10093F2E6 /* Shuffle_Spanish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FA364521DBACCB10093F2E6 /* Shuffle_Spanish.atlas */; };
+		5FA364551DBACCDA0093F2E6 /* Shuffle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FA364541DBACCDA0093F2E6 /* Shuffle.atlas */; };
+		5FA364571DBAD10A0093F2E6 /* RotatableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA364561DBAD10A0093F2E6 /* RotatableImageView.swift */; };
 		5FCBAE7D1D85950500EC5DF0 /* flatbox-text-icon copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAE7C1D85950500EC5DF0 /* flatbox-text-icon copy.png */; };
 		5FCBAE7F1D859C1600EC5DF0 /* DailyRewardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */; };
 		5FCBAED91D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */; };
@@ -179,6 +186,12 @@
 		5FCBAEDB1D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */; };
 		5FDDC4FF1D95CA4B00456DA8 /* GameModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */; };
 		5FDDC5011D95D02400456DA8 /* LocalNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */; };
+		5FF452861DA1B8CC00939B09 /* Endless_Spanish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FF452851DA1B8CC00939B09 /* Endless_Spanish.atlas */; };
+		5FF4528D1DA1B9D200939B09 /* Build-Up_Spanish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FF4528B1DA1B9D200939B09 /* Build-Up_Spanish.atlas */; };
+		5FF4528E1DA1B9D200939B09 /* Shoot_Spanish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FF4528C1DA1B9D200939B09 /* Shoot_Spanish.atlas */; };
+		5FFCC8781DB262380067C714 /* ShuffleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC8771DB262370067C714 /* ShuffleMode.swift */; };
+		5FFCC8791DB262390067C714 /* ShuffleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC8771DB262370067C714 /* ShuffleMode.swift */; };
+		5FFCC87A1DB262390067C714 /* ShuffleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC8771DB262370067C714 /* ShuffleMode.swift */; };
 		9400FDAA1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */; };
 		9400FDAB1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */; };
 		9400FDAC1C1E1E47007FC1E7 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9F1C1E1E47007FC1E7 /* CGPoint+Extensions.swift */; };
@@ -266,15 +279,14 @@
 		52910F651DA038B500781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		52910F691DA039B000781236 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		52910F6B1DA039BE00781236 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		52910F6C1DA039BF00781236 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		52910F6D1DA039C400781236 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		52910F6E1DA039C500781236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		52910F701DA039D000781236 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AcousticModelEnglish.bundle; path = Libraries/AcousticModelEnglish.bundle; sourceTree = "<group>"; };
 		52A0057E1D9725A6000BC100 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEars.framework; path = Libraries/OpenEars.framework; sourceTree = "<group>"; };
 		52A0057F1D9725A6000BC100 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Slt.framework; path = Libraries/Slt.framework; sourceTree = "<group>"; };
 		52A005861D973EF9000BC100 /* VoiceRecognitionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceRecognitionHelper.h; sourceTree = "<group>"; };
 		52A005871D973EF9000BC100 /* VoiceRecognitionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceRecognitionHelper.m; sourceTree = "<group>"; };
+		5F0466191DA9013700A168C5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		5F0D7D671D7AEB55007BDA84 /* Appirater.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appirater.framework; path = "../../Library/Developer/Xcode/DerivedData/Number_Tap_Universal-eymrhjgdqbbftxdulcywvhhuvbse/Build/Products/Debug-iphonesimulator/Appirater/Appirater.framework"; sourceTree = "<group>"; };
 		5F0D7D7E1D7B4311007BDA84 /* ios-ntp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ios-ntp.h"; sourceTree = "<group>"; };
 		5F0D7D7F1D7B4311007BDA84 /* NetAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetAssociation.h; sourceTree = "<group>"; };
@@ -295,6 +307,7 @@
 		5F44B8C51D6680470022FB81 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptValidator.swift; sourceTree = "<group>"; };
 		5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptObtainer.swift; sourceTree = "<group>"; };
+		5F5AB0221DB372D00059CC6B /* Share Polaroid.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "Share Polaroid.sks"; path = "Universal/Share Polaroid.sks"; sourceTree = "<group>"; };
 		5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+Spring.swift"; sourceTree = "<group>"; };
 		5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
 		5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -358,11 +371,20 @@
 		5F7C5D4D1D671CFE00EA24EC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Libraries/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		5F7C5D4E1D671CFE00EA24EC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Libraries/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		5F7C5D4F1D671CFE00EA24EC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Libraries/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		5F8FDF981DBCCF6C0020EEFF /* iPhone 5s - Screenshot 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone 5s - Screenshot 1.png"; sourceTree = "<group>"; };
+		5F91C5A81DBBD0CC0005F34E /* Share.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Share.sks; path = "Number Tap iOS/Share.sks"; sourceTree = "<group>"; };
+		5FA364521DBACCB10093F2E6 /* Shuffle_Spanish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Shuffle_Spanish.atlas; sourceTree = "<group>"; };
+		5FA364541DBACCDA0093F2E6 /* Shuffle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Shuffle.atlas; sourceTree = "<group>"; };
+		5FA364561DBAD10A0093F2E6 /* RotatableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatableImageView.swift; sourceTree = "<group>"; };
 		5FCBAE7C1D85950500EC5DF0 /* flatbox-text-icon copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flatbox-text-icon copy.png"; sourceTree = "<group>"; };
 		5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyRewardHelper.swift; sourceTree = "<group>"; };
 		5FCBAED81D85BC0A00EC5DF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeHelper.swift; sourceTree = "<group>"; };
 		5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationHelper.swift; sourceTree = "<group>"; };
+		5FF452851DA1B8CC00939B09 /* Endless_Spanish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Endless_Spanish.atlas; path = Universal/Endless_Spanish.atlas; sourceTree = "<group>"; };
+		5FF4528B1DA1B9D200939B09 /* Build-Up_Spanish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = "Build-Up_Spanish.atlas"; path = "Universal/Build-Up_Spanish.atlas"; sourceTree = "<group>"; };
+		5FF4528C1DA1B9D200939B09 /* Shoot_Spanish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Shoot_Spanish.atlas; path = Universal/Shoot_Spanish.atlas; sourceTree = "<group>"; };
+		5FFCC8771DB262370067C714 /* ShuffleMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShuffleMode.swift; path = Universal/ShuffleMode.swift; sourceTree = "<group>"; };
 		8D0F76A0556902927134F4F1 /* Pods_Number_Tap_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Number_Tap_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		9400FD9F1C1E1E47007FC1E7 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -396,6 +418,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F04661A1DA9013700A168C5 /* iAd.framework in Frameworks */,
 				5F0D7D681D7AEB55007BDA84 /* Appirater.framework in Frameworks */,
 				5F1D9BB91D8587CA00B905DE /* StoreKit.framework in Frameworks */,
 				5F7C5D561D671CFE00EA24EC /* FBSDKShareKit.framework in Frameworks */,
@@ -503,9 +526,8 @@
 		5F7C5C911D66862B00EA24EC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				5F7C5C9A1D66870F00EA24EC /* Helpers */,
 				5F7C5C921D66867300EA24EC /* Constants.swift */,
-				5F7C5C961D66869700EA24EC /* Extensions.swift */,
+				5F7C5C9A1D66870F00EA24EC /* Helpers */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -513,19 +535,12 @@
 		5F7C5C9A1D66870F00EA24EC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5FF4527F1DA1995300939B09 /* IAP */,
 				52A005851D973EC7000BC100 /* Voice Recognition */,
 				5F7C5C9F1D670E7800EA24EC /* GameCenter */,
-				5F7C5C9B1D66878200EA24EC /* IAPHelper.swift */,
-				5F7C5CCA1D6712B800EA24EC /* FTLogging.swift */,
-				5F7C5CCE1D6712C200EA24EC /* SKScrollView.swift */,
-				5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */,
-				5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */,
-				5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */,
-				5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */,
-				5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */,
-				5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */,
-				5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */,
-				5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */,
+				5FF452801DA1997300939B09 /* Extensions */,
+				5FF452811DA1998900939B09 /* Other */,
+				5FA364561DBAD10A0093F2E6 /* RotatableImageView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -599,8 +614,53 @@
 				5F7C5D1E1D67168400EA24EC /* MemoryMode.swift */,
 				5F7C5D1F1D67168400EA24EC /* MultiplayerMode.swift */,
 				5F7C5D201D67168400EA24EC /* ShootMode.swift */,
+				5FFCC8771DB262370067C714 /* ShuffleMode.swift */,
 			);
 			name = GameModes;
+			sourceTree = "<group>";
+		};
+		5FF4527F1DA1995300939B09 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				5FCBAE7E1D859C1600EC5DF0 /* DailyRewardHelper.swift */,
+				5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */,
+				5F7C5C9B1D66878200EA24EC /* IAPHelper.swift */,
+			);
+			name = IAP;
+			sourceTree = "<group>";
+		};
+		5FF452801DA1997300939B09 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5F7C5CCA1D6712B800EA24EC /* FTLogging.swift */,
+				5F7C5C961D66869700EA24EC /* Extensions.swift */,
+				5F7C5CCE1D6712C200EA24EC /* SKScrollView.swift */,
+				5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */,
+				5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */,
+				5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		5FF452811DA1998900939B09 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */,
+				5FDDC5001D95D02400456DA8 /* LocalNotificationHelper.swift */,
+				5FDDC4FE1D95CA4B00456DA8 /* GameModeHelper.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		5FF452821DA1B87600939B09 /* Localized */ = {
+			isa = PBXGroup;
+			children = (
+				5FA364521DBACCB10093F2E6 /* Shuffle_Spanish.atlas */,
+				5FF4528B1DA1B9D200939B09 /* Build-Up_Spanish.atlas */,
+				5FF4528C1DA1B9D200939B09 /* Shoot_Spanish.atlas */,
+				5FF452851DA1B8CC00939B09 /* Endless_Spanish.atlas */,
+			);
+			name = Localized;
 			sourceTree = "<group>";
 		};
 		61DED2BEFDA62B0B980583ED /* Pods */ = {
@@ -695,6 +755,7 @@
 				5F7C5D491D671B8200EA24EC /* GameModes.swift */,
 				5F6F0B9F1D67B92E008DE673 /* TutorialScene.sks */,
 				5F7C5D211D67168400EA24EC /* TutorialScene.swift */,
+				5F5AB0221DB372D00059CC6B /* Share Polaroid.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -714,6 +775,7 @@
 				5F7C5CFC1D6713E000EA24EC /* Fonts */,
 				943373251C1DC2AD00D222D6 /* Graphics */,
 				943373261C1DC2B500D222D6 /* Sounds */,
+				5F91C5A81DBBD0CC0005F34E /* Share.sks */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -721,7 +783,10 @@
 		943373251C1DC2AD00D222D6 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				5FA364541DBACCDA0093F2E6 /* Shuffle.atlas */,
+				5FF452821DA1B87600939B09 /* Localized */,
 				5FCBAE7C1D85950500EC5DF0 /* flatbox-text-icon copy.png */,
+				5F8FDF981DBCCF6C0020EEFF /* iPhone 5s - Screenshot 1.png */,
 				5F7C5CEC1D6713DC00EA24EC /* Build-Up.atlas */,
 				5F7C5CED1D6713DC00EA24EC /* Endless.atlas */,
 				5F7C5CEE1D6713DC00EA24EC /* Memory.atlas */,
@@ -744,6 +809,7 @@
 		CFE588D2C606B40C2C276AFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F0466191DA9013700A168C5 /* iAd.framework */,
 				52A0057D1D9725A5000BC100 /* AcousticModelEnglish.bundle */,
 				52A0057E1D9725A6000BC100 /* OpenEars.framework */,
 				52A0057F1D9725A6000BC100 /* Slt.framework */,
@@ -918,22 +984,30 @@
 				5F7C5C8D1D66830300EA24EC /* LaunchScreen.storyboard in Resources */,
 				5F6EC9CF1D68792400AF3489 /* Montserrat-UltraLight.otf in Resources */,
 				5F7C5D131D67142C00EA24EC /* blop01.wav in Resources */,
+				5FA364551DBACCDA0093F2E6 /* Shuffle.atlas in Resources */,
 				5F6EC9CC1D68792400AF3489 /* Montserrat-Light.otf in Resources */,
+				5FF4528E1DA1B9D200939B09 /* Shoot_Spanish.atlas in Resources */,
 				5F7C5D161D67142C00EA24EC /* blop02.wav in Resources */,
 				52A005801D9725A7000BC100 /* AcousticModelEnglish.bundle in Resources */,
 				5F6F0BA01D67B92E008DE673 /* TutorialScene.sks in Resources */,
 				5F7C5C8C1D66830300EA24EC /* Assets.xcassets in Resources */,
 				5F7C5CE91D67139600EA24EC /* PMAlertController.xib in Resources */,
 				52910F681DA039B000781236 /* Localizable.strings in Resources */,
+				5FF4528D1DA1B9D200939B09 /* Build-Up_Spanish.atlas in Resources */,
 				5F7C5D0A1D67140D00EA24EC /* Montserrat-SemiBold.otf in Resources */,
 				5F7C5D011D67140D00EA24EC /* Montserrat-Bold.otf in Resources */,
+				5F5AB0231DB372D00059CC6B /* Share Polaroid.sks in Resources */,
 				5F7C5D101D67142C00EA24EC /* blipBlop.wav in Resources */,
 				943CF7651C1E46C000340CFD /* Game.xcassets in Resources */,
+				5F8FDF991DBCCF6C0020EEFF /* iPhone 5s - Screenshot 1.png in Resources */,
+				5FA364531DBACCB10093F2E6 /* Shuffle_Spanish.atlas in Resources */,
 				5F7C5CF31D6713DC00EA24EC /* Endless.atlas in Resources */,
 				5F7C5CF01D6713DC00EA24EC /* Build-Up.atlas in Resources */,
 				5F7C5CF91D6713DC00EA24EC /* Shoot.atlas in Resources */,
 				5FCBAED91D85BC0A00EC5DF0 /* GoogleService-Info.plist in Resources */,
+				5FF452861DA1B8CC00939B09 /* Endless_Spanish.atlas in Resources */,
 				5F7C5D071D67140D00EA24EC /* Montserrat-Regular.otf in Resources */,
+				5F91C5A91DBBD0CC0005F34E /* Share.sks in Resources */,
 				5FCBAE7D1D85950500EC5DF0 /* flatbox-text-icon copy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1160,6 +1234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F7C5D3F1D67193C00EA24EC /* MultiplayerNetworking.m in Sources */,
+				5FA364571DBAD10A0093F2E6 /* RotatableImageView.swift in Sources */,
 				5F7C5D3B1D6718F900EA24EC /* AnimatedScoreLabel.m in Sources */,
 				5F7C5D3C1D6718F900EA24EC /* GameKitHelper.m in Sources */,
 				9400FDAC1C1E1E47007FC1E7 /* CGPoint+Extensions.swift in Sources */,
@@ -1176,6 +1251,7 @@
 				5F6EC9C71D685B4C00AF3489 /* NSTimerEx.swift in Sources */,
 				5F7C5CB71D67126400EA24EC /* NumberBox.swift in Sources */,
 				5F7C5CCB1D6712B800EA24EC /* FTLogging.swift in Sources */,
+				5FFCC8781DB262380067C714 /* ShuffleMode.swift in Sources */,
 				5F7C5D341D67168400EA24EC /* ShootMode.swift in Sources */,
 				5F7C5D371D67168400EA24EC /* TutorialScene.swift in Sources */,
 				943CF7671C1E470200340CFD /* InitScene.swift in Sources */,
@@ -1232,6 +1308,7 @@
 				943CF7681C1E471500340CFD /* InitScene.swift in Sources */,
 				5F7C5CC01D67128E00EA24EC /* ProgressNode.swift in Sources */,
 				5F7C5CC81D6712A600EA24EC /* CountdownNode.swift in Sources */,
+				5FFCC8791DB262390067C714 /* ShuffleMode.swift in Sources */,
 				5F7C5CB81D67126400EA24EC /* NumberBox.swift in Sources */,
 				5F7C5CCC1D6712B800EA24EC /* FTLogging.swift in Sources */,
 				5F7C5D471D671B3700EA24EC /* GameScene.swift in Sources */,
@@ -1278,6 +1355,7 @@
 				5F7C5D4C1D671B8200EA24EC /* GameModes.swift in Sources */,
 				5F7C5C951D66867300EA24EC /* Constants.swift in Sources */,
 				5F7C5CBD1D67127000EA24EC /* Ribbon.swift in Sources */,
+				5FFCC87A1DB262390067C714 /* ShuffleMode.swift in Sources */,
 				94D409611C1E3DD70043171E /* SKTTimingFunctions.swift in Sources */,
 				94D409601C1E3DD70043171E /* SKTEffects.swift in Sources */,
 				5F7C5D331D67168400EA24EC /* MultiplayerMode.swift in Sources */,
@@ -1322,10 +1400,8 @@
 			children = (
 				52910F691DA039B000781236 /* Base */,
 				52910F6B1DA039BE00781236 /* en */,
-				52910F6C1DA039BF00781236 /* de */,
 				52910F6D1DA039C400781236 /* fr */,
 				52910F6E1DA039C500781236 /* es */,
-				52910F701DA039D000781236 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1429,6 +1505,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1469,6 +1547,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1520,7 +1600,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macbookpro/Desktop/Number Tap Universal (Swift 3)/Utilities/Number Tap iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jeffe/Documents/Number Tap Universal (Swift 3)/Utilities/Number Tap iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1568,7 +1648,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macbookpro/Desktop/Number Tap Universal (Swift 3)/Utilities/Number Tap iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jeffe/Documents/Number Tap Universal (Swift 3)/Utilities/Number Tap iOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

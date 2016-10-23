@@ -15,6 +15,7 @@ public enum NotificationType {
     case dailyRewardAlmostGone
     case wheelOfFortune
     case gameModeUnlocked
+    case gameModeGoingToUnlock
 }
 
 class LocalNotificationHelper : NSObject {
@@ -22,6 +23,12 @@ class LocalNotificationHelper : NSObject {
         let instance = LocalNotificationHelper()
         return instance
     }()
+    
+    let comeBackArray = ["Come back! It's been a while, there's still numbers to tap",
+                          "HEY! Where are you off to so fast? We need you back!",
+                          "Ok, I'm getting sad now. How could you just leave me like this! Come back",
+                          "You need some excersice! How about tapping?",
+                          "You made a baby cry by leaving me. Come back and you'll give it candy!"]
     
     func scheduleNotificationWith(message: String, intervalInSeconds: TimeInterval, badgeNumber: Int) {
         // 1 Create empty notification
@@ -57,11 +64,12 @@ class LocalNotificationHelper : NSObject {
         UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
-    func notificationMessage(_ type: NotificationType, gameMode: String? = nil) -> String? {
+    func notificationMessage(_ type: NotificationType, gameMode: String? = nil, numbersLeftToUnlock: Int = 0) -> String? {
         switch type {
             
         case .comeBack:
-            return "Come back! It's been a while, there's still numbers to tap"
+            let randomIndex = Int(arc4random_uniform(UInt32(comeBackArray.count)))
+            return comeBackArray[randomIndex]
         case .waited:
             return "Your time has been set back and it's time to play"
         case .dailyReward:
@@ -71,15 +79,17 @@ class LocalNotificationHelper : NSObject {
         case .wheelOfFortune:
             return "You received a free spin on the wheel of fortune!"
         case .gameModeUnlocked:
-            return "Don't forget to check out the \(gameMode!) game mode!"
+            return "Don't forget to check out the recently unlocked \(gameMode!) game mode!"
+        case .gameModeGoingToUnlock:
+            return "There's only another \(numbersLeftToUnlock) tapps till you have unlocked \(gameMode) game mode!"
         }
     }
     
     func notificationReceivedWhileInApp(notification: UILocalNotification) {
         if notification.alertBody == notificationMessage(.gameModeUnlocked, gameMode: kEasyGameMode) {
             GameModeHelper.sharedHelper.showUnlockedNotification(level: kEasyGameMode, count: 1)
-        } else if notification.alertBody == notificationMessage(.gameModeUnlocked, gameMode: kMediumGameMode) {
-            GameModeHelper.sharedHelper.showUnlockedNotification(level: kMediumGameMode, count: 1)
+        } else if notification.alertBody == notificationMessage(.gameModeUnlocked, gameMode: kShuffleGameMode) {
+            GameModeHelper.sharedHelper.showUnlockedNotification(level: kShuffleGameMode, count: 1)
         } else if notification.alertBody == notificationMessage(.gameModeUnlocked, gameMode: kImpossibleGameMode) {
             GameModeHelper.sharedHelper.showUnlockedNotification(level: kImpossibleGameMode, count: 1)
         } else if notification.alertBody == notificationMessage(.gameModeUnlocked, gameMode: kShootGameMode) {

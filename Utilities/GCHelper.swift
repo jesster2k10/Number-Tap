@@ -46,13 +46,13 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
     }
     
     func wasNotAuthenticated() {
-        UserDefaults.standard.set(self.gameCenterEnabled, forKey: "gcEnabled")
-        FTLogging().FTLog("Local player could not be authenticated, disabling game center")
+        UserDefaults.standard.set(false, forKey: "gcEnabled")
+        print("Local player could not be authenticated, disabling game center")
     }
     
     func wasAuthenticated() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.Authenticated), object: nil)
-        UserDefaults.standard.set(self.gameCenterEnabled, forKey: "gcEnabled")
+        UserDefaults.standard.set(true, forKey: "gcEnabled")
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkIfAchivement), userInfo: nil, repeats: true)
         print("Authenticated!")
         
@@ -98,7 +98,7 @@ let PresentAuthenticationViewController = "PresentAuthenticationViewController"
                 
             })
         } else {
-            let alert = UIAlertController(title: "Game Center Unavaliable", message: "Game Center is diabled", preferredStyle: .alert) // 1
+            let alert = UIAlertController(title: "game-center-unavaliable".localized, message: "game-center-disabled".localized, preferredStyle: .alert) // 1
             let firstAction = UIAlertAction(title: "Ok", style: .default) { (alert: UIAlertAction!) -> Void in
                 
                 NSLog("You pressed button one")

@@ -7,16 +7,22 @@
 */
 
 /* ASSETS */
-"banner"        = "banner";
-"play"          = "play";
-"beginGame"     = "beginGame";
-"free"          = "free";
-"gameCenter"    = "gameCenter";
-"no"            = "no";
-"removeAds"     = "removeAds";
-"removeAdsLong" = "removeAdsLong";
-"score"         = "score";
-"share"         = "share";
+"banner"        = "banner_french";
+"play"          = "play_french";
+"beginGame"     = "beginGame_french";
+"free"          = "free_french";
+"gameCenter"    = "gameCenter_french";
+"no-img"        = "no_french";
+"removeAds"     = "removeAds_french";
+"removeAdsLong" = "removeAdsLong_french";
+"score"         = "score_french";
+"share"         = "share_french";
+
+"Shoot-Atlas" = "Shoot";
+"Endless-Atlas" = "Endless";
+"Build-Up-Atlas" = "Build-Up";
+"Memory-Atlas" = "Memory";
+"Shuffle-Atlas" = "Shuffle_French";
 
 /* TEXT */
 "settings"      = "préférences";
@@ -27,17 +33,76 @@
 "gameplay"      = "Le Jeu";
 "restore"       = "Récupérer";
 "purchases"     = "Des Achats";
+"game-modes"    = "mode de jeu";
+"go-countdown"  = "ALLER!";
 
 "no-wifi-alert-title" = "No Wifi";
 "no-wifi-alert-message" = "Unable to purchase product. Please connect to the internet";
 "no-wifi-alert-action" = "Cancel";
 "restore-loading-view-title" = "Restore Purchases";
 
-"game-over" = "game over";
-"continue" = "continue?";
+"game-over" = "fin de jeu";
+"continue" = "continuer?";
 
-"tap-number" = "TAP NUMBER:";
-"numbers-tapped" = "NUMBERS TAPPED";
+"tap-number" = "APPUYEZ SUR LE NUMÉRO:";
+"numbers-tapped" = "NUMÉROS TARAUDÉ";
+
+// Game Modes
+"MULTIPLAYER" = "MULTIPLAYER";
+"LOCKED" = "LOCKED";
+"EASY" = "EASY";
+"IMPOSSIBLE" = "IMPOSSIBLE";
+
+"watch-a-video" = "Watch a video";
+"get-taps" = "Want to get 8 taps by watching a short video?";
+
+"locked-game-mode" = "Locked Game Mode";
+"unlock-all-modes" = "Unlock all modes";
+
+"all-modes-unlocked" = "All Modes Unlocked!";
+"all-modes-unlocked-message" = "Thanks for purchasing! All the levels have been unlocked";
+
+"yes" = "Yes";
+"no" = "No";
+"ok" = "ok";
+
+"numbers" = "numbers";
+"left-to-tap" = "left to tap";
+"best" = "best";
+"score" = "score";
+
+// Tutorial Scene
+"back" = "BACK";
+"skip" = "SKIP";
+"welcome" = "Welcome to Number Tap!";
+
+"intro-p1-l1" = "Hey, this is Number Tap";
+"intro-p1-l2" = "It's pretty straight forward";
+"intro-p1-l3" = "Tap the number shown on the screen.";
+
+"welcome-p2"  = "Let's add the clock";
+"intro-p2-l1" = "You seem to get the hang of it now.";
+"intro-p2-l2" = "It's about time we introduce the clock";
+"intro-p2-l3" = "You've got 10 seconds on the clock. Beat it!";
+
+"tap-to-continue" = "Tap To Continue";
+"try-again" = "Try Again :(";
+"Awesome" = "Awesome";
+"Great!" = "Great!";
+"lets-go" = "Let's Go!";
+
+"welcome-p3" = "Are you ready?";
+"intro-p3-l1" = "That's about the basics of the game";
+"intro-p3-l2" = "It's time for us to advance.";
+"intro-p3-l3" = "But first there's some permissions I need.";
+
+// PERMISSIONS
+
+"contancts-pscope" = "We use this to find\r\nfriends and their high scores";
+"notifications-pscope" = "We use this to send you\r\nupdates and rewards";
+"photos-pscope" = "We use this to save\r\nphotos and gameplay";
+"microphone-pscope" = "We use this to detect\r\nwhen you say pause and for gameplay";
 
 // SHARE
+"polaroid-share" = "polaroid-share_french";
 "share-text" = "I just tapped %@ tiles in a FREE game called 'Number Tap' that's made by a 13-YEAR-OLD! Tap the numbers, beat the clock! Download Today!";

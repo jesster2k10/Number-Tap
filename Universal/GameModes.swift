@@ -32,7 +32,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 let kVideoEnabled = "enabled"
 
-class GameModes: SKScene {
+class GameModes: SKScene, FYBVirtualCurrencyClientDelegate {
     weak var scrollView: SKScrollView!
     let moveableNode              = SKSpriteNode()
     let background                = SKSpriteNode(imageNamed: "background")
@@ -49,7 +49,7 @@ class GameModes: SKScene {
     let multiplayerRibbon         = Ribbon(ribbonType: .multiplayer, bodyColour: .DarkBlue, dotsColour: .DarkBlue, text: "")
     let buildUpRibbon             = Ribbon(ribbonType: .build, bodyColour: .Green, dotsColour: .Green, text: "")
     let easyRibbon                = Ribbon(ribbonType: .easy, bodyColour: .LightBlue, dotsColour: .LightBlue, text: "EASY")
-    let mediumRibbon              = Ribbon(ribbonType: .medium, bodyColour: .Orange, dotsColour: .Orange, text: "MEDIUM")
+    let shuffleRibbon             = Ribbon(ribbonType: .shuffle, bodyColour: .Orange, dotsColour: .Orange, text: "")
     let impossibleRibbon          = Ribbon(ribbonType: .hard, bodyColour: .LightRed, dotsColour: .LightRed, text: "HARD")
     
     var ribbons                   = [Ribbon]()
@@ -81,7 +81,7 @@ class GameModes: SKScene {
             scrollView = SKScrollView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height - 250), moveableNode: moveableNode, scrollDirection: .vertical, scene: self)
         }
         
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: scrollView.frame.size.height * 1.5) // makes it 3 times the height
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: scrollView.frame.size.height * 1.85) // makes it 3 times the height
         view.addSubview(scrollView)
         addChild(moveableNode)
         
@@ -136,7 +136,7 @@ class GameModes: SKScene {
         moveableNode.addChild(numbersTapped)
         
         numbers.position = CGPoint(x: numbersTapped.position.x + 125, y: numbersTapped.position.y + 1)
-        numbers.text = "\(UserDefaults.standard.integer(forKey: kNumbersKey))"
+        numbers.text = "\(UserDefaults.standard.highScore)"
         numbers.fontColor = numbersTapped.fontColor
         numbers.fontSize = numbersTapped.fontSize - 4
         numbers.horizontalAlignmentMode = .center
@@ -174,7 +174,12 @@ class GameModes: SKScene {
         shootRibbon.setSuperScene(self)
         moveableNode.addChild(shootRibbon)
         
-        memoryRibbon.position = CGPoint(x: shootRibbon.position.x, y: shootRibbon.position.y - 150)
+        shuffleRibbon.position = CGPoint(x: shootRibbon.position.x, y: shootRibbon.position.y - 150)
+        shuffleRibbon.setScale(1.5)
+        shuffleRibbon.setSuperScene(self)
+        moveableNode.addChild(shuffleRibbon)
+        
+        memoryRibbon.position = CGPoint(x: shuffleRibbon.position.x, y: shuffleRibbon.position.y - 150)
         memoryRibbon.setScale(1.5)
         memoryRibbon.setSuperScene(self)
         moveableNode.addChild(memoryRibbon)
@@ -191,47 +196,15 @@ class GameModes: SKScene {
         
         ribbons.append(endlessRibbon)
         ribbons.append(easyRibbon)
-        ribbons.append(mediumRibbon)
+        ribbons.append(shuffleRibbon)
         ribbons.append(impossibleRibbon)
         ribbons.append(shootRibbon)
         ribbons.append(memoryRibbon)
         ribbons.append(multiplayerRibbon)
         ribbons.append(buildUpRibbon)
         
+        updatePoints()
         setupModes()
-        
-        if UserDefaults.keyAlreadyExists(kNumbersKey) {
-            let tapped = UserDefaults.standard.integer(forKey: kNumbersKey)
-            let checkArray = [k.numbersToUnlock.buildUp, k.numbersToUnlock.easy, k.numbersToUnlock.medium, k.numbersToUnlock.hard, k.numbersToUnlock.shoot, k.numbersToUnlock.memory, k.numbersToUnlock.multiplayer, k.numbersToUnlock.endless, k.numbersToUnlock.shoot]
-            
-            for number in checkArray {
-                if tapped == number {
-                    switch number {
-                    case k.numbersToUnlock.buildUp:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.buildUp)
-                    case k.numbersToUnlock.easy:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.easy)
-                    case k.numbersToUnlock.medium:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.medium)
-                    case k.numbersToUnlock.hard:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.hard)
-                    case k.numbersToUnlock.shoot:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.shoot)
-                    case k.numbersToUnlock.memory:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.memory)
-                    case k.numbersToUnlock.endless:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.endless)
-                    case k.numbersToUnlock.multiplayer:
-                        UserDefaults.standard.set(true, forKey: k.isUnlocked.multiplayer)
-                    default:
-                        break;
-                    }
-                    
-                    print("New level is unlocked")
-                    setupModes()
-                }
-            }
-        }
         
         if !UserDefaults.keyAlreadyExists(kVideoEnabled) {
             UserDefaults.standard.set(true, forKey: kVideoEnabled)
@@ -239,11 +212,42 @@ class GameModes: SKScene {
         
     }
     
+    func updatePoints() {
+        let tapped = UserDefaults.standard.highScore
+        let checkArray = [k.numbersToUnlock.buildUp, k.numbersToUnlock.easy, k.numbersToUnlock.shuffle, k.numbersToUnlock.hard, k.numbersToUnlock.shoot, k.numbersToUnlock.memory, k.numbersToUnlock.multiplayer, k.numbersToUnlock.endless, k.numbersToUnlock.shoot]
+        
+        for number in checkArray {
+            if tapped == number {
+                switch number {
+                case k.numbersToUnlock.buildUp:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.buildUp)
+                case k.numbersToUnlock.easy:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.easy)
+                case k.numbersToUnlock.shuffle:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.shuffle)
+                case k.numbersToUnlock.hard:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.hard)
+                case k.numbersToUnlock.shoot:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.shoot)
+                case k.numbersToUnlock.memory:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.memory)
+                case k.numbersToUnlock.multiplayer:
+                    UserDefaults.standard.set(true, forKey: k.isUnlocked.multiplayer)
+                default:
+                    break;
+                }
+                
+                print("New level is unlocked")
+                setupModes()
+            }
+        }
+    }
+    
     func setupModes() {
         var tapped = 0
         
-        if UserDefaults.keyAlreadyExists(kNumbersKey) {
-            tapped = UserDefaults.standard.integer(forKey: kNumbersKey)
+        if UserDefaults.standard.highScore > 0 {
+            tapped = UserDefaults.standard.highScore
         } else {
             tapped = 0
         }
@@ -264,16 +268,23 @@ class GameModes: SKScene {
         
         if modeIsUnlocked(k.isUnlocked.easy) {
             setupText(easyRibbon, unlocked: true, numbersNeededToUnlock: nil, currentTapped: nil, bestScore: UserDefaults.standard.highScore)
-            easyRibbon.unlocked(GameMode.easy, text: "EASY")
+            easyRibbon.unlocked(GameMode.easy, text: "EASY".localized)
         } else {
             setupText(easyRibbon, unlocked: false, numbersNeededToUnlock: k.numbersToUnlock.easy, currentTapped: tapped, bestScore: nil)
         }
         
         if modeIsUnlocked(k.isUnlocked.hard) {
             setupText(impossibleRibbon, unlocked: true, numbersNeededToUnlock: nil, currentTapped: nil, bestScore: UserDefaults.standard.highScore)
-            impossibleRibbon.unlocked(GameMode.hard, text: "IMPOSSIBLE")
+            impossibleRibbon.unlocked(GameMode.hard, text: "IMPOSSIBLE".localized)
         } else {
             setupText(impossibleRibbon, unlocked: false, numbersNeededToUnlock: k.numbersToUnlock.hard, currentTapped: tapped, bestScore: nil)
+        }
+        
+        if modeIsUnlocked(k.isUnlocked.shuffle) {
+            setupText(shuffleRibbon, unlocked: true, numbersNeededToUnlock: nil, currentTapped: nil, bestScore: UserDefaults.standard.highScore)
+            shuffleRibbon.unlocked(GameMode.hard, text: "SHUFFLE".localized)
+        } else {
+            setupText(shuffleRibbon, unlocked: false, numbersNeededToUnlock: k.numbersToUnlock.shuffle, currentTapped: tapped, bestScore: nil)
         }
         
         if modeIsUnlocked(k.isUnlocked.shoot) {
@@ -306,18 +317,19 @@ class GameModes: SKScene {
     }
     
     func modeIsUnlocked(_ mode: String) -> Bool {
-        if !UserDefaults.keyAlreadyExists(mode) {
+        if let mode = UserDefaults.standard.value(forKey: mode) as? Bool {
+            if mode == true {
+                return true
+            } else {
+                return false
+            }
+        } else {
             return false
         }
-        
-        return true
     }
     
     //TODO: Make sure nodes are being added to the locked array
     func setupText(_ ribbon: Ribbon, unlocked: Bool = false, numbersNeededToUnlock: Int?, currentTapped: Int?, bestScore: Int? = 0) {
-        if numbersNeededToUnlock != nil && currentTapped != nil {
-            ribbon.setNumbersLeft(numbersNeededToUnlock! - currentTapped!)
-        }
         let topLabel = SKLabelNode(fontNamed: k.Montserrat.SemiBold)
         let bottomLabelOne = SKLabelNode(fontNamed: k.Montserrat.Light)
         let bottomLabelTwo = SKLabelNode(fontNamed: k.Montserrat.Light)
@@ -356,8 +368,8 @@ class GameModes: SKScene {
             } else {
                 topLabel.text = "0"
             }
-            bottomLabelOne.text = "best"
-            bottomLabelTwo.text = "score"
+            bottomLabelOne.text = "best".localized
+            bottomLabelTwo.text = "score".localized
             
         } else {
             lockedModes.append(ribbon)
@@ -365,21 +377,29 @@ class GameModes: SKScene {
             ribbon.locked()
             
             let numbersLeft = numbersNeededToUnlock! - currentTapped!
-            topLabel.text = String(numbersLeft)
-            bottomLabelOne.text = "numbers"
-            bottomLabelTwo.text = "left to tap"
-            
+            if numbersLeft > 0 || numbersLeft != 0 {
+                ribbon.setNumbersLeft(numbersLeft)
+                topLabel.text = String(numbersLeft)
+                bottomLabelOne.text = "numbers".localized
+                bottomLabelTwo.text = "left-to-tap".localized
+            } else if numbersLeft < 0 || numbersLeft == 0 {
+                updatePoints()
+            }
         }
     }
     
     func showVideoAlert() {
-        let alert = PMAlertController(title: "Watch a video", description: "Want to get 50 taps by watching a short video?", image: nil, style: .alert)
-        alert.addAction(PMAlertAction(title: "Yes!", style: .default, action: {
+        let alert = PMAlertController(title: "watch-a-video".localized, description: "get-taps".localized, image: nil, style: .alert)
+        alert.addAction(PMAlertAction(title: "yes".localized, style: .default, action: {
             //TODO: Show rewarded video
             //TODO: Don't Allow them do it again for the day
             if Supersonic.sharedInstance().isAdAvailable() {
                 print("Showing thingh")
                 Supersonic.sharedInstance().showRV(withPlacementName: "Game_Modes")
+                let rewardedVC = FyberSDK.rewardedVideoController()
+                rewardedVC?.delegate = AppDelegate()
+                rewardedVC?.virtualCurrencyClientDelegate = self
+                rewardedVC?.requestVideo()
                 
                 let date = NSDate()
                 let networkDate = NSDate.network()
@@ -392,7 +412,7 @@ class GameModes: SKScene {
             }
         }))
         
-        alert.addAction(PMAlertAction(title: "No", style: .cancel, action: {
+        alert.addAction(PMAlertAction(title: "no".localized, style: .cancel, action: {
             print("cancel")
             //TODO: Allow them do it again for the day
         }))
@@ -423,22 +443,18 @@ class GameModes: SKScene {
             
             for mode in lockedModes {
                 if node == mode {
-                    let alert = PMAlertController(title: "Locked Game Mode", description: "This mode is locked! You have to tap another \(mode.numbersLeftToUnlock!) numbers to unlock this mode. You must keep on tapping!", image: nil, style: .walkthrough)
-                    alert.addAction(PMAlertAction(title: "Unlock all modes", style: .default, action: {
+                    let alert = PMAlertController(title: "locked-game-mode".localized, description: "This mode is locked! You have to tap another \(mode.numbersLeftToUnlock!) numbers to unlock this mode. You must keep on tapping!", image: nil, style: .walkthrough)
+                    alert.addAction(PMAlertAction(title: "unlock-all-modes".localized, style: .default, action: {
                         self.purchaseProduct(1)
                     }))
                     
-                    alert.addAction(PMAlertAction(title: "Unlock this mode", style: .default, action: {
-                        //TODO: Set up IAP to unlock all of the levels.
-                    }))
-                    
                     if (UserDefaults.standard.bool(forKey: kVideoEnabled) != nil) {
-                        alert.addAction(PMAlertAction(title: "Watch a video", style: .default, action: {
+                        alert.addAction(PMAlertAction(title: "watch-a-video".localized, style: .default, action: {
                             self.showVideoAlert()
                         }))
                     }
                     
-                    alert.addAction(PMAlertAction(title: "Ok", style: .cancel))
+                    alert.addAction(PMAlertAction(title: "Ok".localized, style: .cancel))
                     let vc = self.view?.window?.rootViewController!
                     vc?.present(alert, animated: true, completion: nil)
                 }
@@ -480,6 +496,12 @@ class GameModes: SKScene {
                 self.view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
             }
             
+            if node == shuffleRibbon && lockedModes.contains(shuffleRibbon) == false {
+                scrollView.removeFromSuperview()
+                let scene = ShuffleMode(size: size)
+                self.view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1))
+            }
+            
             if node == easyRibbon && lockedModes.contains(easyRibbon) == false {
                 scrollView.removeFromSuperview()
                 let scene = GameScene()
@@ -497,8 +519,8 @@ class GameModes: SKScene {
     }
     
     func showUnlockedAlert() {
-        let alert = PMAlertController(title: "All Modes Unlocked!", description: "Thanks for purchasing! All the levels have been unlocked", image: nil, style: PMAlertControllerStyle.alertWithBlur)
-        alert.addAction(PMAlertAction(title: "Great!", style: .default, action: {
+        let alert = PMAlertController(title: "all-modes-unlocked".localized, description: "all-modes-unlocked-message".localized, image: nil, style: PMAlertControllerStyle.alertWithBlur)
+        alert.addAction(PMAlertAction(title: "Ok".localized, style: .default, action: {
             
         }))
     }
@@ -525,7 +547,7 @@ class GameModes: SKScene {
         let productIdentifier = notification.object as! String
         for (_, product) in products.enumerated() {
             if product.productIdentifier == productIdentifier {
-                FTLogging().FTLog("product purchased with id \(productIdentifier) & \(product.productIdentifier)")
+                print("product purchased with id \(productIdentifier) & \(product.productIdentifier)")
                 
                 if productIdentifier == Products.UnlockAllLevel {
                     unlockAllLevels()
@@ -543,22 +565,24 @@ class GameModes: SKScene {
         defaults.set(true, forKey: k.isUnlocked.memory)
         defaults.set(true, forKey: k.isUnlocked.multiplayer)
         defaults.set(true, forKey: k.isUnlocked.easy)
-        defaults.set(true, forKey: k.isUnlocked.medium)
+        defaults.set(true, forKey: k.isUnlocked.shuffle)
         defaults.set(true, forKey: k.isUnlocked.hard)
         defaults.set(true, forKey: k.isUnlocked.shoot)
         defaults.set(true, forKey: k.isUnlocked.buildUp)
         
+        updatePoints()
         setupModes()
         showUnlockedAlert()
     }
     
     func rewardUser(_ aNotification: Notification) {
         if let rewardAmount = (aNotification as NSNotification).userInfo?["rewardAmount"] as? Int{
-            let currentTapped = UserDefaults.standard.integer(forKey: kNumbersKey)
+            let currentTapped = UserDefaults.standard.highScore
             let numbersTapped = rewardAmount + currentTapped
-            UserDefaults.standard.set(numbersTapped, forKey: kNumbersKey)
+            UserDefaults.standard.highScore = numbersTapped
             
-            numbers.text = "\(currentTapped)"
+            numbers.text = "\(UserDefaults.standard.highScore)"
+            updatePoints()
         }
     }
     
@@ -570,6 +594,22 @@ class GameModes: SKScene {
         }
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "hideBanner"), object: nil)
+    }
+    
+    // MARK
+    func virtualCurrencyClient(_ client: FYBVirtualCurrencyClient!, didFailWithError error: Error!) {
+        NSLog("VCS error received %@", error.localizedDescription)
+    }
+    
+    func virtualCurrencyClient(_ client: FYBVirtualCurrencyClient!, didReceive response: FYBVirtualCurrencyResponse!) {
+        NSLog("Received %.2f %@", response.deltaOfCoins, response.currencyName)
+        
+        let currentTapped = UserDefaults.standard.highScore
+        let numbersTapped = response.deltaOfCoins + CGFloat(currentTapped)
+        UserDefaults.standard.highScore = Int(numbersTapped)
+        
+        numbers.text = "\(UserDefaults.standard.highScore)"
+        updatePoints()
     }
 }
 

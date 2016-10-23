@@ -10,6 +10,53 @@ import SpriteKit
 import UIKit
 import SystemConfiguration
 import ObjectiveC
+
+extension SKScene {
+    private func getBluredScreenshot() -> SKSpriteNode{
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: self.view!.frame.size.width, height: self.view!.frame.size.height), true, 1)
+        
+        self.view!.drawHierarchy(in: self.view!.frame, afterScreenUpdates: true)
+        
+        let context = UIGraphicsGetCurrentContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        let ciContext = CIContext(options: nil)
+        let coreImage = CIImage(image: image!)
+        let filter = CIFilter(name: "CIGaussianBlur")
+        filter?.setValue(coreImage, forKey: kCIInputImageKey)
+        filter?.setValue(3, forKey: kCIInputRadiusKey)
+        
+        let filteredImageData = filter?.value(forKey: kCIOutputImageKey) as! CIImage
+        let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
+        let filteredImage = UIImage(cgImage: filteredImageRef!)
+        
+        let texture = SKTexture(image: filteredImage)
+        let sprite = SKSpriteNode(texture:texture)
+        
+        sprite.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        
+        let scale:CGFloat = UIScreen.main.scale
+        
+        sprite.size.width  *= scale
+        sprite.size.height *= scale
+        
+        return sprite
+        
+    }
+    
+    func blur(animationDuration: Int) {
+        let pauseBG:SKSpriteNode = self.getBluredScreenshot()
+        
+        pauseBG.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        pauseBG.alpha = 0
+        pauseBG.zPosition = self.zPosition + 1
+        pauseBG.run(SKAction.fadeAlpha(to: 1, duration: TimeInterval(animationDuration)))
+        
+        self.addChild(pauseBG)
+    }
+}
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -305,6 +352,10 @@ extension UserDefaults {
     }
 }
 
-
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+    }
+}
 
 

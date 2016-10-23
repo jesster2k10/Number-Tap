@@ -19,5 +19,7 @@
 
 #import "VoiceRecognitionHelper.h"
 
+#import "FyberSDK.h"
+
 
 //#import "ios-ntp.h"

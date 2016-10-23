@@ -418,6 +418,7 @@ class Shoot : BaseScene, SKPhysicsContactDelegate {
         
         updateScore(numbersShot)
         
+        showShare(image: snapshot)
         setShareDetails("I just shot \(numbersShot) numbers playing shoot mode in a FREE game called Number Tap!  Download today! #numbertapgame", image: snapshot, url: URL(string: "http://apple.co/2bvrooQ")!)
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "hideBanner"), object: nil)

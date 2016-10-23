@@ -80,9 +80,15 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "FyberSDK/Fyber_iOS_SDK_v.8.5.3/fyber-sdk-lib/Resources/FYBBackIcon@2x.png"
+  install_resource "FyberSDK/Fyber_iOS_SDK_v.8.5.3/fyber-sdk-lib/Resources/FYBBackIconiPad@2x.png"
+  install_resource "FyberSDK/Fyber_iOS_SDK_v.8.5.3/fyber-sdk-lib/Resources/FYBBackIconiPhone@2x.png"
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/SupersonicSDK/CloseAdButtons.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "FyberSDK/Fyber_iOS_SDK_v.8.5.3/fyber-sdk-lib/Resources/FYBBackIcon@2x.png"
+  install_resource "FyberSDK/Fyber_iOS_SDK_v.8.5.3/fyber-sdk-lib/Resources/FYBBackIconiPad@2x.png"
+  install_resource "FyberSDK/Fyber_iOS_SDK_v.8.5.3/fyber-sdk-lib/Resources/FYBBackIconiPhone@2x.png"
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/SupersonicSDK/CloseAdButtons.bundle"
 fi
 

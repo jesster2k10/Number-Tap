@@ -38,9 +38,9 @@ class CountdownNode: SKSpriteNode {
     func counterUpdate () {
         FTLogging().FTLog("update by -1")
         
-        if counter != 0 {
+        if counter > 1 {
             counter -= 1
-            if counter != 0 {counterText.text = "\(counter)"}
+            counterText.text = "\(counter)"
         } else {
             counterText.text = NSLocalizedString("go-countdown", comment: "go")
             counterTimer.invalidate()

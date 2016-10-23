@@ -17,6 +17,7 @@ class Follow: BaseScene {
     var touchedBoxesArray = [NumberBox]()
     
     override func didMove(to view: SKView) {
+        setUpListners()
         randomWord()
         start(kGameMode.kFollow, cam: nil)
         

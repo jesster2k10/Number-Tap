@@ -235,8 +235,9 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     @objc func matchStarted() {
         randomWord()
         networkingEngine.send(array)
+        networkingEngine.sendNewNumber(Int32(number))
         
-        start(kGameMode.kMultiplayer, cam: nil)
+        //start(kGameMode.kMultiplayer, cam: nil)
     }
     
     @objc func gameBegan() {
@@ -271,11 +272,19 @@ class MultiplayerMode : BaseScene, MultiplayerNetworkingProtocol {
     }
     
     func newNumber(_ number: Int32) {
-        
+        print("Number is %i", number)
+        self.number = Int(number)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        networkingEngine.sendPoint()
+        for box in boxArray {
+            if box.indexs == number {
+                networkingEngine.sendPoint()
+            } else {
+                print("Game End")
+            }
+        }
+        
     }
     
 }

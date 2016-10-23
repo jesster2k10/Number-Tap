@@ -18,9 +18,10 @@ enum kGameMode {
     case kMemory
     case kBuildUp
     case kFollow
+    case kShuffle
 }
 
-class BaseScene : SKScene {
+class BaseScene : InitScene {
     let background = SKSpriteNode(imageNamed: "background")
     var array = [Int]()
     var products = [SKProduct]()
@@ -42,6 +43,9 @@ class BaseScene : SKScene {
     var numbersTap = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     var tapOnLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     let numberLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
+    var mostTappedLabel = SKLabelNode(fontNamed: k.Montserrat.Light)
+    var mostLabel = AnimatedScoreLabel(text: "Score", score: 0, size: 20, color: k.flatColors.red)
+    var mostCound = 0
     let circularTimer = ProgressNode()
     let share = SKSpriteNode(imageNamed: NSLocalizedString("share", comment: "share-button"))
     let removeAds = SKSpriteNode(imageNamed: NSLocalizedString("removeAds", comment: "remove-ads"))
@@ -61,6 +65,10 @@ class BaseScene : SKScene {
     
     var hasGameEnded = false
     var hasRun = 0
+    
+    var opponentTappedTextLabel = SKLabelNode(fontNamed: k.Montserrat.Light)
+    var opponentTappedLabel = AnimatedScoreLabel(text: "Score", score: 0, size: 20, color: k.flatColors.red)!
+    var mostCount = 0
     
     let numberBox1 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
     let numberBox2 = NumberBox(texture: nil, color: UIColor.clear, size: CGSize(width: 400, height: 500), index: nil)
@@ -109,6 +117,8 @@ class BaseScene : SKScene {
     }
     
     func start(_ mode: kGameMode, cam: SKCameraNode?)  {
+        setUpListners()
+
         UserDefaults.standard.set(false, forKey: "nk")
 
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.productPurchased), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: nil)
@@ -142,7 +152,7 @@ class BaseScene : SKScene {
         background.zPosition = -10
         //addChild(background)
         
-        if mode != .kMemory || mode != .kBuildUp || mode == .kFollow {
+        if mode != .kMemory || mode != .kBuildUp || mode == .kFollow || mode != .kMultiplayer {
             addNumbers()
             
             setup(mode, cam: cam)
@@ -342,20 +352,44 @@ class BaseScene : SKScene {
         scoreLabel?.horizontalAlignmentMode = .left
         scoreLabel?.fontColor = UIColor(rgba: "#e74c3c")
         
-        numbersTap.text = "NUMBERS TAPPED"
-        numbersTap.position = CGPoint(x: (scoreLabel?.position.x)! + 15, y: (scoreLabel?.position.y)!)
-        numbersTap.horizontalAlignmentMode = .left
-        numbersTap.fontColor = UIColor.white
-        numbersTap.fontSize = 25
-        numbersTap.zPosition = (scoreLabel?.zPosition)!
-        
-        starVideo.position = CGPoint(x: (scoreLabel?.position.x)! + 10, y: (scoreLabel?.position.y)! - 32)
-        starVideo.name = "starVideo"
-        starVideo.zPosition = 2
-        
-        records.position = CGPoint(x: starVideo.position.x + 65, y: starVideo.position.y)
-        records.name = "records"
-        records.zPosition = 2
+        if mode == .kMultiplayer {
+            opponentTappedLabel.position = CGPoint(x: (scoreLabel?.position.x)!, y: (scoreLabel?.position.y)! - 30)
+            opponentTappedLabel.horizontalAlignmentMode = .left
+            opponentTappedLabel.fontColor = k.flatColors.red
+            opponentTappedLabel.score = 0
+            opponentTappedLabel.text = ""
+            addChild(opponentTappedLabel)
+            
+            opponentTappedTextLabel.position = CGPoint(x: opponentTappedLabel.position.x + 20, y: opponentTappedLabel.position.y)
+            opponentTappedTextLabel.fontSize = opponentTappedLabel.fontSize
+            opponentTappedTextLabel.fontColor = UIColor.white
+            opponentTappedTextLabel.horizontalAlignmentMode = .left
+            opponentTappedTextLabel.zPosition = opponentTappedLabel.zPosition
+            opponentTappedTextLabel.text = "Oppenent Tapped"
+            addChild(opponentTappedTextLabel)
+        } else {
+            starVideo.position = CGPoint(x: (scoreLabel?.position.x)! + 10, y: (scoreLabel?.position.y)! - 32)
+            numbersTap.text = "NUMBERS TAPPED"
+            numbersTap.position = CGPoint(x: (scoreLabel?.position.x)! + 15, y: (scoreLabel?.position.y)!)
+            numbersTap.horizontalAlignmentMode = .left
+            numbersTap.fontColor = UIColor.white
+            numbersTap.fontSize = 25
+            numbersTap.zPosition = (scoreLabel?.zPosition)!
+            
+            mostLabel?.position = CGPoint(x: (scoreLabel?.position.x)!, y: (scoreLabel?.position.y)! - 30)
+            mostLabel?.horizontalAlignmentMode = .left
+            mostLabel?.fontColor = k.flatColors.red
+            mostLabel?.score = Int32(UserDefaults.standard.highScore)
+            mostLabel?.text = ""
+            
+            mostTappedLabel.position = CGPoint(x: mostLabel!.position.x + 20, y: mostLabel!.position.y)
+            mostTappedLabel.fontSize = mostLabel!.fontSize
+            mostTappedLabel.fontColor = UIColor.white
+            mostTappedLabel.horizontalAlignmentMode = .left
+            mostTappedLabel.zPosition = mostLabel!.zPosition
+            mostTappedLabel.text = "MOST TAPPED"
+            
+        }
         
         if mode == .kFollow && cam != nil{
             cam!.addChild(circularTimer)
@@ -368,9 +402,8 @@ class BaseScene : SKScene {
             addChild(circularTimer)
             addChild(scoreLabel!)
             addChild(numbersTap)
-            addChild(starVideo)
-            addChild(records)
-
+            addChild(mostLabel!)
+            addChild(mostTappedLabel)
         }
         
         if mode != .kMemory {
@@ -451,7 +484,7 @@ class BaseScene : SKScene {
     func randomWord() {
         
         let getRandom = randomSequenceGenerator(1, max: 99)
-        for _ in 1...99 {
+        for _ in 1...24 {
             array.append(getRandom());
             
         }
@@ -488,7 +521,7 @@ class BaseScene : SKScene {
             
         } else {
             resetScene()
-            
+            toSceneReset()
             
             var randNum = 0
             // random key from array
@@ -503,6 +536,10 @@ class BaseScene : SKScene {
             return randNum;
             
         }
+        
+    }
+    
+    func toSceneReset() {
         
     }
     
@@ -739,6 +776,30 @@ class BaseScene : SKScene {
         MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
     }
     
+    func showShare(image: UIImage) {
+        blur(animationDuration: 1)
+        
+        let frame = SKSpriteNode(imageNamed: "polaroid-frame")
+        let shareButton = SKSpriteNode(imageNamed: "polaroid-share".localized)
+        let texture = SKTexture(image: image)
+        let frameImage = SKSpriteNode(texture: texture)
+        
+        frame.name = "frame"
+        frame.position = CGPoint(x: self.view!.frame.midX, y: self.view!.frame.midY)
+        frame.zPosition = self.zPosition + 2
+        
+        shareButton.name = "share-button"
+        shareButton.position = CGPoint(x: 4, y: -123.058)
+        shareButton.zPosition = frame.zPosition + 1
+        frame.addChild(shareButton)
+        
+        frameImage.name = "frame-image"
+        frameImage.position =  CGPoint(x: -0.994, y: 35.796)
+        frameImage.zPosition = shareButton.zPosition
+        frame.addChild(frameImage)
+        addChild(frame)
+    }
+    
     func handleTouchedPoint(_ location: CGPoint) {
         if hasGameEnded {
             if gameCenter.contains(location) {
@@ -801,17 +862,16 @@ class BaseScene : SKScene {
                 
                 share.run(k.Sounds.blopAction1)
                 
-                if let _ = URL(string: "") {
-                    let objectsToShare = [shareMessage, shareURL, shareImage] as [Any]
-                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                let objectsToShare = [shareMessage, shareURL, shareImage] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                
+                //New Excluded Activities Code
+                activityVC.excludedActivityTypes = [UIActivityType.addToReadingList]
+                
+                let vC = self.view?.window?.rootViewController
+                vC!.present(activityVC, animated: true, completion: nil)
                     
-                    //New Excluded Activities Code
-                    activityVC.excludedActivityTypes = [UIActivityType.addToReadingList]
-                    
-                    let vC = self.view?.window?.rootViewController
-                    vC!.present(activityVC, animated: true, completion: nil)
-                    
-                }
+                
             }
             if removeAds.contains(location) {
                 FTLogging().FTLog("remove ads")

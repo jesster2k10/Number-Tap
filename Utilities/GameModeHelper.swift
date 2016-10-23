@@ -93,8 +93,8 @@ extension GameModeHelper {
             if numbersTapped >= k.numbersToUnlock.easy && !self.modeIsUnlocked(kEasyGameMode) {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLevelUnlockedNotificationName), object: nil, userInfo: ["level": kEasyGameMode])
 
-            } else if numbersTapped >= k.numbersToUnlock.medium && !self.modeIsUnlocked(kMediumGameMode) {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLevelUnlockedNotificationName), object: kMediumGameMode, userInfo: ["level": kMediumGameMode])
+            } else if numbersTapped >= k.numbersToUnlock.shuffle && !self.modeIsUnlocked(kShuffleGameMode) {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLevelUnlockedNotificationName), object: kShuffleGameMode, userInfo: ["level": kShuffleGameMode])
                 
             } else if numbersTapped >= k.numbersToUnlock.hard && !self.modeIsUnlocked(kImpossibleGameMode) {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLevelUnlockedNotificationName), object: kImpossibleGameMode, userInfo: ["level": kImpossibleGameMode])

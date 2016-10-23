@@ -9,15 +9,27 @@
 import UIKit
 import SpriteKit
 import AVFoundation
+import iAd
 
-class GameViewController: UIViewController {
+let kShareNotification = "share"
+
+class GameViewController: UIViewController, ADBannerViewDelegate {
     var backgroundMusicPlayer = AVAudioPlayer()
-    var skView: SKView = SKView()
-    var counterLabel = UILabel()
-    var pauseLabel = UILabel()
-    var pausedTimer = Timer()
-    var blurView = UIVisualEffectView()
-
+    
+    @IBOutlet weak var bannerView: ADBannerView!
+    var isBannerVisible = false
+    
+    @IBOutlet weak var shareBlurView: UIVisualEffectView!
+    @IBOutlet weak var shareView: UIView!
+    
+    @IBOutlet weak var shareImage: RotatableImageView!
+    @IBOutlet weak var shareButton: UIButton!
+    
+    var shareMessage = ""
+    var shareURL = NSURL()
+    
+    var isShareEnabled = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,9 +42,10 @@ class GameViewController: UIViewController {
         }
         
         // Configure the view.
-        skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        let skView = self.view as! SKView
+        skView.showsFPS = false
+        skView.showsNodeCount = false
+        skView.isPaused = false
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
@@ -44,97 +57,46 @@ class GameViewController: UIViewController {
         
         playBackgroundMusic(k.Sounds.blipBlop)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(pauseGame), name: Notification.Name(rawValue: kPausedNotification), object: nil)
+        GCHelper.sharedGameKitHelper.authenticateLocalPlayer()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(unPauseGame), name: Notification.Name(rawValue: kUnPausedNotification), object: nil)
+        bannerView.alpha = 0
+        bannerView.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(resumeMusic), name: Notification.Name(rawValue: "playMusic"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(pauseMusic), name: Notification.Name(rawValue: "stopMusic"), object: nil)
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(hideBanner), name: Notification.Name(rawValue: "hideBanner"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showBanner), name: Notification.Name(rawValue: "showBanner"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showShare), name: Notification.Name(rawValue: kShareNotification), object: nil)
+        
         let gmodesHelper = GameModeHelper()
         gmodesHelper.initPointsCheck()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tap.numberOfTapsRequired = 4
-        view.addGestureRecognizer(tap)
-        
-        //TODO: Developer Mode
-        let vcRecog = VoiceRecognitionHelper()
-        vcRecog!.start()
-    }
-    
-    func pauseGame() {
-        if UserDefaults.standard.bool(forKey: "nk") == true {
-            print("Pause wont work!")
-        } else {
-            skView.isPaused = true
-            
-            let visualEffect = UIBlurEffect(style: .dark)
-            blurView = UIVisualEffectView(effect: visualEffect)
-            blurView.frame = view!.bounds
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.view.addSubview(blurView)
-            
-            counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-            counterLabel.center = CGPoint(x: view!.bounds.midX, y: view!.bounds.midY + 25)
-            counterLabel.textAlignment = NSTextAlignment.center
-            counterLabel.text = "3"
-            counterLabel.font = UIFont(name: k.Montserrat.Regular, size: 32)
-            counterLabel.textColor = UIColor.white
-            counterLabel.alpha = 0
-            self.view.addSubview(counterLabel)
-            
-            pauseLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-            pauseLabel.center = CGPoint(x: view!.bounds.midX, y: view!.bounds.midY + 30)
-            pauseLabel.textAlignment = NSTextAlignment.center
-            pauseLabel.text = "Game Paused"
-            pauseLabel.font = UIFont(name: k.Montserrat.Light, size: 22)
-            pauseLabel.textColor = UIColor.white
-            pauseLabel.alpha = 0
-            self.view.addSubview(pauseLabel)
+        if !kIsAppLive {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            tap.numberOfTapsRequired = 4
+            view.addGestureRecognizer(tap)
         }
     }
     
-    func unPauseGame() {
-        var counter = 3
-        pausedTimer = Timer.every(1, {
-            if counter > 1 {
-                counter -= 1
-                self.counterLabel.text = String(counter)
-            } else if counter < 1 {
-                self.counterLabel.text = "0"
-                self.pausedTimer.invalidate()
-                self.animate()
-                
-            }
-            
-        })
+    func hideBanner() {
+        UIView.animate(withDuration: 1, animations: { 
+            self.bannerView.alpha = 0
+            }) { (completed) in
+                self.isBannerVisible = false
+        }
     }
     
-    func animate() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.counterLabel.center = CGPoint(x: self.view!.bounds.midX, y: self.view!.bounds.midY)
-            self.counterLabel.alpha = 1
-            }, completion: { (value: Bool) in
-                
-                let delayTime = DispatchTime.now() + Double(Int64(1.85 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-                DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                    
-                    UIView.animate(withDuration: 1, animations: {
-                        self.counterLabel.alpha = 0
-                        self.counterLabel.center = CGPoint(x: self.view!.bounds.midX, y: self.view!.bounds.midY - 25)
-                        self.blurView.alpha = 0
-                        
-                        }, completion: { (value: Bool) in
-                            self.counterLabel.removeFromSuperview()
-                            self.blurView.removeFromSuperview()
-                            
-                            self.skView.isPaused = false
-                    })
-                }
-        })
-
+    func showBanner() {
+        UIView.animate(withDuration: 1, animations: {
+            self.bannerView.alpha = 1
+        }) { (completed) in
+            self.isBannerVisible = true
+        }
     }
     
     func resumeMusic() {
@@ -183,6 +145,66 @@ class GameViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func bannerViewDidLoadAd(_ banner: ADBannerView!) {
+        if !isBannerVisible {
+            UIView.animate(withDuration: 1, animations: {
+                self.bannerView.alpha = 1
+            }) { (completed) in
+                self.isBannerVisible = true
+            }
+        }
+    }
+    
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+        print("Failed to retrive ad: \(error.localizedDescription)")
+        if isBannerVisible {
+            UIView.animate(withDuration: 1, animations: {
+                self.bannerView.alpha = 0
+            }) { (completed) in
+                self.isBannerVisible = false
+            }
+        }
+    }
+    
+    func showShare(_ aNotificaton: NSNotification) {
+        let userInfo = aNotificaton.userInfo
+        let image = userInfo!["image"] as! UIImage
+        
+        shareMessage = userInfo!["message"] as! String
+        shareURL = userInfo!["shareURL"] as! NSURL
+        
+        shareImage.image = image
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.shareView.alpha = 1
+            self.shareBlurView.alpha = 1
+        }) { (completed) in
+            self.isShareEnabled = true
+        }
+    }
+    
+    func hideShare(_ aNotificaton: NSNotification) {
+        UIView.animate(withDuration: 1, animations: {
+            self.shareView.alpha = 0
+            self.shareBlurView.alpha = 0
+        }) { (completed) in
+            self.isShareEnabled = false
+        }
+    }
+    
+    @IBAction func share(_ sender: AnyObject) {
+        let objectsToShare = [shareMessage, shareURL, shareImage.image] as [Any]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        //New Excluded Activities Code
+        activityVC.excludedActivityTypes = [UIActivityType.addToReadingList]
+        
+        self.present(activityVC, animated: true, completion: nil)
+
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

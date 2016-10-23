@@ -12,11 +12,17 @@
 "beginGame"     = "beginGame_spanish";
 "free"          = "free_spanish";
 "gameCenter"    = "gameCenter_spanish";
-"no"            = "no_spanish";
+"no-img"        = "no_spanish";
 "removeAds"     = "removeAds_spanish";
 "removeAdsLong" = "removeAdsLong_spanish";
 "score"         = "score_spanish";
 "share"         = "share_spanish";
+
+"Shoot-Atlas" = "Shoot_Spanish";
+"Endless-Atlas" = "Endless_Spanish";
+"Build-Up-Atlas" = "Build-Up_Spanish";
+"Memory-Atlas" = "Memory";
+"Shuffle-Atlas" = "Shuffle_Spanish";
 
 /* TEXT */
 "settings"      = "preferencias";
@@ -27,6 +33,9 @@
 "gameplay"      = "el juego";
 "restore"       = "Recuperar";
 "purchases"     = "Productors Comprados";
+"game-modes"    = "modos de juego";
+"go-countdown"  = "IR !";
+"loading" = "carga";
 
 "no-wifi-alert-title" = "No hay Internet";
 "no-wifi-alert-message" = "No se puede comprar el producto. Por favor, Conectar a internet";
@@ -36,8 +45,66 @@
 "game-over" = "juego terminado";
 "continue" = "continuar?";
 
-"tap-number" = "PULSE EL NÚMERO:";
+"tap-number" = "PULSE NÚMERO:";
 "numbers-tapped" = "JUGADO NÚMERO";
 
+// Game Modes
+"MULTIPLAYER" = "MULTIJUGADOR";
+"LOCKED" = "CERRADO";
+"EASY" = "FÁCIL";
+"IMPOSSIBLE" = "IMPOSIBLE";
+
+"watch-a-video" = "Ver el video";
+"get-taps" = "¿Quieres obtener 8 grifos para ver un corto video?";
+
+"locked-game-mode" = "Modo de juego cerrado";
+"unlock-all-modes" = "Desbloquear todos los modos de juego";
+
+"all-modes-unlocked" = "¡Todos los modos desbloqueados!";
+"all-modes-unlocked-message" = "¡Gracias por comprar! Todos los niveles se han desbloqueado.";
+
+"yes" = "Sí";
+"no" = "No";
+"ok" = "Vale";
+
+"numbers" = "números";
+"left-to-tap" = "tocar";
+"best" = "mejor";
+"score" = "puntuación";
+
+// Tutorial Scene
+"back" = "ATRÁS";
+"skip" = "OMITIR";
+"welcome" = "¡Bienvenido a Number Tap!";
+
+"intro-p1-l1" = "Oye, esto es Number Tap";
+"intro-p1-l2" = "Es bastante sencillo";
+"intro-p1-l3" = "Pulse el número que aparece en la pantalla.";
+
+"welcome-p2"  = "Vamos a agregar el reloj";
+"intro-p2-p1" = "Parecen obtener el cuelgue de ella ahora.";
+"intro-p2-p2" = "Se trata de tiempo que presentamos el reloj";
+"intro-p2-p3" = "Tienes diez segundos en el reloj. ¡Véncelo!";
+
+"tap-to-continue" = "Pulse Para Continuar";
+"try-again" = "Tratar otra vez :(";
+"Awesome" = "Gran!";
+"Great!" = "Gran!";
+"lets-go" = "¡Vamos!";
+
+"welcome-p3" = "¿Estás listo?";
+"intro-p3-l1" = "Trata de los fundamentos del juego";
+"intro-p3-l2" = "Es hora de avanzar.";
+"intro-p3-l3" = "Pero primero hay algunos permisos que necesito.";
+
+// PERMISSIONS
+
+"contancts-pscope" = "Utilizamos esto para encontrar amigos\r\n y sus puntuaciones";
+"notifications-pscope" = "Usamos esto para enviar\r\nque actualiza y recompensas";
+"photos-pscope" = "Usamos esto para salvar\r\nel juego y fotos";
+"microphone-pscope" = "Utilizamos esto para detectar\r\ncuando dice pausa y juego";
+
+
 // SHARE
+"polaroid-share" = "polaroid-share_spanish";
 "share-text" = "I just tapped %@ tiles in a FREE game called 'Number Tap' that's made by a 13-YEAR-OLD! Tap the numbers, beat the clock! Download Today!";

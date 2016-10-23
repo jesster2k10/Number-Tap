@@ -57,7 +57,7 @@ class TutorialScene: InitScene {
     
     func setupText() {
         backButton = SKLabelNode(fontNamed: k.Montserrat.UltraLight)
-        backButton.text = "BACK"
+        backButton.text = "BACK".localized
         backButton.fontColor = SKColor.white
         backButton.fontSize = 55
         backButton.position = CGPoint(x: -299, y: 760)
@@ -65,14 +65,14 @@ class TutorialScene: InitScene {
         camera!.addChild(backButton)
         
         skipButton = SKLabelNode(fontNamed: k.Montserrat.UltraLight)
-        skipButton.text = "SKIP"
+        skipButton.text = "SKIP".localized
         skipButton.fontColor = SKColor.white
         skipButton.fontSize = 55
         skipButton.position = CGPoint(x: 290, y: backButton.position.y)
         camera!.addChild(skipButton)
         
         welcomeLabel = SKLabelNode(fontNamed: k.Montserrat.Regular)
-        welcomeLabel.text = "Welcome to Number Tap!"
+        welcomeLabel.text = "welcome".localized
         welcomeLabel.fontColor = SKColor.white
         welcomeLabel.fontSize = 65
         welcomeLabel.horizontalAlignmentMode = .center
@@ -83,7 +83,7 @@ class TutorialScene: InitScene {
         welcomeLabel.position.y = originalPosition.y - 35
         
         descLineOne = SKLabelNode(fontNamed: "Montserrat-UltraLight")
-        descLineOne.text = "Hey, this is Number Tap"
+        descLineOne.text = "intro-p1-l1".localized
         descLineOne.fontSize = 50
         descLineOne.fontColor = SKColor.white
         descLineOne.horizontalAlignmentMode = .center
@@ -91,7 +91,7 @@ class TutorialScene: InitScene {
         addChild(descLineOne)
         
         descLineTwo = SKLabelNode(fontNamed: "Montserrat-UltraLight")
-        descLineTwo.text = "It's pretty straight forward"
+        descLineTwo.text = "intro-p1-l2".localized
         descLineTwo.fontSize = 50
         descLineTwo.fontColor = SKColor.white
         descLineTwo.horizontalAlignmentMode = .center
@@ -99,7 +99,7 @@ class TutorialScene: InitScene {
         addChild(descLineTwo)
         
         descLineThree = SKLabelNode(fontNamed: "Montserrat-UltraLight")
-        descLineThree.text = "Tap the number shown on the screen"
+        descLineThree.text = "intro-p1-l3".localized
         descLineThree.fontSize = 50
         descLineThree.fontColor = SKColor.white
         descLineThree.horizontalAlignmentMode = .center
@@ -112,7 +112,7 @@ class TutorialScene: InitScene {
         tapNumberLabel = SKLabelNode(fontNamed: k.Montserrat.SemiBold)
         tapNumberLabel.fontSize = 65
         tapNumberLabel.fontColor = SKColor.white
-        tapNumberLabel.text = "Tap Number: "
+        tapNumberLabel.text = "tap-number".localized
         tapNumberLabel.horizontalAlignmentMode = .center
         tapNumberLabel.position = CGPoint(x: frame.midX - 20, y: numberBox4.position.y - 300)
         tapNumberLabel.alpha = 0
@@ -443,10 +443,10 @@ class TutorialScene: InitScene {
                 skipButton.alpha = 2
             }
             
-            welcomeLabel.text = "Let's add the clock"
-            descLineOne.text = "You seem to get the hang of it now."
-            descLineTwo.text = "It's about time we introduce the clock"
-            descLineThree.text = "You've got 10 seconds on the clock. Beat it!"
+            welcomeLabel.text = "welcome-p2".localized
+            descLineOne.text = "intro-p2-l1".localized
+            descLineTwo.text = "intro-p2-l2".localized
+            descLineThree.text = "intro-p2-l3".localized
             
             welcomeLabel.position = CGPoint(x: welcomeLabel.position.x + 1080, y: welcomeLabel.position.y)
             descLineOne.position = CGPoint(x: descLineOne.position.x + 1080, y: descLineOne.position.y)
@@ -477,7 +477,7 @@ class TutorialScene: InitScene {
             
             let tapToContinue = SKLabelNode(fontNamed: k.Montserrat.Light)
             tapToContinue.fontSize = 55
-            tapToContinue.text = "Tap To Continue"
+            tapToContinue.text = "tap-to-continue".localized
             tapToContinue.horizontalAlignmentMode = .center
             tapToContinue.position = CGPoint(x: descLineThree.position.x, y: descLineThree.position.y - 300)
             tapToContinue.name = "tap to continue"
@@ -545,7 +545,7 @@ class TutorialScene: InitScene {
                         clock.countdown(10, completionHandler: { (Void) in
                             clock.stopCountdown()
                             self.userWonClock = false
-                            self.showContinue(1, text: "Try Again :(")
+                            self.showContinue(1, text: "try-again".localized)
                         })
                     })
                     
@@ -569,17 +569,17 @@ class TutorialScene: InitScene {
             descLineThree.position = CGPoint(x: descLineThree.position.x + 1080, y: descLineThree.position.y)
             numberLabel.position = CGPoint(x: numberLabel.position.x + 1080, y: numberLabel.position.y)
             
-            welcomeLabel.text = "Are you ready?"
-            descLineOne.text = "That's about the basics of the game"
-            descLineTwo.text = "It's time for us to advance."
-            descLineThree.text = "But first there's some permissions I need."
+            welcomeLabel.text = "welcome-p3".localized
+            descLineOne.text = "intro-p3-l1".localized
+            descLineTwo.text = "intro-p3-l2".localized
+            descLineThree.text = "intro-p3-l3".localized
             
             let original = welcomeLabel.position
             welcomeLabel.position = CGPoint(x: original.x, y: original.y - 25)
             
             let tapToContinue = SKLabelNode(fontNamed: k.Montserrat.Light)
             tapToContinue.fontSize = 55
-            tapToContinue.text = "Tap To Continue"
+            tapToContinue.text = "tap-to-continue".localized
             tapToContinue.horizontalAlignmentMode = .center
             tapToContinue.position = CGPoint(x: descLineThree.position.x, y: descLineThree.position.y - 300)
             tapToContinue.name = "tap to continue"
@@ -633,14 +633,14 @@ class TutorialScene: InitScene {
                                         selected(box, touch: touch)
                                         touch += 1
                                     } else {
-                                        showContinue(3, text: "Awesome")
+                                        showContinue(3, text: "Awesome".localized)
                                     }
                                 } else {
                                     if touch < 4 {
                                         selected(box, touch: touch)
                                         touch += 1
                                     } else {
-                                        showContinue(1, text: "Great!")
+                                        showContinue(1, text: "Great!".localized)
                                     }
                                 }
                             } else {
@@ -657,20 +657,20 @@ class TutorialScene: InitScene {
         let pscope = PermissionScope()
         
         // Set up permissions
-        pscope.addPermission(ContactsPermission(),
-                             message: "We use this to find\r\nfriends and their high scores")
         pscope.addPermission(NotificationsPermission(notificationCategories: nil),
-                             message: "We use this to send you\r\nupdates and rewards")
+                             message: "notifications-pscope".localized)
         pscope.addPermission(PhotosPermission(),
-                             message: "We use this to save\r\nphotos and gameplay")
+                             message: "photos-pscope".localized)
+        pscope.addPermission(MicrophonePermission(),
+                             message: "microphone-pscope".localized)
         
         // Show dialog with callbacks
         pscope.show({ finished, results in
             print("got results \(results)")
-            self.showContinue(4, text: "Let's Go!")
+            self.showContinue(4, text: "lets-go".localized)
             }, cancelled: { (results) -> Void in
                 print("thing was cancelled")
-                self.showContinue(4, text: "Let's Go!")
+                self.showContinue(4, text: "lets-go".localized)
         })   
     }
     

@@ -23,6 +23,7 @@ enum GameMode : UInt32 {
     case medium = 7
     case hard = 8
     case locked = 9
+    case shuffle = 10
 }
 
 class Ribbon: SKSpriteNode {
@@ -75,6 +76,9 @@ class Ribbon: SKSpriteNode {
     fileprivate var buildUpFrames : [SKTexture]?
     fileprivate var buildUpAtlas : SKTextureAtlas?
     
+    fileprivate var shuffleFrames : [SKTexture]?
+    fileprivate var shuffleAtlas : SKTextureAtlas?
+    
     internal var mainScene : SKScene?
     internal var numbersLeftToUnlock : Int?
     
@@ -82,6 +86,7 @@ class Ribbon: SKSpriteNode {
     var buildUp = SKSpriteNode()
     var endless = SKSpriteNode()
     var shoot = SKSpriteNode()
+    var shuffle = SKSpriteNode()
     
     var initialColor: UIColor?
     var dotInitialColor: UIColor?
@@ -183,28 +188,7 @@ class Ribbon: SKSpriteNode {
         dots1.color = UIColor(rgba: DotsColour.Grey.rawValue)
         dots2.color = UIColor(rgba: DotsColour.Grey.rawValue)
         
-        /*if children.contains(shoot) {
-         shoot.removeFromParent()
-         shoot.removeAllActions()
-         } else if children.contains(memory) {
-         memory.removeFromParent()
-         memory.removeAllActions()
-         } else if children.contains(endless) {
-         endless.removeFromParent()
-         endless.removeAllActions()
-         } else if children.contains(buildUp) {
-         buildUp.removeFromParent()
-         buildUp.removeAllActions()
-         }
-         
-         if let labelNode = childNodeWithName("customText") as? SKLabelNode {
-         labelNode.text = "LOCKED"
-         } else {
-         createCustom("LOCKED")
-         
-         }*/
-        
-        createCustom("LOCKED")
+        createCustom("LOCKED".localized)
         
     }
     
@@ -237,6 +221,10 @@ class Ribbon: SKSpriteNode {
         case .locked:
             locked()
             break;
+        
+        case .shuffle:
+            createShuffle()
+            break;
             
         default:
             createCustom(text)
@@ -247,7 +235,7 @@ class Ribbon: SKSpriteNode {
     
     fileprivate func createMultiplayer() {
         let multiLabel = SKLabelNode(fontNamed: k.Montserrat.Regular)
-        multiLabel.text = "MULTIPLAYER"
+        multiLabel.text = "MULTIPLAYER".localized
         multiLabel.zPosition = 38
         multiLabel.fontColor = UIColor.white
         multiLabel.horizontalAlignmentMode = .center
@@ -271,7 +259,7 @@ class Ribbon: SKSpriteNode {
     
     fileprivate func createShoot() {
         shootFrames = [SKTexture]()
-        shootAtlas = SKTextureAtlas(named: "Shoot")
+        shootAtlas = SKTextureAtlas(named: "Shoot-Atlas".localized)
         
         let numImages = shootAtlas!.textureNames.count
         var shootAnimFrames = [SKTexture]()
@@ -298,9 +286,38 @@ class Ribbon: SKSpriteNode {
         animate(shoot, frames: shootFrames!, speed: 0.33)
     }
     
+    fileprivate func createShuffle() {
+        shuffleFrames = [SKTexture]()
+        shuffleAtlas = SKTextureAtlas(named: "Shuffle-Atlas".localized)
+        
+        let numImages = shuffleAtlas!.textureNames.count
+        var shuffleAnimFrames = [SKTexture]()
+        
+        for i in 0...numImages - 1 {
+            let imgName = "Shuffle" + String(i) + ".png"
+            var temp = shuffleAtlas?.textureNamed(imgName)
+            shuffleAnimFrames.append(temp!)
+            temp = nil
+        }
+        shuffleFrames = shuffleAnimFrames
+        
+        var temp : SKTexture? = shuffleFrames![0]
+        
+        shuffle = SKSpriteNode(texture: temp)
+        shuffle.position = CGPoint(x: 2, y: -0)
+        shuffle.zPosition = 33
+        shuffle.name = "shoot"
+        shuffle.setScale(0.30)
+        addChild(shuffle)
+        
+        temp = nil
+        
+        animate(shuffle, frames: shuffleFrames!, speed: 0.33)
+    }
+    
     fileprivate func createEndless() {
         endlessFrames = [SKTexture]()
-        endlessAtlas = SKTextureAtlas(named: "Endless")
+        endlessAtlas = SKTextureAtlas(named: "Endless-Atlas".localized)
         
         let numImages = endlessAtlas!.textureNames.count
         var endlessAnimFrames = [SKTexture]()
@@ -329,7 +346,7 @@ class Ribbon: SKSpriteNode {
     
     fileprivate func createBuildUp() {
         buildUpFrames = [SKTexture]()
-        buildUpAtlas = SKTextureAtlas(named: "Build-Up")
+        buildUpAtlas = SKTextureAtlas(named: "Build-Up-Atlas".localized)
         
         let numImages = buildUpAtlas!.textureNames.count
         var buildUpAnimFrames = [SKTexture]()
@@ -358,7 +375,7 @@ class Ribbon: SKSpriteNode {
     
     fileprivate func createMemory() {
         memoryFrames = [SKTexture]()
-        memoryAtlas = SKTextureAtlas(named: "Memory")
+        memoryAtlas = SKTextureAtlas(named: "Memory-Atlas".localized)
         
         let numImages = memoryAtlas!.textureNames.count
         var memoryAnimFrames = [SKTexture]()

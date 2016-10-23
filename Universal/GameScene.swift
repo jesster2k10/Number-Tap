@@ -17,7 +17,7 @@ let kNumbersKey = "NumberKey"
 let kImpossibleKey = "kImpossibleKey"
 let kEasyKey = "kEasyKey"
 
-class GameScene: SKScene, RPScreenRecorderDelegate {
+class GameScene: InitScene, RPScreenRecorderDelegate {
     var loadingNotification = MBProgressHUD()
     var array = [Int]()
     var products = [SKProduct]()
@@ -25,6 +25,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
     var topArray = [SKNode]()
     
     var rater = false
+    var recording = false
     
     var number = 0
     var score : Int = 0
@@ -52,6 +53,9 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
     var timeLabel = SKLabelNode()
     var scoreLabel = AnimatedScoreLabel(text: "Score", score: 0, size: 25, color: UIColor(rgba: "#e74c3c"))
     var numbersTap = SKLabelNode(fontNamed: "Montserrat-SemiBold")
+    var mostTappedLabel = SKLabelNode(fontNamed: k.Montserrat.Light)
+    var mostLabel = AnimatedScoreLabel(text: "Score", score: 0, size: 20, color: k.flatColors.red)
+    var mostCound = 0
     
     var tapOnLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     let numberLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
@@ -87,7 +91,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
     let replay = SKSpriteNode(imageNamed: "replay")
     let record = SKSpriteNode(imageNamed: "record")
     let homeButton = SKSpriteNode(imageNamed: "home")
-    let no = SKSpriteNode(imageNamed: NSLocalizedString("no", comment: "no-button"))
+    let no = SKSpriteNode(imageNamed: "no-img".localized)
     let free = SKSpriteNode(imageNamed: NSLocalizedString("free", comment: "free-button"))
     let continueLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     let continueCountLabel = SKLabelNode(fontNamed: "Montserrat-Light")
@@ -135,13 +139,14 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
     
     override func didMove(to view: SKView) {
         /* Setup your scene here */
+        setUpListners()
         
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.productPurchased), name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(productCancelled), name: NSNotification.Name(rawValue: "cancelled"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.rewardUser(_:)), name: NSNotification.Name(rawValue: "videoRewarded"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.counterComplete), name: NSNotification.Name(rawValue: "counter"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.setPaused), name: NSNotification.Name(rawValue: "pauseGame"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(shouldRecord(_:)), name: NSNotification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startRecording), name: NSNotification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showGameMode), name: NSNotification.Name(rawValue: kPlayGameModeNotification), object: nil)
 
         products = []
@@ -150,7 +155,6 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
                 self.products = products!
             }
         }
-        
         UserDefaults.standard.set(false, forKey: "nk")
 
         randomWord()
@@ -179,6 +183,9 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
     }
     
     //MARK: Init Methods
+    func setToRecord(_ toRecord: Bool) {
+        recording = toRecord
+    }
     
     func setupScene (_ mode : gameMode) {
         score = 0
@@ -403,6 +410,10 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
         dbackground.name = "bg"
         dbackground.zPosition = 9
         self.addChild(dbackground)
+        
+        if recording {
+            startRecording()
+        }
     }
     
     func createTutorial(tutorialWithNumber number: Int) {
@@ -461,26 +472,6 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             numbersTap.zPosition = (scoreLabel?.zPosition)!
             addChild(numbersTap)
             
-            pause.position = CGPoint(x: (scoreLabel?.position.x)!, y: (scoreLabel?.position.y)! - 32)
-            pause.name = "pause"
-            pause.zPosition = 2
-            addChild(pause)
-            
-            homeButton.position = CGPoint(x: pause.position.x + 45, y: pause.position.y)
-            homeButton.name = "homeButton"
-            homeButton.zPosition = 2
-            addChild(homeButton)
-            
-            replay.position = CGPoint(x: homeButton.position.x + 45, y: homeButton.position.y)
-            replay.name = "replay"
-            replay.zPosition = 2
-            addChild(replay)
-            
-            record.position = CGPoint(x: replay.position.x + 45, y: replay.position.y)
-            record.name = "record"
-            record.zPosition = 2
-            addChild(record)
-            
         } else {
             
             setupScene(mode)
@@ -503,7 +494,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             
             self.addChild(self.circularTimer)
             
-            scoreLabel?.position = CGPoint(x: circularTimer.position.x - 320, y: circularTimer.position.y)
+            scoreLabel?.position = CGPoint(x: circularTimer.position.x - 320, y: circularTimer.position.y - 10)
             scoreLabel?.horizontalAlignmentMode = .left
             scoreLabel?.fontColor = UIColor(rgba: "#e74c3c")
             addChild(scoreLabel!)
@@ -516,25 +507,20 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             numbersTap.zPosition = (scoreLabel?.zPosition)!
             addChild(numbersTap)
             
-            pause.position = CGPoint(x: (scoreLabel?.position.x)!, y: (scoreLabel?.position.y)! - 32)
-            pause.name = "pause"
-            pause.zPosition = 2
-            addChild(pause)
+            mostLabel?.position = CGPoint(x: (scoreLabel?.position.x)!, y: (scoreLabel?.position.y)! - 30)
+            mostLabel?.horizontalAlignmentMode = .left
+            mostLabel?.fontColor = k.flatColors.red
+            mostLabel?.score = Int32(UserDefaults.standard.highScore)
+            mostLabel?.text = ""
+            addChild(mostLabel!)
             
-            homeButton.position = CGPoint(x: pause.position.x + 45, y: pause.position.y)
-            homeButton.name = "homeButton"
-            homeButton.zPosition = 2
-            addChild(homeButton)
-            
-            replay.position = CGPoint(x: homeButton.position.x + 45, y: homeButton.position.y)
-            replay.name = "replay"
-            replay.zPosition = 2
-            addChild(replay)
-            
-            record.position = CGPoint(x: replay.position.x + 45, y: replay.position.y)
-            record.name = "record"
-            record.zPosition = 2
-            addChild(record)
+            mostTappedLabel.position = CGPoint(x: mostLabel!.position.x + 20, y: mostLabel!.position.y)
+            mostTappedLabel.fontSize = mostLabel!.fontSize
+            mostTappedLabel.fontColor = UIColor.white
+            mostTappedLabel.horizontalAlignmentMode = .left
+            mostTappedLabel.zPosition = mostLabel!.zPosition
+            mostTappedLabel.text = "MOST TAPPED"
+            addChild(mostTappedLabel)
 
         }
         
@@ -744,7 +730,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
         recentScore.setScale(0)
         
         let recentScoreText = SKLabelNode(fontNamed: "Montserrat-SemiBold")
-        recentScoreText.text = String(score)
+        recentScoreText.text = String(numbersTapped)
         recentScoreText.fontColor = UIColor.white
         recentScoreText.fontSize = 42
         recentScoreText.zPosition = recentScore.zPosition + 1
@@ -848,9 +834,10 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
         }
 
     
-    if isRecording {
+    if isRecording || recording {
         stopRecording()
     }
+        
     }
     
     func showGameMode() {
@@ -890,7 +877,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
     func addContinue () {
         if Reachability.isConnectedToNetwork() {
             
-            var _ = 10
+            var count = 5
             
             continueLabel.position = CGPoint(x: 327, y: 687)
             continueLabel.fontColor = UIColor.white
@@ -905,7 +892,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             continueCountLabel.zPosition = 33
             continueCountLabel.horizontalAlignmentMode = .center
             continueCountLabel.fontSize = 75
-            continueLabel.text = "continue?"
+            continueCountLabel.text = String(count)
             if self.children.contains(continueCountLabel) {} else { addChild(continueCountLabel) }
             
             free.position = CGPoint(x: 255, y: 431)
@@ -927,21 +914,21 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
                 
             isShowingContinue = true
             
-            /*continueTimer = NSTimer.every(1, {
-                if count < 0 {
+            continueTimer = Timer.every(1, {
+                if count > 0 {
                     count -= 1
                     self.continueCountLabel.text = String(count)
                 } else {
                     self.continueTimer.invalidate()
-                    
+                    self.continueCountLabel.text = "0"
                     for node in self.continueArray {
-                        node.runAction(SKAction.fadeOutWithDuration(1))
+                        node.run(SKAction.fadeOut(withDuration: 0.2))
                     }
                     
                     self.addStuff()
                 }
-            })*/
-                
+            })
+            
         } else {
             addStuff()
         }
@@ -1073,10 +1060,16 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
         numberLabel.text = String(number)
         
         timeLabel.removeAllActions()
-      
-        let randScore = arc4random_uniform(250)+50
         
-        score += Int(randScore)
+        var highScore = UserDefaults.standard.highScore
+        if numbersTapped > highScore {
+            print("There is a new high score of: \(numbersTapped) and a saved high score of: \(highScore)")
+            highScore = numbersTapped
+            mostLabel?.score = Int32(highScore)
+        } else {
+            mostLabel?.score = Int32(numbersTapped)
+        }
+        
         numbersTapped += 1
         scoreLabel?.score = Int32(numbersTapped)
        
@@ -1158,6 +1151,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             
             if free.contains(location) {
                 if Supersonic.sharedInstance().isAdAvailable() {
+                    self.continueTimer.invalidate()
                     Supersonic.sharedInstance().showRV(withPlacementName: "Game_Over")
                 }
             }
@@ -1226,18 +1220,16 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
                 
                 let textToShare = "I just tapped \(numbersTapped) tiles in a FREE game called 'Number Tap' that's made by a 13-YEAR-OLD! Download Today!"
                 
-                if let myWebsite = URL(string: "") {
-                    let objectsToShare = [textToShare, myWebsite] as [Any]
-                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                    
-                    //New Excluded Activities Code
-                    activityVC.excludedActivityTypes = [UIActivityType.addToReadingList]
-                    
-                    let vC = self.view?.window?.rootViewController
-                    vC!.present(activityVC, animated: true, completion: nil)
-                    
-                }
+                let objectsToShare = [textToShare] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                
+                //New Excluded Activities Code
+                activityVC.excludedActivityTypes = [UIActivityType.addToReadingList]
+                
+                let vC = self.view?.window?.rootViewController
+                vC!.present(activityVC, animated: true, completion: nil)
             }
+            
             if removeAds.contains(location) {
                 FTLogging().FTLog("remove ads")
                 let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
@@ -1313,6 +1305,87 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
 
     }
     
+    override func pauseGame() {
+        super.pauseGame()
+        
+        self.view?.isPaused = true
+        
+        let visualEffect = UIBlurEffect(style: .dark)
+        ablurView = UIVisualEffectView(effect: visualEffect)
+        ablurView.frame = (view?.bounds)!
+        ablurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view?.addSubview(ablurView)
+        
+        counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        counterLabel.center = CGPoint(x: view!.bounds.midX, y: view!.bounds.midY + 25)
+        counterLabel.textAlignment = NSTextAlignment.center
+        counterLabel.text = "3"
+        counterLabel.font = UIFont(name: k.Montserrat.Regular, size: 42)
+        counterLabel.textColor = UIColor.white
+        counterLabel.alpha = 0
+        self.view?.addSubview(counterLabel)
+        
+        pauseLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        pauseLabel.center = CGPoint(x: view!.bounds.midX, y: view!.bounds.midY + 65) // +40
+        pauseLabel.textAlignment = NSTextAlignment.center
+        pauseLabel.text = "Game Paused"
+        pauseLabel.font = UIFont(name: k.Montserrat.Light, size: 22)
+        pauseLabel.textColor = UIColor.white
+        pauseLabel.alpha = 0
+        self.view?.addSubview(pauseLabel)
+
+    }
+    
+    override func unPauseGame(completionOfAnimation: @escaping () -> ()) {
+        super.unPauseGame(completionOfAnimation: completionOfAnimation)
+        UIView.animate(withDuration: 2, animations: {
+            self.counterLabel.center = CGPoint(x: self.view!.bounds.midX, y: self.view!.bounds.midY)
+            self.counterLabel.alpha = 1
+            
+            self.pauseLabel.center = CGPoint(x: self.view!.bounds.midX, y: self.view!.bounds.midY + 40)
+            self.pauseLabel.alpha = 1
+            
+            }, completion: { (value: Bool) in
+                
+                var counter = 3
+                self.pausedTimer = Timer.every(1, {
+                    if counter == 0 {
+                        self.counterLabel.text = "0"
+                        self.pausedTimer.invalidate()
+                        self.animate(completionOfAnimation: completionOfAnimation)
+                    } else {
+                        counter -= 1
+                        self.counterLabel.text = String(counter)
+                    }
+                    
+                })
+        })
+    }
+    
+    override func animate(completionOfAnimation: @escaping () -> ()) {
+        super.animate(completionOfAnimation: completionOfAnimation)
+        let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            
+            UIView.animate(withDuration: 1, animations: {
+                self.counterLabel.alpha = 0
+                self.counterLabel.center = CGPoint(x: self.view!.bounds.midX, y: self.view!.bounds.midY - 25)
+                
+                self.pauseLabel.alpha = 0
+                self.pauseLabel.center = CGPoint(x: self.view!.bounds.midX, y: self.view!.bounds.midY - 40)
+                
+                self.ablurView.alpha = 0
+                
+                }, completion: { (value: Bool) in
+                    self.counterLabel.removeFromSuperview()
+                    self.ablurView.removeFromSuperview()
+                    self.pauseLabel.removeFromSuperview()
+                    
+                    completionOfAnimation()
+            })
+        }
+    }
+    
     func stopRecording() {
         let vC = self.view?.window?.rootViewController
         RPScreenRecorder.shared().stopRecording { (previewController: RPPreviewViewController?, error: Error?) -> Void in
@@ -1332,20 +1405,14 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
                 alertController.addAction(discardAction)
                 alertController.addAction(viewAction)
                 
-                vC!.present(alertController, animated: true, completion: nil)
+                vC!.present(alertController, animated: true, completion: {
+                    print("Presented recording")
+                })
                 
             } else {
                 // Handle error
+                print("Error in recording")
             }
-        }
-    }
-    
-    func shouldRecord(_ notification : Notification) {
-        let userInfo = (notification as NSNotification).userInfo
-        let isToRecord = userInfo!["isOn"] as? Bool
-        
-        if (isToRecord != nil) && isToRecord == true {
-            startRecording()
         }
     }
     
@@ -1354,6 +1421,7 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
             RPScreenRecorder.shared().startRecording(withMicrophoneEnabled: true, handler: { (error: Error?) -> Void in
                 if error == nil { // Recording has started
                     self.isRecording = true
+                    print("Recording")
                 } else {
                     // Handle error
                     self.isRecording = false
@@ -1435,6 +1503,19 @@ class GameScene: SKScene, RPScreenRecorderDelegate {
                 self.gameEnd(true)
             }
         }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        var highScore = UserDefaults.standard.highScore
+        if numbersTapped > highScore {
+            print("There is a new high score of: \(numbersTapped) and a saved high score of: \(highScore)")
+            highScore = numbersTapped
+            mostLabel?.score = Int32(highScore)
+        } else {
+            mostLabel?.score = Int32(numbersTapped)
+        }
+        
+        
     }
 }
 

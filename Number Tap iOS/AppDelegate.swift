@@ -17,7 +17,7 @@ import FBSDKCoreKit
 import Appirater
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate, FYBRewardedVideoControllerDelegate {
     public func supersonicRVAdFailedWithError(_ error: Error!) {
         NSLog("Rewarded video  failed with error \(error.localizedDescription)")
     }
@@ -53,6 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
                 let idfv = UUID().uuidString
                 Supersonic.sharedInstance().setRVDelegate(self)
                 Supersonic.sharedInstance().initRV(withAppKey: "4d9a08fd", withUserId: idfv)
+                
+                let options = FYBSDKOptions(appId: "63613", securityToken: "ef24a8ba7b89867f306bb9671b8057aa")
+                FyberSDK.start(with: options)
                 
                 UserDefaults.standard.set(0, forKey: "videoSave")
             }
@@ -146,24 +149,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
         
         let tempDate = calendar.date(from: components)!
         var comps = DateComponents()
-        comps.day = 2
+        comps.day = 1
         let fireDateOfNotification = (calendar as NSCalendar).date(byAdding: comps, to: tempDate, options:[])
         
-        let message = LocalNotificationHelper.sharedHelper.notificationMessage(.comeBack, gameMode: nil)
-        LocalNotificationHelper.sharedHelper.scheduleNotificationWith(message: message!, fireDate: fireDateOfNotification!, badgeNumber: 1)
+        let comeBackMessage = LocalNotificationHelper.sharedHelper.notificationMessage(.comeBack, gameMode: nil)
+        LocalNotificationHelper.sharedHelper.scheduleNotificationWith(message: comeBackMessage!, fireDate: fireDateOfNotification!, badgeNumber: 1)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kPausedNotification), object: nil)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
         application.applicationIconBadgeNumber = 0
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kUnPausedNotification), object: nil)
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -186,15 +186,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
     
     //MARK: Supersonic ADS :: RVDelegate
     public func supersonicRVInitSuccess() {
-        FTLogging().FTLog("Initialised rewarded video")
+        print("Initialised rewarded video")
     }
     
     public func supersonicRVAdAvailabilityChanged(_ hasAvailableAds: Bool) {
-        FTLogging().FTLog("Avaliability changed")
+        print("Avaliability changed")
     }
     
     public func supersonicRVAdRewarded(_ placementInfo: SupersonicPlacementInfo!) {
-        FTLogging().FTLog("Ad Rewarded!")
+        print("Ad Rewarded!")
         NotificationCenter.default.post(name: Notification.Name(rawValue: "videoRewarded"), object: nil, userInfo: ["rewardAmount" : placementInfo.rewardAmount,
             "rewardName"   : placementInfo.rewardName])
     }
@@ -215,6 +215,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate {
     
     public func supersonicRVAdEnded() {
         FTLogging().FTLog("Ad Ended")
+    }
+    
+    func rewardedVideoControllerDidStartVideo(_ rewardedVideoController: FYBRewardedVideoController!) {
+        print("Started Rewarded Video")
+    }
+    
+    func rewardedVideoControllerDidReceiveVideo(_ rewardedVideoController: FYBRewardedVideoController!) {
+        print("Received Video")
+        let vc = self.window?.rootViewController
+        rewardedVideoController.presentRewardedVideo(from: vc!)
+    }
+    
+    func rewardedVideoController(_ rewardedVideoController: FYBRewardedVideoController!, didDismissVideoWith reason: FYBRewardedVideoControllerDismissReason) {
+        switch reason {
+        case FYBRewardedVideoControllerDismissReason.error:
+            print("Error during playback")
+            break;
+            
+        case FYBRewardedVideoControllerDismissReason.userEngaged:
+            print("User was engaged")
+            break;
+            
+        case FYBRewardedVideoControllerDismissReason.aborted:
+            print("User aborted video")
+            break;
+        }
+    }
+    
+    func rewardedVideoController(_ rewardedVideoController: FYBRewardedVideoController!, didFailToStartVideoWithError error: Error!) {
+        print("Failed to start video: \(error.localizedDescription)")
     }
     
     //MARK: Notification

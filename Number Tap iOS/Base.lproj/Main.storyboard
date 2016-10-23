@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
@@ -14,13 +14,147 @@
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
                     </layoutGuides>
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="29W-Fj-gkU" userLabel="Share Blur View">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="4rB-dd-rP2">
+                                    <frame key="frameInset"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAl-j0-w4e" customClass="ADBannerView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="YSG-gP-JSo"/>
+                                    <constraint firstAttribute="height" constant="50" id="zUZ-Wc-St5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctv-ih-xPg" userLabel="Share View">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone 5s - Screenshot 1.png" translatesAutoresizingMaskIntoConstraints="NO" id="rSX-rb-pxu" customClass="RotatableImageView" customModule="Number_Tap_iOS" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="258" id="2DW-EP-K7w"/>
+                                            <constraint firstAttribute="width" constant="238" id="GDL-kP-qfS"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="degrees">
+                                                <real key="value" value="-2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="crop">
+                                                <size key="value" width="10" height="24"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="polaroid-frame" translatesAutoresizingMaskIntoConstraints="NO" id="MBF-ka-Oh8">
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="359" id="Qhg-w4-IrG"/>
+                                            <constraint firstAttribute="width" constant="279" id="b60-Bh-7tU"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPz-fe-IDY">
+                                        <state key="normal" image="polarioid-share"/>
+                                        <connections>
+                                            <action selector="share:" destination="BV1-FR-VrT" eventType="touchUpInside" id="YHg-yS-pgN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="36d-Pt-Xwl"/>
+                                    <constraint firstItem="MBF-ka-Oh8" firstAttribute="leading" secondItem="rSX-rb-pxu" secondAttribute="trailing" constant="-260.5" id="5Ie-Xf-wQH"/>
+                                    <constraint firstItem="CPz-fe-IDY" firstAttribute="leading" secondItem="MBF-ka-Oh8" secondAttribute="trailing" constant="-256" id="FKe-CA-Qoi"/>
+                                    <constraint firstItem="MBF-ka-Oh8" firstAttribute="top" secondItem="rSX-rb-pxu" secondAttribute="bottom" constant="-274" id="Oi6-2a-p89"/>
+                                    <constraint firstItem="CPz-fe-IDY" firstAttribute="top" secondItem="MBF-ka-Oh8" secondAttribute="bottom" constant="-93" id="TvW-c0-n7S"/>
+                                    <constraint firstItem="MBF-ka-Oh8" firstAttribute="centerX" secondItem="ctv-ih-xPg" secondAttribute="centerX" id="kQo-pM-ZGo"/>
+                                    <constraint firstAttribute="width" constant="279" id="kWg-Tq-vK5"/>
+                                    <constraint firstItem="MBF-ka-Oh8" firstAttribute="centerY" secondItem="ctv-ih-xPg" secondAttribute="centerY" id="qxW-ZZ-PHg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ctv-ih-xPg" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="1TJ-xw-tQf"/>
+                            <constraint firstItem="JAl-j0-w4e" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="HWM-S4-r33"/>
+                            <constraint firstItem="29W-Fj-gkU" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="Zw4-BB-Oic"/>
+                            <constraint firstItem="29W-Fj-gkU" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" id="ism-Xw-60w"/>
+                            <constraint firstItem="ctv-ih-xPg" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="l9K-Hv-R8n"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="JAl-j0-w4e" secondAttribute="bottom" id="lpi-eZ-Qgg"/>
+                            <constraint firstItem="29W-Fj-gkU" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="uy7-HX-9P0"/>
+                            <constraint firstItem="29W-Fj-gkU" firstAttribute="width" secondItem="3se-qz-xqx" secondAttribute="width" id="xTV-pZ-peV"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bannerView" destination="JAl-j0-w4e" id="KOX-8R-PJX"/>
+                        <outlet property="shareBlurView" destination="29W-Fj-gkU" id="E80-rk-T91"/>
+                        <outlet property="shareButton" destination="CPz-fe-IDY" id="Vbw-3r-3ox"/>
+                        <outlet property="shareImage" destination="rSX-rb-pxu" id="TbG-TF-yIL"/>
+                        <outlet property="shareView" destination="ctv-ih-xPg" id="00y-W2-Kvb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.25" y="120.4225352112676"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="f1G-zK-gPh">
+            <objects>
+                <viewController id="NNc-zD-tKn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UrK-J4-xTf"/>
+                        <viewControllerLayoutGuide type="bottom" id="9pZ-gU-wF5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eB0-0Z-5Ed">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6f-yt-Ate">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="RCo-ik-JhG"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Cancel" id="Rxo-86-6Uf"/>
+                                </items>
+                            </toolbar>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWj-1L-CBh">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gg5-Pp-UuP">
+                                    <frame key="frameInset"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone 5s - Screenshot 1.png" translatesAutoresizingMaskIntoConstraints="NO" id="h0d-6o-7Gm"/>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="h0d-6o-7Gm" firstAttribute="top" secondItem="gg5-Pp-UuP" secondAttribute="top" id="0Q9-Lp-ng0"/>
+                                        <constraint firstAttribute="trailing" secondItem="h0d-6o-7Gm" secondAttribute="trailing" id="EXP-sP-wyB"/>
+                                        <constraint firstAttribute="bottom" secondItem="h0d-6o-7Gm" secondAttribute="bottom" id="aGh-JV-kmb"/>
+                                        <constraint firstItem="h0d-6o-7Gm" firstAttribute="leading" secondItem="gg5-Pp-UuP" secondAttribute="leading" id="eI9-5E-xaM"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KWj-1L-CBh" firstAttribute="top" secondItem="w6f-yt-Ate" secondAttribute="bottom" id="7xB-9h-h4C"/>
+                            <constraint firstItem="w6f-yt-Ate" firstAttribute="top" secondItem="eB0-0Z-5Ed" secondAttribute="top" id="E4P-1H-Jps"/>
+                            <constraint firstItem="w6f-yt-Ate" firstAttribute="leading" secondItem="eB0-0Z-5Ed" secondAttribute="leading" id="FWg-CJ-jc7"/>
+                            <constraint firstItem="KWj-1L-CBh" firstAttribute="bottom" secondItem="9pZ-gU-wF5" secondAttribute="top" id="ahO-lP-Evq"/>
+                            <constraint firstItem="w6f-yt-Ate" firstAttribute="leading" secondItem="KWj-1L-CBh" secondAttribute="leading" id="ij0-5k-pgi"/>
+                            <constraint firstItem="w6f-yt-Ate" firstAttribute="trailing" secondItem="KWj-1L-CBh" secondAttribute="trailing" id="qZL-s7-ECs"/>
+                            <constraint firstAttribute="trailing" secondItem="w6f-yt-Ate" secondAttribute="trailing" id="zj9-5h-pu5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TxY-IQ-qSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="805.60000000000002" y="119.1904047976012"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iPhone 5s - Screenshot 1.png" width="640" height="1136"/>
+        <image name="polarioid-share" width="237" height="75"/>
+        <image name="polaroid-frame" width="279" height="357"/>
+    </resources>
 </document>

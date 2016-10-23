@@ -10,16 +10,16 @@ import SpriteKit
 import StoreKit
 import MBProgressHUD
 
-class HomeScene: InitScene {
+class HomeScene: InitScene, FYBInterstitialControllerDelegate {
     
     let background         = SKSpriteNode(imageNamed: "background")
-    let play               = SKSpriteNode(imageNamed: "play")
+    let play               = SKSpriteNode(imageNamed: "play".localized)
     let numberTap          = SKSpriteNode(imageNamed: "number tap")
     let favourite          = SKSpriteNode(imageNamed: "favourite")
     let like               = SKSpriteNode(imageNamed: "like")
     let leaderboard        = SKSpriteNode(imageNamed: "leaderboard")
-    let removeAds          = SKSpriteNode(imageNamed: "remove-ads-long")
-    let gameMode           = SKSpriteNode(imageNamed: "banner")
+    let removeAds          = SKSpriteNode(imageNamed: "removeAdsLong".localized)
+    let gameMode           = SKSpriteNode(imageNamed: "banner".localized)
     let starOne            = SKSpriteNode(imageNamed: "star")
     let starTwo            = SKSpriteNode(imageNamed: "star")
     var sound              = SKSpriteNode(imageNamed: "sound")
@@ -41,6 +41,8 @@ class HomeScene: InitScene {
     var isShowingSettings  = false
     var scaling            = [SKNode]()
     var nonScaling         = [SKNode]()
+    
+    var record = false
 
     
     // *************************************************************
@@ -299,8 +301,19 @@ class HomeScene: InitScene {
         let darkGrey = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
         let lightGrey = UIColor(red: 110/255.0, green: 107/255.0, blue: 107/255.0, alpha: 1)
         
-        switchDemo.isOn = true
-        switchDemo.setOn(true, animated: false)
+        if UserDefaults.keyAlreadyExists("isSliderOn") {
+            if let on = UserDefaults.standard.value(forKey: "isSliderOn") as? Bool {
+                switchDemo.isOn = on
+                record = on
+                switchDemo.setOn(on, animated: true)
+            }
+            
+        } else {
+            switchDemo.isOn = false
+            switchDemo.setOn(false, animated: true)
+            record = false
+        }
+        
         switchDemo.addTarget(self, action: #selector(HomeScene.switchValueDidChange(_:)), for: .valueChanged)
         switchDemo.onTintColor = darkGrey
         switchDemo.thumbTintColor = lightGrey
@@ -347,9 +360,11 @@ class HomeScene: InitScene {
     
     func switchValueDidChange(_ sender: UISwitch) {
         if sender.isOn == true {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil, userInfo: ["isOn" : true])
+            record = true
+            UserDefaults.standard.set(true, forKey: "isSliderOn")
+            //NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil, userInfo: ["isOn" : true])
         } else {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil, userInfo: ["isOn" : false])
+            UserDefaults.standard.set(false, forKey: "isSliderOn")
         }
     }
     
@@ -438,8 +453,34 @@ class HomeScene: InitScene {
         
         let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
         loadingNotification.mode = .indeterminate
-        loadingNotification.label.text = "Loading"
+        loadingNotification.label.text = "Loading".localized
         loadingNotification.isUserInteractionEnabled = false
+        
+        let def = UserDefaults.standard
+        if let _ = def.object(forKey: "hasRemovedAds") as? Bool { print("all ads are gone") } else {
+            let randomNum = arc4random_uniform(6) + 1
+            
+            switch randomNum {
+            case 3:
+                showIntersitial()
+                break;
+                
+            case 5:
+                showIntersitial()
+                break;
+                
+            case 1:
+                showIntersitial()
+                break;
+                
+            case 6:
+                showIntersitial()
+                break;
+                
+            default:
+                break;
+            }
+        }
         
         let atlas1 = SKTextureAtlas(named: "Endless")
         let atlas2 = SKTextureAtlas(named: "Build-Up")
@@ -461,6 +502,51 @@ class HomeScene: InitScene {
             })
             
         })
+    }
+    
+    func showIntersitial() {
+        let intersitialController = FyberSDK.interstitialController()
+        intersitialController?.delegate = self
+        
+        intersitialController?.requestInterstitial()
+    }
+    
+    // MARK: - Delegate
+    func interstitialControllerDidReceiveInterstitial(_ interstitialController: FYBInterstitialController!) {
+        print("Received intersitial")
+        let vc = self.view?.window?.rootViewController
+        interstitialController.presentInterstitial(from: vc!)
+    }
+    
+    func interstitialController(_ interstitialController: FYBInterstitialController!, didFailToReceiveInterstitialWithError error: Error!) {
+        print("Failed to receive intersitial due to error \(error.localizedDescription)")
+    }
+    
+    func interstitialControllerDidPresentInterstitial(_ interstitialController: FYBInterstitialController!) {
+        print("Presented interstital")
+    }
+    
+    func interstitialController(_ interstitialController: FYBInterstitialController!, didDismissInterstitialWith reason: FYBInterstitialControllerDismissReason) {
+        
+        var reasonDescription = ""
+        
+        switch (reason) {
+        case FYBInterstitialControllerDismissReason.userEngaged:
+            reasonDescription = "because the user clicked on it"
+            break;
+        case FYBInterstitialControllerDismissReason.aborted:
+            reasonDescription = "because the user explicitly closed it"
+            break;
+        case FYBInterstitialControllerDismissReason.error:
+            break;
+        default:
+            break;
+        }
+        NSLog("The interstitial ad was dismissed %@", reasonDescription)
+    }
+    
+    func interstitialController(_ interstitialController: FYBInterstitialController!, didFailToPresentInterstitialWithError error: Error!) {
+        NSLog("An error occured while requesting or showing the interstitial \(error)")
     }
     
     // *************************************************************
@@ -535,6 +621,10 @@ class HomeScene: InitScene {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "hideBanner"), object: nil)
                 
                 let gameScene = GameScene()
+                if record {
+                    gameScene.setToRecord(true)
+                }
+                
                 self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))
                 
             }
@@ -580,10 +670,11 @@ class HomeScene: InitScene {
                 let iTunesBaseUrl = "number-tap!/id1097322101?ls=1&mt=8"
                 let url = URL(string: "itms://itunes.apple.com/us/app/" + iTunesBaseUrl)
                 
-                if UIApplication.shared.canOpenURL(url!) {
+                if UIApplication.shared.canOpenURL(url!) && kIsAppLive {
                     UIApplication.shared.openURL(url!)
                 } else {
-                    UIApplication.shared.openURL(URL(string: "https://facebook.com/831944953601016")!)
+                    let alert = PMAlertController(title: "app-is-debug".localized, description: "app-is-debug-message".localized, image: nil, style: .alert)
+                    alert.addAction(PMAlertAction(title: "ok".localized, style: .default, action: nil))
                 }
             }
             
@@ -617,13 +708,4 @@ class HomeScene: InitScene {
             }
         }
     }
-    
-    override func userInteractionMoved(_ location: CGPoint) {
-        // touch/mouse moved
-    }
-    
-    override func userInteractionEnded(_ location: CGPoint) {
-        
-    }
-    
 }

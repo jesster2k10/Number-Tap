@@ -7,6 +7,7 @@
 //  Copyright © 2016 Denver Swift Heads. All rights reserved.
 //
 
+let kIsAppLive = false
 let kPausedNotification = "gamePaused"
 let kUnPausedNotification = "gameUnpaused"
 
@@ -17,7 +18,7 @@ let kWheelOfFortuneNotification = "wheel"
 
 let kEndlessGameMode = "Endless"
 let kEasyGameMode = "Easy"
-let kMediumGameMode = "Medium"
+let kShuffleGameMode = "Shuffle"
 let kImpossibleGameMode = "Impossible"
 let kShootGameMode = "Shoot"
 let kMemoryGameMode = "Memory"
@@ -66,20 +67,20 @@ struct k {
         static let memory = "Memory"
         static let multiplayer = "Multiplayer"
         static let easy = "Easy"
-        static let medium = "Medium"
         static let hard = "Impossible"
         static let buildUp = "Build Up"
+        static let shuffle = "Shuffle"
     }
     
     struct numbersToUnlock {
-        static let shoot = 250
+        static let shoot = 400
         static let endless = 0
-        static let memory = 750
-        static let multiplayer = 1300
-        static let easy = 50
-        static let medium = 100
-        static let hard = 150
-        static let buildUp = 1000
+        static let memory = 900
+        static let multiplayer = 1450
+        static let easy = 200
+        static let shuffle = 250
+        static let hard = 300
+        static let buildUp = 1150
     }
     
     struct Montserrat {
