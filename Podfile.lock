@@ -1,6 +1,5 @@
 PODS:
   - Appirater (2.0.5)
-  - BEMCheckBox (1.2.1)
   - CocoaAsyncSocket (7.5.0):
     - CocoaAsyncSocket/GCD (= 7.5.0)
   - CocoaAsyncSocket/GCD (7.5.0)
@@ -63,7 +62,6 @@ PODS:
 
 DEPENDENCIES:
   - Appirater
-  - BEMCheckBox
   - Crashlytics
   - Fabric
   - Firebase
@@ -81,7 +79,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
-  BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   CocoaAsyncSocket: 3baeb1ddd969f81cf9fca81053ae49ef2d1cbbfa
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
@@ -104,6 +101,6 @@ SPEC CHECKSUMS:
   SupersonicSDK: 475a118f596a5cb953c9fc178cabd9a264451558
   SwiftKeychainWrapper: aa69884eb623a6f7d644921bbf58c8cee416a9e6
 
-PODFILE CHECKSUM: 837c154540f9195572f8893422e1e684fd7b12ec
+PODFILE CHECKSUM: f14e6ed0bd916ef79dd3a9431e96f7592726669e
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

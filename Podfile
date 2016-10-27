@@ -16,13 +16,12 @@ pod 'PermissionScope', '~> 1.1.1'
 pod 'SupersonicSDK'
 pod 'FyberSDK', '~> 8.0'
 pod 'NHNetworkTime'
+pod 'PeekView'
 pod 'Firebase'
 pod 'Firebase/Messaging'
 pod 'Firebase/AdMob'
 pod 'Firebase/Core'
 pod 'Firebase/RemoteConfig'
-pod 'BEMCheckBox'
-pod 'PeekView'
 
   # Pods for Number Tap iOS
 

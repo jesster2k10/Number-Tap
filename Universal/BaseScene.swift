@@ -126,7 +126,7 @@ class BaseScene : InitScene {
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.rewardUser(_:)), name: NSNotification.Name(rawValue: "videoRewarded"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.setPaused), name: NSNotification.Name(rawValue: "pauseGame"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showGameMode), name: NSNotification.Name(rawValue: kPlayGameModeNotification), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(unPauseFromShare), name: NSNotification.Name(rawValue: kShareHiddenNotificaion), object: nil)
         
         
         products = []
@@ -776,28 +776,70 @@ class BaseScene : InitScene {
         MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
     }
     
-    func showShare(image: UIImage) {
-        blur(animationDuration: 1)
-        
-        let frame = SKSpriteNode(imageNamed: "polaroid-frame")
-        let shareButton = SKSpriteNode(imageNamed: "polaroid-share".localized)
-        let texture = SKTexture(image: image)
-        let frameImage = SKSpriteNode(texture: texture)
-        
-        frame.name = "frame"
-        frame.position = CGPoint(x: self.view!.frame.midX, y: self.view!.frame.midY)
-        frame.zPosition = self.zPosition + 2
-        
-        shareButton.name = "share-button"
-        shareButton.position = CGPoint(x: 4, y: -123.058)
-        shareButton.zPosition = frame.zPosition + 1
-        frame.addChild(shareButton)
-        
-        frameImage.name = "frame-image"
-        frameImage.position =  CGPoint(x: -0.994, y: 35.796)
-        frameImage.zPosition = shareButton.zPosition
-        frame.addChild(frameImage)
-        addChild(frame)
+    func showShare(image: UIImage, score: Int) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kShareNotification), object: self, userInfo: ["image" : image, "message": shareMessage, "shareURL": shareURL, "score" : score])
+        for child in children {
+            child.isUserInteractionEnabled = false
+        }
+    }
+    
+    func unPauseFromShare() {
+        for child in children {
+            child.isUserInteractionEnabled = true
+        }
+    }
+    
+    func restoreTapped() {
+        if Reachability.isConnectedToNetwork() {
+            Products.store.restorePurchases()
+        } else {
+            let vc = self.view?.window?.rootViewController
+            
+            let alert = UIAlertController(title: NSLocalizedString("no-wifi-alert-title", comment: "alert-title-no-wifi"), message: NSLocalizedString("no-wifi-alert-message", comment: "alert-message-no-wifi"), preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("no-wifi-alert-action", comment: "alert-action-no-wifi"), style: .cancel, handler: { (UIAlertAction) in
+                FTLogging().FTLog("Alert")
+            })
+            
+            alert.addAction(action)
+            vc!.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    func purchaseProduct(_ index: Int) {
+        if Reachability.isConnectedToNetwork() {
+            let product = products[index]
+            Products.store.buyProduct(product)
+        } else {
+            let vc = self.view?.window?.rootViewController
+            
+            let alert = UIAlertController(title: NSLocalizedString("no-wifi-alert-title", comment: "alert-title-no-wifi"), message: NSLocalizedString("no-wifi-alert-message", comment: "alert-message-no-wifi"), preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("no-wifi-alert-action", comment: "alert-action-no-wifi"), style: .cancel, handler: { (UIAlertAction) in
+                FTLogging().FTLog("Alert")
+            })
+            
+            alert.addAction(action)
+            vc!.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    func productPurchased(_ notification: Notification) {
+        let productIdentifier = notification.object as! String
+        MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+        for (_, product) in products.enumerated() {
+            if product.productIdentifier == productIdentifier {
+                FTLogging().FTLog("product purchased with id \(productIdentifier) & \(product.productIdentifier)")
+                if productIdentifier == Products.RemoveAds {
+                    let defaults = UserDefaults.standard
+                    defaults.set(true, forKey: "hasRemovedAds")
+                    removeAds.run(SKAction.fadeAlpha(to: 0, duration: 2), completion: {
+                        self.removeAds.removeFromParent()
+                    })
+                }
+                break
+            }
+        }
     }
     
     func handleTouchedPoint(_ location: CGPoint) {
@@ -849,7 +891,7 @@ class BaseScene : InitScene {
                     
                 } // 2
                 let restorePurchases = UIAlertAction(title: "Restore Purchases", style: .default, handler: { (UIAlertAction) in
-                    //self.restoreTapped()
+                    self.restoreTapped()
                 })
                 
                 alert.addAction(firstAction) // 4
@@ -877,11 +919,22 @@ class BaseScene : InitScene {
                 FTLogging().FTLog("remove ads")
                 let loadingNotification = MBProgressHUD.showAdded(to: self.view!, animated: true)
                 loadingNotification.mode = .indeterminate
-                loadingNotification.labelText = "Loading"
+                loadingNotification.labelText = "Checking For WiFi Connection"
                 loadingNotification.isUserInteractionEnabled = false
                 
+                if Reachability.isConnectedToNetwork() {
+                    loadingNotification.labelText = "Loading"
+                    purchaseProduct(0)
+                } else {
+                    loadingNotification.labelText = "No WiFi Connection avaliable"
+                    Timer.after(2, { 
+                        MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+                    })
+
+                }
+                
+                
                 removeAds.run(k.Sounds.blopAction1)
-                //purchaseProduct(0)
             }
             
             if beginGame.contains(location) {

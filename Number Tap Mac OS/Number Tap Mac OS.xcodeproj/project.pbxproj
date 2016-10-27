@@ -1,0 +1,430 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5F5B2B0B1DC2BDEC0086E2D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5B2B0A1DC2BDEC0086E2D9 /* AppDelegate.swift */; };
+		5F5B2B0D1DC2BDEC0086E2D9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F5B2B0C1DC2BDEC0086E2D9 /* GameScene.sks */; };
+		5F5B2B0F1DC2BDEC0086E2D9 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F5B2B0E1DC2BDEC0086E2D9 /* Actions.sks */; };
+		5F5B2B111DC2BDEC0086E2D9 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5B2B101DC2BDEC0086E2D9 /* GameScene.swift */; };
+		5F5B2B131DC2BDEC0086E2D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5B2B121DC2BDEC0086E2D9 /* ViewController.swift */; };
+		5F5B2B151DC2BDEC0086E2D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F5B2B141DC2BDEC0086E2D9 /* Assets.xcassets */; };
+		5F5B2B181DC2BDEC0086E2D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F5B2B161DC2BDEC0086E2D9 /* Main.storyboard */; };
+		5F5B2B231DC2BDED0086E2D9 /* Number_Tap_Mac_OSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5B2B221DC2BDED0086E2D9 /* Number_Tap_Mac_OSUITests.swift */; };
+		5F5B2B2E1DC2BE230086E2D9 /* Game.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F5B2B2D1DC2BE230086E2D9 /* Game.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5F5B2B1F1DC2BDED0086E2D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F5B2AFF1DC2BDEC0086E2D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F5B2B061DC2BDEC0086E2D9;
+			remoteInfo = "Number Tap Mac OS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5F5B2B071DC2BDEC0086E2D9 /* Number Tap Mac OS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Number Tap Mac OS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F5B2B0A1DC2BDEC0086E2D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5F5B2B0C1DC2BDEC0086E2D9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		5F5B2B0E1DC2BDEC0086E2D9 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		5F5B2B101DC2BDEC0086E2D9 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5F5B2B121DC2BDEC0086E2D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5F5B2B141DC2BDEC0086E2D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F5B2B171DC2BDEC0086E2D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5F5B2B191DC2BDEC0086E2D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F5B2B1E1DC2BDED0086E2D9 /* Number Tap Mac OSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Number Tap Mac OSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F5B2B221DC2BDED0086E2D9 /* Number_Tap_Mac_OSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number_Tap_Mac_OSUITests.swift; sourceTree = "<group>"; };
+		5F5B2B241DC2BDED0086E2D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F5B2B2D1DC2BE230086E2D9 /* Game.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Game.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5F5B2B041DC2BDEC0086E2D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F5B2B1B1DC2BDED0086E2D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5F5B2AFE1DC2BDEC0086E2D9 = {
+			isa = PBXGroup;
+			children = (
+				5F5B2B091DC2BDEC0086E2D9 /* Number Tap Mac OS */,
+				5F5B2B211DC2BDED0086E2D9 /* Number Tap Mac OSUITests */,
+				5F5B2B081DC2BDEC0086E2D9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5F5B2B081DC2BDEC0086E2D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F5B2B071DC2BDEC0086E2D9 /* Number Tap Mac OS.app */,
+				5F5B2B1E1DC2BDED0086E2D9 /* Number Tap Mac OSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5F5B2B091DC2BDEC0086E2D9 /* Number Tap Mac OS */ = {
+			isa = PBXGroup;
+			children = (
+				5F5B2B2D1DC2BE230086E2D9 /* Game.xcassets */,
+				5F5B2B0A1DC2BDEC0086E2D9 /* AppDelegate.swift */,
+				5F5B2B0C1DC2BDEC0086E2D9 /* GameScene.sks */,
+				5F5B2B0E1DC2BDEC0086E2D9 /* Actions.sks */,
+				5F5B2B101DC2BDEC0086E2D9 /* GameScene.swift */,
+				5F5B2B121DC2BDEC0086E2D9 /* ViewController.swift */,
+				5F5B2B141DC2BDEC0086E2D9 /* Assets.xcassets */,
+				5F5B2B161DC2BDEC0086E2D9 /* Main.storyboard */,
+				5F5B2B191DC2BDEC0086E2D9 /* Info.plist */,
+			);
+			path = "Number Tap Mac OS";
+			sourceTree = "<group>";
+		};
+		5F5B2B211DC2BDED0086E2D9 /* Number Tap Mac OSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5F5B2B221DC2BDED0086E2D9 /* Number_Tap_Mac_OSUITests.swift */,
+				5F5B2B241DC2BDED0086E2D9 /* Info.plist */,
+			);
+			path = "Number Tap Mac OSUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5F5B2B061DC2BDEC0086E2D9 /* Number Tap Mac OS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F5B2B271DC2BDED0086E2D9 /* Build configuration list for PBXNativeTarget "Number Tap Mac OS" */;
+			buildPhases = (
+				5F5B2B031DC2BDEC0086E2D9 /* Sources */,
+				5F5B2B041DC2BDEC0086E2D9 /* Frameworks */,
+				5F5B2B051DC2BDEC0086E2D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Number Tap Mac OS";
+			productName = "Number Tap Mac OS";
+			productReference = 5F5B2B071DC2BDEC0086E2D9 /* Number Tap Mac OS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5F5B2B1D1DC2BDED0086E2D9 /* Number Tap Mac OSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F5B2B2A1DC2BDED0086E2D9 /* Build configuration list for PBXNativeTarget "Number Tap Mac OSUITests" */;
+			buildPhases = (
+				5F5B2B1A1DC2BDED0086E2D9 /* Sources */,
+				5F5B2B1B1DC2BDED0086E2D9 /* Frameworks */,
+				5F5B2B1C1DC2BDED0086E2D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F5B2B201DC2BDED0086E2D9 /* PBXTargetDependency */,
+			);
+			name = "Number Tap Mac OSUITests";
+			productName = "Number Tap Mac OSUITests";
+			productReference = 5F5B2B1E1DC2BDED0086E2D9 /* Number Tap Mac OSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5F5B2AFF1DC2BDEC0086E2D9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Full Stop Apps";
+				TargetAttributes = {
+					5F5B2B061DC2BDEC0086E2D9 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 964QFWYN42;
+						ProvisioningStyle = Automatic;
+					};
+					5F5B2B1D1DC2BDED0086E2D9 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 964QFWYN42;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5F5B2B061DC2BDEC0086E2D9;
+					};
+				};
+			};
+			buildConfigurationList = 5F5B2B021DC2BDEC0086E2D9 /* Build configuration list for PBXProject "Number Tap Mac OS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5F5B2AFE1DC2BDEC0086E2D9;
+			productRefGroup = 5F5B2B081DC2BDEC0086E2D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5F5B2B061DC2BDEC0086E2D9 /* Number Tap Mac OS */,
+				5F5B2B1D1DC2BDED0086E2D9 /* Number Tap Mac OSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5F5B2B051DC2BDEC0086E2D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F5B2B0D1DC2BDEC0086E2D9 /* GameScene.sks in Resources */,
+				5F5B2B151DC2BDEC0086E2D9 /* Assets.xcassets in Resources */,
+				5F5B2B0F1DC2BDEC0086E2D9 /* Actions.sks in Resources */,
+				5F5B2B2E1DC2BE230086E2D9 /* Game.xcassets in Resources */,
+				5F5B2B181DC2BDEC0086E2D9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F5B2B1C1DC2BDED0086E2D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5F5B2B031DC2BDEC0086E2D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F5B2B131DC2BDEC0086E2D9 /* ViewController.swift in Sources */,
+				5F5B2B111DC2BDEC0086E2D9 /* GameScene.swift in Sources */,
+				5F5B2B0B1DC2BDEC0086E2D9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F5B2B1A1DC2BDED0086E2D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F5B2B231DC2BDED0086E2D9 /* Number_Tap_Mac_OSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5F5B2B201DC2BDED0086E2D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5F5B2B061DC2BDEC0086E2D9 /* Number Tap Mac OS */;
+			targetProxy = 5F5B2B1F1DC2BDED0086E2D9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5F5B2B161DC2BDEC0086E2D9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F5B2B171DC2BDEC0086E2D9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5F5B2B251DC2BDED0086E2D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5F5B2B261DC2BDED0086E2D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		5F5B2B281DC2BDED0086E2D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 964QFWYN42;
+				INFOPLIST_FILE = "Number Tap Mac OS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatboxstudio.Number-Tap-Mac-OS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		5F5B2B291DC2BDED0086E2D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 964QFWYN42;
+				INFOPLIST_FILE = "Number Tap Mac OS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatboxstudio.Number-Tap-Mac-OS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		5F5B2B2B1DC2BDED0086E2D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 964QFWYN42;
+				INFOPLIST_FILE = "Number Tap Mac OSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatboxstudio.Number-Tap-Mac-OSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Number Tap Mac OS";
+			};
+			name = Debug;
+		};
+		5F5B2B2C1DC2BDED0086E2D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 964QFWYN42;
+				INFOPLIST_FILE = "Number Tap Mac OSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatboxstudio.Number-Tap-Mac-OSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Number Tap Mac OS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5F5B2B021DC2BDEC0086E2D9 /* Build configuration list for PBXProject "Number Tap Mac OS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F5B2B251DC2BDED0086E2D9 /* Debug */,
+				5F5B2B261DC2BDED0086E2D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5F5B2B271DC2BDED0086E2D9 /* Build configuration list for PBXNativeTarget "Number Tap Mac OS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F5B2B281DC2BDED0086E2D9 /* Debug */,
+				5F5B2B291DC2BDED0086E2D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5F5B2B2A1DC2BDED0086E2D9 /* Build configuration list for PBXNativeTarget "Number Tap Mac OSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F5B2B2B1DC2BDED0086E2D9 /* Debug */,
+				5F5B2B2C1DC2BDED0086E2D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5F5B2AFF1DC2BDEC0086E2D9 /* Project object */;
+}

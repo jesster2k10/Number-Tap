@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate, FYB
             NHNetworkClock.shared()
             
             //TODO: Delete this
-            //UserDefaults.standard.set(0, forKey: kNumbersKey)
+            UserDefaults.standard.set(false, forKey: k.isUnlocked.multiplayer)
             
             NotificationCenter.default.addObserver(self, selector: #selector(self.enableDeveloperMode), name: NSNotification.Name(rawValue: "DeveloperMode"), object: nil)
             
@@ -57,7 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate, FYB
                 let options = FYBSDKOptions(appId: "63613", securityToken: "ef24a8ba7b89867f306bb9671b8057aa")
                 FyberSDK.start(with: options)
                 
-                UserDefaults.standard.set(0, forKey: "videoSave")
+                //SET TO 0
+                UserDefaults.standard.set(1, forKey: "videoSave")
             }
             
             let ln = LocalNotificationHelper.sharedHelper
@@ -153,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SupersonicRVDelegate, FYB
         let fireDateOfNotification = (calendar as NSCalendar).date(byAdding: comps, to: tempDate, options:[])
         
         let comeBackMessage = LocalNotificationHelper.sharedHelper.notificationMessage(.comeBack, gameMode: nil)
-        LocalNotificationHelper.sharedHelper.scheduleNotificationWith(message: comeBackMessage!, fireDate: fireDateOfNotification!, badgeNumber: 1)
+        LocalNotificationHelper.sharedHelper.scheduleNotificationWith(message: comeBackMessage!, fireDate: fireDateOfNotification!, badgeNumber: 1, aRepeat: NSCalendar.Unit.day)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {

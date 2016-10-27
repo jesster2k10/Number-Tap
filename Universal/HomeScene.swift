@@ -652,7 +652,7 @@ class HomeScene: InitScene, FYBInterstitialControllerDelegate {
                         self.removeAllChildren()
                         
                         visualEffectView.removeFromSuperview()
-                        MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+                        loadingNotification.hide(animated: true)
                         
                         let gameModes = GameModes()
                         self.view?.presentScene(gameModes, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))

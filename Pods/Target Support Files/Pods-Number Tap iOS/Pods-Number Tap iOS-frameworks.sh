@@ -85,7 +85,6 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Appirater/Appirater.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/BEMCheckBox/BEMCheckBox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CocoaAsyncSocket/CocoaAsyncSocket.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NHNetworkTime/NHNetworkTime.framework"
@@ -95,7 +94,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Appirater/Appirater.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/BEMCheckBox/BEMCheckBox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CocoaAsyncSocket/CocoaAsyncSocket.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NHNetworkTime/NHNetworkTime.framework"

@@ -330,7 +330,7 @@ extension UserDefaults {
     var highScore: Int {
         get {
             
-            print("High Score = " + (UserDefaults().integer(forKey: "highScore").description))
+            //print("High Score = " + (UserDefaults().integer(forKey: "highScore").description))
             return UserDefaults().integer(forKey: "highScore")
         }
         set {

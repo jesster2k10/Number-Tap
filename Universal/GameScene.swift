@@ -24,6 +24,12 @@ class GameScene: InitScene, RPScreenRecorderDelegate {
     var continueArray = [SKNode]()
     var topArray = [SKNode]()
     
+    var snapshot = UIImage()
+    var shareTitle = ""
+    var shareMessage = ""
+    var shareImage = UIImage()
+    var shareURL = URL(fileURLWithPath: "")
+    
     var rater = false
     var recording = false
     
@@ -148,7 +154,8 @@ class GameScene: InitScene, RPScreenRecorderDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(GameScene.setPaused), name: NSNotification.Name(rawValue: "pauseGame"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(startRecording), name: NSNotification.Name(rawValue: k.NotificationCenter.RecordGameplay), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showGameMode), name: NSNotification.Name(rawValue: kPlayGameModeNotification), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(unPauseFromShare), name: NSNotification.Name(rawValue: kShareHiddenNotificaion2), object: nil)
+        
         products = []
         Products.store.requestProducts{success, products in
             if success {
@@ -185,6 +192,12 @@ class GameScene: InitScene, RPScreenRecorderDelegate {
     //MARK: Init Methods
     func setToRecord(_ toRecord: Bool) {
         recording = toRecord
+    }
+    
+    func setShareDetails(_ message: String, image: UIImage, url: URL) {
+        shareMessage = message
+        shareImage = image
+        shareURL = url
     }
     
     func setupScene (_ mode : gameMode) {
@@ -708,9 +721,24 @@ class GameScene: InitScene, RPScreenRecorderDelegate {
         if videoSaveDefault == 0 {
             addContinue()
         } else {
+            setShareDetails("I just tapped \(numbersTapped) numbers playing FREE game called Number Tap! What's you highest score? Mine's \(UserDefaults.standard.highScore) Download free today! #numbertapgame", image: snapshot, url: URL(string: "http://apple.co/2bvrooQ")!)
+            showShare(image: snapshot, score: numbersTapped)
             addStuff()
             videoSave -= 1
             UserDefaults.standard.set(videoSave, forKey: "videoSave")
+        }
+    }
+    
+    func showShare(image: UIImage, score: Int) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kShareNotification2), object: self, userInfo: ["image" : image, "message": shareMessage, "shareURL": shareURL, "score" : score])
+        for child in children {
+            child.isUserInteractionEnabled = false
+        }
+    }
+    
+    func unPauseFromShare() {
+        for child in children {
+            child.isUserInteractionEnabled = true
         }
     }
     
@@ -864,7 +892,7 @@ class GameScene: InitScene, RPScreenRecorderDelegate {
                 self.removeAllChildren()
                 
                 visualEffectView.removeFromSuperview()
-                MBProgressHUD.hideAllHUDs(for: self.view!, animated: true)
+                loadingNotification.hide(animated: true)
                 
                 let gameModes = GameModes()
                 self.view?.presentScene(gameModes, transition: SKTransition.fade(with: UIColor(rgba: "#434343"), duration: 1))
@@ -1050,7 +1078,7 @@ class GameScene: InitScene, RPScreenRecorderDelegate {
     }
     
     func loose() {
-        
+        var snapshot = self.view!.takeSnapshot()
         gameEnd(false)
     }
     

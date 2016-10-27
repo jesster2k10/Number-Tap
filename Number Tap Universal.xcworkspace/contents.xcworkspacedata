@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Number Tap Mac OS/Number Tap Mac OS.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Number Tap Universal.xcodeproj">
    </FileRef>
    <FileRef

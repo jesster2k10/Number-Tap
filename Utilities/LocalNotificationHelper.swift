@@ -30,7 +30,7 @@ class LocalNotificationHelper : NSObject {
                           "You need some excersice! How about tapping?",
                           "You made a baby cry by leaving me. Come back and you'll give it candy!"]
     
-    func scheduleNotificationWith(message: String, intervalInSeconds: TimeInterval, badgeNumber: Int) {
+    func scheduleNotificationWith(message: String, intervalInSeconds: TimeInterval, badgeNumber: Int, aRepeat: NSCalendar.Unit = NSCalendar.Unit.day) {
         // 1 Create empty notification
         let localNotification = UILocalNotification()
         
@@ -44,12 +44,13 @@ class LocalNotificationHelper : NSObject {
         localNotification.timeZone = NSTimeZone.default
         localNotification.applicationIconBadgeNumber = badgeNumber
         localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.repeatInterval = aRepeat
         
         // 4 Schedule the notification
         UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
-    func scheduleNotificationWith(message: String, fireDate: Date, badgeNumber: Int) {
+    func scheduleNotificationWith(message: String, fireDate: Date, badgeNumber: Int, aRepeat: NSCalendar.Unit = NSCalendar.Unit.day) {
         // 1 Create empty notification
         let localNotification = UILocalNotification()
         
@@ -59,6 +60,7 @@ class LocalNotificationHelper : NSObject {
         localNotification.timeZone = NSTimeZone.default
         localNotification.applicationIconBadgeNumber = badgeNumber
         localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.repeatInterval = aRepeat
         
         // 4 Schedule the notification
         UIApplication.shared.scheduleLocalNotification(localNotification)

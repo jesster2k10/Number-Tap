@@ -35,6 +35,7 @@
 		5F48B6DB1D725D4300FE4310 /* AppStoreReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */; };
 		5F48B6DD1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */; };
 		5F5AB0231DB372D00059CC6B /* Share Polaroid.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F5AB0221DB372D00059CC6B /* Share Polaroid.sks */; };
+		5F5B2B311DC2C2540086E2D9 /* EmojiStylePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5B2B301DC2C2540086E2D9 /* EmojiStylePack.swift */; };
 		5F6EC9C51D685B3B00AF3489 /* SKAction+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */; };
 		5F6EC9C71D685B4C00AF3489 /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */; };
 		5F6EC9C91D685B5E00AF3489 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */; };
@@ -192,6 +193,7 @@
 		5FFCC8781DB262380067C714 /* ShuffleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC8771DB262370067C714 /* ShuffleMode.swift */; };
 		5FFCC8791DB262390067C714 /* ShuffleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC8771DB262370067C714 /* ShuffleMode.swift */; };
 		5FFCC87A1DB262390067C714 /* ShuffleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC8771DB262370067C714 /* ShuffleMode.swift */; };
+		5FFCDE4F1DBD21F20065AC80 /* ShareImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCDE4E1DBD21F20065AC80 /* ShareImageViewController.swift */; };
 		9400FDAA1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */; };
 		9400FDAB1C1E1E47007FC1E7 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */; };
 		9400FDAC1C1E1E47007FC1E7 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9400FD9F1C1E1E47007FC1E7 /* CGPoint+Extensions.swift */; };
@@ -308,6 +310,7 @@
 		5F48B6DA1D725D4300FE4310 /* AppStoreReceiptValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptValidator.swift; sourceTree = "<group>"; };
 		5F48B6DC1D725DAE00FE4310 /* AppStoreReceiptObtainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceiptObtainer.swift; sourceTree = "<group>"; };
 		5F5AB0221DB372D00059CC6B /* Share Polaroid.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "Share Polaroid.sks"; path = "Universal/Share Polaroid.sks"; sourceTree = "<group>"; };
+		5F5B2B301DC2C2540086E2D9 /* EmojiStylePack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmojiStylePack.swift; path = Universal/EmojiStylePack.swift; sourceTree = "<group>"; };
 		5F6EC9C41D685B3B00AF3489 /* SKAction+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+Spring.swift"; sourceTree = "<group>"; };
 		5F6EC9C61D685B4C00AF3489 /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
 		5F6EC9C81D685B5E00AF3489 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 		5FF4528B1DA1B9D200939B09 /* Build-Up_Spanish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = "Build-Up_Spanish.atlas"; path = "Universal/Build-Up_Spanish.atlas"; sourceTree = "<group>"; };
 		5FF4528C1DA1B9D200939B09 /* Shoot_Spanish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = Shoot_Spanish.atlas; path = Universal/Shoot_Spanish.atlas; sourceTree = "<group>"; };
 		5FFCC8771DB262370067C714 /* ShuffleMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShuffleMode.swift; path = Universal/ShuffleMode.swift; sourceTree = "<group>"; };
+		5FFCDE4E1DBD21F20065AC80 /* ShareImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareImageViewController.swift; sourceTree = "<group>"; };
 		8D0F76A0556902927134F4F1 /* Pods_Number_Tap_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Number_Tap_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9400FD9E1C1E1E47007FC1E7 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		9400FD9F1C1E1E47007FC1E7 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -495,6 +499,14 @@
 			path = "Number Tap tvOS";
 			sourceTree = "<group>";
 		};
+		5F5B2B2F1DC2C2120086E2D9 /* Style Packs */ = {
+			isa = PBXGroup;
+			children = (
+				5F5B2B301DC2C2540086E2D9 /* EmojiStylePack.swift */,
+			);
+			name = "Style Packs";
+			sourceTree = "<group>";
+		};
 		5F7C5C781D6682E400EA24EC /* Number Tap OSX */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +528,7 @@
 				5F7C5C851D66830200EA24EC /* LaunchScreen.storyboard */,
 				5F7C5C871D66830200EA24EC /* Main.storyboard */,
 				5F7C5C891D66830200EA24EC /* GameViewController.swift */,
+				5FFCDE4E1DBD21F20065AC80 /* ShareImageViewController.swift */,
 				5F7C5C8A1D66830300EA24EC /* Info.plist */,
 				5F7C5CA01D670EAF00EA24EC /* Number Tap iOS-Bridging-Header.h */,
 				52910F6A1DA039B000781236 /* Localizable.strings */,
@@ -749,6 +762,7 @@
 		9402F46D1C12193E00B2C2D7 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5F5B2B2F1DC2C2120086E2D9 /* Style Packs */,
 				5F7C5D191D67163C00EA24EC /* GameModes */,
 				9402F4501C120E3500B2C2D7 /* HomeScene.swift */,
 				943CF7661C1E470200340CFD /* InitScene.swift */,
@@ -1092,7 +1106,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5188CCB5871920DC505D961C /* [CP] Copy Pods Resources */ = {
@@ -1163,7 +1177,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A76FC7A82A60CF0D7D552AD0 /* [CP] Check Pods Manifest.lock */ = {
@@ -1178,7 +1192,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		BECEB8DCBC9210A88FFDC878 /* [CP] Embed Pods Frameworks */ = {
@@ -1264,6 +1278,7 @@
 				5F6EC9C91D685B5E00AF3489 /* UIColor+Hex.swift in Sources */,
 				5F7C5D251D67168400EA24EC /* BuildingModeScene.swift in Sources */,
 				5F7C5D2B1D67168400EA24EC /* FollowMode.swift in Sources */,
+				5F5B2B311DC2C2540086E2D9 /* EmojiStylePack.swift in Sources */,
 				5FDDC5011D95D02400456DA8 /* LocalNotificationHelper.swift in Sources */,
 				9400FDBE1C1E1E47007FC1E7 /* SKTTimingFunctions.swift in Sources */,
 				5F7C5D281D67168400EA24EC /* FallingMode.swift in Sources */,
@@ -1274,6 +1289,7 @@
 				5F7C5CC31D67129D00EA24EC /* TutorialBox.swift in Sources */,
 				9400FDB01C1E1E47007FC1E7 /* Int+Extensions.swift in Sources */,
 				9400FDC01C1E1E47007FC1E7 /* Vector3.swift in Sources */,
+				5FFCDE4F1DBD21F20065AC80 /* ShareImageViewController.swift in Sources */,
 				5F7C5D221D67168400EA24EC /* BaseScene.swift in Sources */,
 				9402F46B1C12193400B2C2D7 /* InitScene+Touches.swift in Sources */,
 				9400FDB61C1E1E47007FC1E7 /* SKColor+Extensions.swift in Sources */,
