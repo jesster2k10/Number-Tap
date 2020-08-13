@@ -15,6 +15,14 @@ Some of my shortfalls were:
 
 The project never went live officially and the source code has remained close source until now (August 2020). It was a great learning experience and I applied most of my knowledge from it to my future endeavours.
 
+Some of the things I learned while working on this project are:
+
+- The importance of architecture in software development. My current projects are all built with a specific architecture in mind. My most popular choice when working with Swift is either MVVM + RxSwift, Redux (with SwiftUI) or Viper (with UIKit)
+- Seperation of concerns: A lot of the code in this project is duplicated, and could easily be refactored in to re-usable functions and classes
+- How to setup in app purchases with receipt validation
+- Basic data structures and algorithims
+- The basics of game development.
+
 ## Background
 
  Tap the correct number tiles while being put on the clock! Tap as many of the number tiles as fast as you can! Can you the ultimate challenge?
